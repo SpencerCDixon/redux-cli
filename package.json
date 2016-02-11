@@ -4,7 +4,8 @@
   "description": "An opinionated CLI to make working on redux apps much faster.",
   "main": "bin/index.js",
   "scripts": {
-    "test": "npm test"
+    "test": "npm test",
+    "start": "./node_modules/.bin/babel src --watch -d lib"
   },
   "keywords": [
     "redux",
@@ -19,8 +20,11 @@
   },
   "dependencies": {
     "chalk": "^1.1.1",
-    "co": "^4.6.0",
-    "co-prompt": "^1.0.0",
-    "commander": "^2.9.0"
+    "commander": "^2.9.0",
+    "prompt": "^1.0.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.5.1",
+    "babel-preset-es2015": "^6.5.0"
   }
 }
