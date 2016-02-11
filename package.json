@@ -21,6 +21,7 @@
   "dependencies": {
     "chalk": "^1.1.1",
     "commander": "^2.9.0",
+    "jsonfile": "^2.2.3",
     "prompt": "^1.0.0"
   },
   "devDependencies": {
