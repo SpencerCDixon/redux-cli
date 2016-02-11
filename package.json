@@ -4,7 +4,7 @@
   "description": "An opinionated CLI to make working on redux apps much faster.",
   "main": "bin/index.js",
   "scripts": {
-    "test": "npm test",
+    "test": "mocha --compilers js:babel-register --opts ./.mocha.opts",
     "start": "./node_modules/.bin/babel src --watch -d lib"
   },
   "keywords": [
@@ -25,6 +25,9 @@
   },
   "devDependencies": {
     "babel-cli": "^6.5.1",
-    "babel-preset-es2015": "^6.5.0"
+    "babel-preset-es2015": "^6.5.0",
+    "babel-register": "^6.5.1",
+    "chai": "^3.5.0",
+    "mocha": "^2.4.5"
   }
 }

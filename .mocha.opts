@@ -1,0 +1,4 @@
+--require ./test/setup.js
+--full-trace
+--reporter nyan
+--recursive ./test/**/*.js
