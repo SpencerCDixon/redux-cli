@@ -1,5 +1,5 @@
 import chalk, { hasColor } from 'chalk';
-import * as th from '../../src/util/textHelper';
+import * as th from 'util/textHelper';
 
 describe('textHelpers', () => {
   describe('#success', () => {

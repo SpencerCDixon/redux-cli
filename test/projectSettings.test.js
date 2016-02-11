@@ -1,4 +1,4 @@
-import ProjectSettings from '../src/ProjectSettings';
+import ProjectSettings from 'ProjectSettings';
 import fs from 'fs';
 import path from 'path';
 

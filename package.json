@@ -4,7 +4,7 @@
   "description": "An opinionated CLI to make working on redux apps much faster.",
   "main": "bin/index.js",
   "scripts": {
-    "test": "mocha --compilers js:babel-register --opts ./.mocha.opts",
+    "test": "env NODE_PATH=$NODE_PATH:$PWD/src mocha --compilers js:babel-register --opts ./.mocha.opts",
     "start": "./node_modules/.bin/babel src --watch -d lib"
   },
   "keywords": [
