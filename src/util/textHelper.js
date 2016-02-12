@@ -6,4 +6,4 @@ export const success = (text) => {
 
 export const error = (text) => {
   return chalk.red(text);
-}
+};

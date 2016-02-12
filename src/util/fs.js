@@ -13,4 +13,4 @@ export const fileExists = (filename) => {
   } catch (e) {
     return false;
   }
-}
+};

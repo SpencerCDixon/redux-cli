@@ -1,7 +1,5 @@
 import * as th from '../util/textHelper';
-import chalk from 'chalk';
 import prompt from 'prompt';
-import fs from 'fs';
 
 console.log(th.success('Redux CLI Initialization:'));
 

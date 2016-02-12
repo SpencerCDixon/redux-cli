@@ -1,6 +1,8 @@
 import path from 'path';
-import fs from 'fs';
 import { fileExists } from './util/fs';
+import config from '../config';
+
+const { basePath } = config;
 
 export default class ProjectSettings {
   constructor() {
@@ -10,7 +12,7 @@ export default class ProjectSettings {
   }
 
   settingsPath() {
-    return path.join(process.env['PWD'], '.reduxrc');
+    return path.join(basePath, '.reduxrc');
   }
 
   settingsExist() {
