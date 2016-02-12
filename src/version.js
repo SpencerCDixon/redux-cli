@@ -1,8 +1,7 @@
 import path from 'path';
-import fs from 'fs';
+import { readJsonSync } from 'fs-extra';
 
 export const version = () => {
   const pkgPath = path.join(path.dirname(module.id), '../package.json');
-  const pkgJSON = JSON.parse(fs.readFileSync(pkgPath));
-  return pkgJSON.version;
+  return readJsonSync(pkgPath).version;
 };

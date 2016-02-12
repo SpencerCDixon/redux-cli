@@ -6,7 +6,7 @@
   "scripts": {
     "test": "npm run lint && env NODE_PATH=$NODE_PATH:$PWD/src mocha --compilers js:babel-register --opts ./.mocha.opts",
     "start": "./node_modules/.bin/babel src --watch -d lib",
-    "lint": "eslint ./src"
+    "lint": "eslint ./src ./test"
   },
   "keywords": [
     "redux",
@@ -22,6 +22,7 @@
   "dependencies": {
     "chalk": "^1.1.1",
     "commander": "^2.9.0",
+    "fs-extra": "^0.26.5",
     "jsonfile": "^2.2.3",
     "prompt": "^1.0.0"
   },
