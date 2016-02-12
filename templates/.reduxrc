@@ -1,4 +1,6 @@
 {
   "testPath": "",
-  "componentPath": ""
+  "smartPath": "",
+  "dumbPath": "",
+  "formPath": ""
 }

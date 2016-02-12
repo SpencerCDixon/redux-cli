@@ -1,20 +1,30 @@
-import ProjectSettings from '../projectSettings';
-import * as th from '../util/textHelper';
-
 import prompt from 'prompt';
 
-console.log(th.success('Redux CLI Initialization:'));
-prompt.start();
-prompt.get(['testPath', 'componentPath'], function (err, result) {
-  console.log('Command-line input received:');
-  console.log('test path: ' + result.testPath);
-  console.log('component path  : ' + result.componentPath);
-  console.log();
-  console.log(th.success('Saving your settings...'));
+import ProjectSettings from '../projectSettings';
+import { danger, warning, success, create } from '../util/textHelper';
+import initPrompt from '../prompts/initPrompt';
+import { setupPrompt } from '../prompts/setup';
 
-  const { testPath, componentPath } = result;
+setupPrompt('init', prompt);
+
+console.log(success('Redux CLI Initialization:'));
+console.log();
+console.log(
+  danger('**NOTE**'),
+  warning('All paths need to be relative to project root'),
+  danger('**NOTE**')
+);
+console.log();
+
+prompt.get(initPrompt, (err, result) => {
+  console.log(success('Saving your settings...'));
+  const { testPath, smartPath, dumbPath, formPath } = result;
+
   const settings = new ProjectSettings();
   settings.setSetting('testPath', testPath);
-  settings.setSetting('componentPath', componentPath);
+  settings.setSetting('smartPath', smartPath);
+  settings.setSetting('dumbPath', dumbPath);
+  settings.setSetting('formPath', formPath);
   settings.save();
+  console.log(create('.reduxrc with configuration saved in project root.'));
 });

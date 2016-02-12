@@ -16,3 +16,7 @@ export const warning = (text) => {
 export const info = (text) => {
   return chalk.blue(text);
 };
+
+export const create = (text) => {
+  return chalk.blue(`CREATED: ${text}`);
+};
