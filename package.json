@@ -6,7 +6,7 @@
   "scripts": {
     "test": "npm run lint && env NODE_PATH=$NODE_PATH:$PWD/src mocha --compilers js:babel-register --opts ./.mocha.opts",
     "start": "./node_modules/.bin/babel src --watch -d lib",
-    "lint": "eslint ./src ./test"
+    "lint": "./node_modules/.bin/eslint ./src ./test"
   },
   "keywords": [
     "redux",
@@ -28,9 +28,11 @@
   },
   "devDependencies": {
     "babel-cli": "^6.5.1",
+    "babel-eslint": "^4.1.8",
     "babel-preset-es2015": "^6.5.0",
     "babel-register": "^6.5.1",
     "chai": "^3.5.0",
+    "eslint": "^1.10.3",
     "eslint-plugin-react": "^3.16.1",
     "mocha": "^2.4.5",
     "sinon": "^1.17.3"
