@@ -1,12 +1,24 @@
 import path from 'path';
 import { copySync } from 'fs-extra';
+import jf from 'jsonfile';
+
 import { fileExists } from './util/fs';
-import config from '../config';
+import config from './config';
 
 const { basePath } = config;
 
 export default class ProjectSettings {
   constructor() {
+    this.loadSettings();
+  }
+
+  loadSettings() {
+    if (this.settingsExist()) {
+      this.settings = jf.readFileSync(this.settingsPath());
+    } else {
+      this.buildFromTemplate();
+      this.settings = jf.readFileSync(this.settingsPath());
+    }
   }
 
   templatePath() {
@@ -25,5 +37,17 @@ export default class ProjectSettings {
 
   settingsExist() {
     return fileExists(this.settingsPath());
+  }
+
+  getSetting(key) {
+    return this.settings[key];
+  }
+
+  setSetting(key, val) {
+    this.settings[key] = val;
+  }
+
+  save() {
+    jf.writeFileSync(this.settingsPath(), this.settings);
   }
 }
