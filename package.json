@@ -17,7 +17,10 @@
   "license": "MIT",
   "bin": {
     "redux": "bin/index.js",
-    "redux-init": "bin/redux-init.js"
+    "redux-init": "bin/redux-init.js",
+    "redux-dumb": "bin/redux-dumb.js",
+    "redux-smart": "bin/redux-smart.js",
+    "redux-form": "bin/redux-form.js"
   },
   "dependencies": {
     "chalk": "^1.1.1",
