@@ -41,5 +41,12 @@
     "eslint-plugin-react": "^3.16.1",
     "mocha": "^2.4.5",
     "sinon": "^1.17.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SpencerCDixon/redux-cli"
+  },
+  "bugs": {
+    "url": "https://github.com/SpencerCDixon/redux-cli/issues"
   }
 }
