@@ -50,8 +50,8 @@ describe('textHelpers', () => {
       expect(createString).to.match(/CREATED: .reduxrc was created/);
     });
 
-    it('colors the text blue', () => {
-      expect(createString).to.eql(chalk.blue('CREATED: ' + string));
+    it('colors the text green', () => {
+      expect(createString).to.eql(chalk.green('CREATED: ' + string));
     });
   });
 });

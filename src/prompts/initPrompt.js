@@ -2,6 +2,11 @@ import { info } from '../util/textHelper';
 
 const schema = {
   properties: {
+    sourceBase: {
+      description: info('Path to your source code?'),
+      type: 'string',
+      required: true
+    },
     testPath: {
       description: info('What is the path to your test folder?'),
       type: 'string',
@@ -21,6 +26,12 @@ const schema = {
       description: info('Where is path to Form Components?'),
       type: 'string',
       required: true
+    },
+    fileExtension: {
+      description: info('Do you use .js or .jsx for your React components? (js|jsx)'),
+      type: 'string',
+      required: true,
+      pattern: /(js|jsx)/
     }
   }
 };

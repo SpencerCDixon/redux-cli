@@ -18,13 +18,17 @@ console.log();
 
 prompt.get(initPrompt, (err, result) => {
   console.log(success('Saving your settings...'));
-  const { testPath, smartPath, dumbPath, formPath } = result;
+
+  const { testPath, smartPath, dumbPath, formPath,
+          fileExtension, sourceBase } = result;
 
   const settings = new ProjectSettings();
+  settings.setSetting('sourceBase', sourceBase);
   settings.setSetting('testPath', testPath);
   settings.setSetting('smartPath', smartPath);
   settings.setSetting('dumbPath', dumbPath);
   settings.setSetting('formPath', formPath);
+  settings.setSetting('fileExtension', fileExtension);
   settings.save();
   console.log(create('.reduxrc with configuration saved in project root.'));
 });

@@ -1,4 +1,4 @@
-import ProjectSettings from 'ProjectSettings';
+import ProjectSettings from 'projectSettings';
 import fs from 'fs';
 import config from 'config';
 import { fileExists } from 'util/fs';

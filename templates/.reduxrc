@@ -1,6 +1,8 @@
 {
+  "sourceBase": "",
   "testPath": "",
   "smartPath": "",
   "dumbPath": "",
-  "formPath": ""
+  "formPath": "",
+  "fileExtension": ""
 }
