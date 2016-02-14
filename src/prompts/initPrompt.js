@@ -32,7 +32,15 @@ const schema = {
       type: 'string',
       required: true,
       pattern: /(js|jsx)/
-    }
+    },
+    duckPath: {
+      description: info('Where is path to your redux Ducks? If none, leave blank.'),
+      type: 'string',
+    },
+    reducerPath: {
+      description: info('Where is path to your reducers?'),
+      type: 'string'
+    },
   }
 };
 

@@ -4,5 +4,7 @@
   "smartPath": "",
   "dumbPath": "",
   "formPath": "",
-  "fileExtension": ""
+  "fileExtension": "",
+  "duckPath": "",
+  "reducerPath": ""
 }

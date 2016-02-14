@@ -20,7 +20,8 @@
     "redux-init": "bin/redux-init.js",
     "redux-dumb": "bin/redux-dumb.js",
     "redux-smart": "bin/redux-smart.js",
-    "redux-form": "bin/redux-form.js"
+    "redux-form": "bin/redux-form.js",
+    "redux-duck": "bin/redux-duck.js"
   },
   "dependencies": {
     "chalk": "^1.1.1",
