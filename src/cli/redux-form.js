@@ -39,7 +39,7 @@ commander
   .option('-f, --fields', 'pass in list of fields the form will have')
   .arguments('<ComponentName>')
   .action(name => {
-    const component = new DumbComponent(name);
+    const component = new FormComponent(name);
     component.generate();
   })
   .parse(process.argv);
