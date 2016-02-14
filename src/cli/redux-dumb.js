@@ -36,7 +36,7 @@ class DumbComponent {
 
 commander
   .version(version())
-  .option('-s, --stateless', 'create a stateless functional component')
+  .option('-f, --functional', 'create a stateless functional component instead of class extending')
   .arguments('<ComponentName>')
   .action(name => {
     const component = new DumbComponent(name);
