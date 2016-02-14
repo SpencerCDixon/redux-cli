@@ -1,12 +1,14 @@
 ## **DON'T USE**: In active development.  
 
-#### Project Set Up:  
+#### Development Setup
 ```
 nvm use 5.1.0    // install node V5.1 if not present (nvm install 5.1.0)
 npm install
 npm i eslint babel-eslint -g  // make sure you have eslint installed globally
 npm start        // to compile src into lib
 npm test         // make sure all tests are passing
+
+// to test the cli in the local directory you can:
 npm i . -g       // will install the npm package locally so you can run 'redux <commands>'
 redux init       // will prompt you to init a .reduxrc file to be used in the CLI
 ```
