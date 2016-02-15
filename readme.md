@@ -1,4 +1,5 @@
 # Redux CLI
+[![Build Status](https://travis-ci.org/SpencerCDixon/redux-cli.svg?branch=master)](https://travis-ci.org/SpencerCDixon/redux-cli)
 
 **Getting Project Setup**:
 There is an `init` subcommand for you to specify all pathes to where components
