@@ -1,10 +1,11 @@
 ---
 engines:
   duplication:
-    enabled: false
+    enabled: true
     config:
       languages:
-      - javascript
+        javascript:
+          mass_threshold: 60
   eslint:
     enabled: true
   fixme:
