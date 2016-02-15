@@ -6,7 +6,7 @@ live in your project.  The `init` command just creates a `.reduxrc` in your
 project root.  If you want to you can just create the `.reduxrc` manually.
 
 ```
-npm i redux-cli -D  // save cli to dev dependencies
+npm i redux-cli -g  // install redux-cli globally so you can use cli without prepending node_modules
 redux init          // Then follow along with questions to create .reduxrc file
 ```
 
