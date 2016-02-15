@@ -16,3 +16,4 @@ ratings:
   - "**.jsx"
 exclude_paths:
 - test/
+- templates/
