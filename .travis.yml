@@ -4,3 +4,7 @@ node_js:
 addons:
   code_climate:
     repo_token: bc3997ee81bddc88a39799cac43d7e6a71e7f0a2334331a7f02ae486433ddc1f
+before_install:
+  - pip install --user codecov
+after_success:
+  - codecov --file coverage/lcov.info --disable search
