@@ -1,7 +1,6 @@
 # Redux CLI
 [![Build Status](https://travis-ci.org/SpencerCDixon/redux-cli.svg?branch=master)](https://travis-ci.org/SpencerCDixon/redux-cli)
 [![Code Climate](https://codeclimate.com/github/SpencerCDixon/redux-cli/badges/gpa.svg)](https://codeclimate.com/github/SpencerCDixon/redux-cli)
-[![NPM](https://nodei.co/npm/redux-cli.png?downloads=true)](https://nodei.co/npm/redux-cli/)
 
 **Getting Project Setup**:
 There is an `init` subcommand for you to specify all pathes to where components
