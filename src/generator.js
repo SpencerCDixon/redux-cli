@@ -22,10 +22,10 @@ export default class Generator {
 
   generate() {
     if (fileExists(this.componentPath())) {
-      console.log(
+      console.error(
         danger(`File already exists at path: ${this.componentPath()}.  Aborting generator`)
       );
-      process.exit(1);
+      throw new Error('Not going to generate file since it already exists');
     } else {
       this.createComponent();
       this.createTest();

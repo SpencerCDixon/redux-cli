@@ -13,14 +13,33 @@ describe('Generator', () => {
   const componentName = 'Example';
 
   describe('#generate', () => {
-    it('throws error if file already exists in location', () => {
+    describe('when file already exists...', () => {
       const args = { templatePath, creationPath, componentName };
       const generator = new Generator(args);
       const finalPath = generator.componentPath();
-      fse.createFileSync(finalPath, 'already created file');
 
-      expect(() => generator.generate()).to.throw;
-      fse.removeSync(finalPath);
+      beforeEach(() => {
+        fse.createFileSync(finalPath, 'already created file');
+      });
+
+      afterEach(() => {
+        fse.removeSync(finalPath);
+      });
+
+
+      it('throws error if file already exists in location', () => {
+        expect(() => generator.generate()).to.throw(/Not going to generate/);
+      });
+
+      it('logs an error message', () => {
+        sinon.stub(console, 'error');
+        try {
+          generator.generate();
+        } catch (e) {
+          expect(console.error.calledOnce).to.be.true;
+        }
+        console.error.restore();
+      });
     });
 
     it('creates component and test file', () => {
