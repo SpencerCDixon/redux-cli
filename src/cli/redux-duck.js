@@ -12,7 +12,7 @@ class ReduxDuck {
   }
 
   generate() {
-    console.log(info(`Generating new component... ${this.componentName}`));
+    console.log(info(`Generating new Redux Duck named: ${this.duckName}`));
 
     const sourceBase = this.settings.getSetting('sourceBase');
     const creationPath = this.settings.getSetting('duckPath');

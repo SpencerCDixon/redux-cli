@@ -12,7 +12,7 @@ class DumbComponent {
   }
 
   generate() {
-    console.log(info(`Generating new component... ${this.componentName}`));
+    console.log(info(`Generating new Dumb Component named: ${this.componentName}`));
 
     const sourceBase = this.settings.getSetting('sourceBase');
     const creationPath = this.settings.getSetting('dumbPath');

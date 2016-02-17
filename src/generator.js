@@ -1,5 +1,5 @@
 import fs from 'fs';
-import { ensureDirSync } from 'fs-extra';
+import { outputFileSync } from 'fs-extra';
 import path from 'path';
 import ejs from 'ejs';
 
@@ -33,23 +33,15 @@ export default class Generator {
   }
 
   createComponent() {
-    const templatePath = path.join(pkgBasePath, '..', this.templatePath);
-    const template = fs.readFileSync(templatePath, 'utf8');
-    const file = ejs.render(template, { name: this.componentName });
-
-    ensureDirSync(path.join(basePath, this.componentDirPath()));
-    fs.writeFileSync(this.componentPath(), file);
-    console.log(create(`${this.componentName} Component at: ${this.componentPath()}`));
+    const file = this.renderTemplate(this.templatePath);
+    outputFileSync(this.componentPath(), file);
+    console.log(create(`${this.componentPath()}`));
   }
 
   createTest() {
-    const templatePath = path.join(pkgBasePath, '..', this.testTemplatePath);
-    const template = fs.readFileSync(templatePath, 'utf8');
-    const file = ejs.render(template, { name: this.componentName });
-
-    ensureDirSync(path.join(basePath, this.testDirPath()));
-    fs.writeFileSync(this.componentTestPath(), file);
-    console.log(create(`${this.componentName} Component test at: ${this.componentTestPath()}`));
+    const file = this.renderTemplate(this.testTemplatePath);
+    outputFileSync(this.componentTestPath(), file);
+    console.log(create(`${this.componentTestPath()}`));
   }
 
   componentPath() {
@@ -68,5 +60,12 @@ export default class Generator {
 
   componentDirPath() {
     return path.normalize(`${this.sourceBase}/${this.creationPath}`);
+  }
+
+  renderTemplate(templatePath, args) {
+    const finalPath = path.join(pkgBasePath, '..', templatePath);
+    const template = fs.readFileSync(finalPath, 'utf8');
+    const ejsArgs = Object.assign({}, {name: this.componentName}, args);
+    return ejs.render(template, ejsArgs);
   }
 }

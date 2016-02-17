@@ -12,7 +12,7 @@ class FormComponent {
   }
 
   generate() {
-    console.log(info(`Generating new component... ${this.componentName}`));
+    console.log(info(`Generating new Form Component named: ${this.componentName}`));
 
     const sourceBase = this.settings.getSetting('sourceBase');
     const creationPath = this.settings.getSetting('formPath');

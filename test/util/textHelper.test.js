@@ -46,12 +46,8 @@ describe('textHelpers', () => {
     const string = '.reduxrc was created';
     const createString = th.create(string);
 
-    it('prepends CREATED: to text', () => {
-      expect(createString).to.match(/CREATED: .reduxrc was created/);
-    });
-
-    it('colors the text green', () => {
-      expect(createString).to.eql(chalk.green('CREATED: ' + string));
+    it('prepends "create" to text', () => {
+      expect(createString).to.match(/create/);
     });
   });
 });

@@ -18,5 +18,5 @@ export const info = (text) => {
 };
 
 export const create = (text) => {
-  return chalk.green(`CREATED: ${text}`);
+  return chalk.green(`    create: `) + text;
 };

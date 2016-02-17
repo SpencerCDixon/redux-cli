@@ -1,5 +1,6 @@
 import Generator from 'generator';
-// import fs from 'fs';
+import fse from 'fs-extra';
+import fs from 'fs';
 import config from 'config';
 import path from 'path';
 
@@ -8,24 +9,30 @@ const { basePath } = config;
 describe('Generator', () => {
   const templatePath = '/components/Dumb.js';
   const sourceBase = './src';
-  // const creationPath = '/components';
-  // const componentName = 'Example';
+  const creationPath = '/components';
+  const componentName = 'Example';
 
   describe('#generate', () => {
-    // it('throws error if file already exists in location', () => {
-      // const args = {
-        // templatePath,
-        // creationPath,
-        // componentName
-      // };
-      // const generator = new Generator(args);
-      // const finalPath = generator.componentPath();
-      // fs.writeFileSync(finalPath, 'already created file');
+    it('throws error if file already exists in location', () => {
+      const args = { templatePath, creationPath, componentName };
+      const generator = new Generator(args);
+      const finalPath = generator.componentPath();
+      fse.createFileSync(finalPath, 'already created file');
 
-      // const fn = () => { generator.generate(); };
-      // expect(fn).to.throw;
-      // fs.unlinkSync(finalPath);
-    // });
+      expect(() => generator.generate()).to.throw;
+      fse.removeSync(finalPath);
+    });
+
+    it('creates component and test file', () => {
+      const args = { templatePath, creationPath, componentName };
+      const generator = new Generator(args);
+      const compSpy = sinon.stub(generator, 'createComponent');
+      const testSpy = sinon.stub(generator, 'createTest');
+
+      generator.generate();
+      expect(compSpy.calledOnce).to.be.true;
+      expect(testSpy.calledOnce).to.be.true;
+    });
   });
 
   describe('#componentPath', () => {
@@ -86,6 +93,84 @@ describe('Generator', () => {
 
       const expectedPath = 'src/components';
       expect(generator.componentDirPath()).to.eql(expectedPath);
+    });
+  });
+
+  describe('#renderTemplate', () => {
+    const templatePath = '/tmp/components/Dumb.js';
+    const sourceBase = './tmp/src';
+    const creationPath = '/components';
+    const componentName = 'Example';
+    const args = {
+      templatePath,
+      sourceBase,
+      creationPath,
+      componentName
+    };
+
+    it('renders an ejs template', () => {
+      const finalPath = path.join(basePath, templatePath);
+      fse.outputFileSync(finalPath, '<%= name %>');
+      const generator = new Generator(args);
+
+      const template = generator.renderTemplate(templatePath);
+      expect(template).to.match(/Example/);
+      fse.removeSync(finalPath);
+    });
+  });
+
+  describe('creating component and test files', () => {
+    const templatePath = '/tmp/components/Dumb.js';
+    const sourceBase = './tmp/src';
+    const creationPath = '/components';
+    const testCreationPath = '/tmp/test';
+    const componentName = 'Example';
+    const args = {
+      templatePath,
+      sourceBase,
+      creationPath,
+      componentName,
+      testCreationPath
+    };
+    const generator = new Generator(args);
+
+    beforeEach(() => {
+      sinon.spy(console, 'log');
+    });
+
+    afterEach(() => {
+      console.log.restore();
+    });
+
+
+    describe('#createComponent', () => {
+      it('renders template and writes it to componentPath', () => {
+        sinon.stub(generator, 'renderTemplate').returns('component file');
+
+        generator.createComponent();
+
+        const file = fs.readFileSync(generator.componentPath(), 'utf8');
+        expect(console.log.calledOnce).to.be.true;
+        expect(file).to.eq('component file');
+
+        fse.removeSync(generator.componentPath());
+        generator.renderTemplate.restore();
+      });
+    });
+
+    describe('#createTest', () => {
+      it('renders template and write it to testPath', () => {
+        sinon.stub(generator, 'renderTemplate').returns('test file');
+
+        generator.createTest();
+
+        const file = fs.readFileSync(generator.componentTestPath(), 'utf8');
+        expect(console.log.calledOnce).to.be.true;
+        expect(file).to.eq('test file');
+
+        fse.removeSync(generator.componentTestPath());
+        generator.renderTemplate.restore();
+      });
     });
   });
 });
