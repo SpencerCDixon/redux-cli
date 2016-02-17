@@ -1,10 +1,10 @@
 {
-  "sourceBase": "",
-  "testPath": "",
-  "smartPath": "",
-  "dumbPath": "",
-  "formPath": "",
-  "fileExtension": "",
-  "duckPath": "",
-  "reducerPath": ""
+  "sourceBase":"",
+  "testPath":"",
+  "smartPath":"",
+  "dumbPath":"",
+  "formPath":"",
+  "fileExtension":"",
+  "duckPath":"",
+  "reducerPath":""
 }
