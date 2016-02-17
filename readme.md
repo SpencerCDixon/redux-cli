@@ -48,7 +48,13 @@ Final `.reduxrc` might look like this:
 `redux dumb <ComponentName>` - generates a dumb component and test file  
 `redux smart <ComponentName>` - generates a smart component and test file  
 `redux form <ComponentName>` - generates a form component and test file  
+
+All component names can be passed as `PascalCase`, `snake_case`, `dash-names`,
+or `camelCase` and they will be converted to Pascal Case in the generated files.
+
 `redux duck <duckName>` - generates redux duck and test file testing reducer  
+
+Duck names will be converted to camelCase automatically.
 
 
 ### Development Setup
