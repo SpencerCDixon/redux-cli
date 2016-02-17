@@ -8,11 +8,11 @@ There is an `init` subcommand for you to specify all pathes to where components
 live in your project.  The `init` command just creates a `.reduxrc` in your
 project root.  If you want to you can just create the `.reduxrc` manually.
 
-```
+```javascript
 npm i redux-cli -g  // install redux-cli globally so you can use cli without prepending node_modules
 redux init          // Then follow along with questions to create .reduxrc file 
 
-// Start generating components with tests!
+// Start generating components/tests and save time \(• ◡ •)/
 ```
 
 Final `.reduxrc` might look like this:
@@ -30,16 +30,17 @@ Final `.reduxrc` might look like this:
 }
 ```  
 
-**sourceBase**: where you keep your pre-compiled source code.  
-**testPath**: path to where your tests live.  
-**fileExtension**: do you use .js or .jsx for your components?  
-
-Relative from your sourceBase path:  
-**smartPath**: path where you keep smart/container components.  
-**dumbPath**: path where you keep dumb/pure components.  
-**formPath**: path where you keep form components.  
-**duckPath**: path where you keep redux 'ducks' if you use that pattern. (optional)  
-**reducerPath**: path where you keep reducers if you don't use 'ducks' pattern (optional)  
+### Initial Configuration
+|Key Name|Description|Extra Info|Required|
+|---|---|---|---|
+|**sourceBase**|where you keep your pre-compiled source|usually going to be `./src`|✓|
+|**testPath**|where you keep your tests|usually going to be `./test` or `./tests`  |✓|
+|**fileExtension**|do you use .js or .jsx for your React components|   |  |
+|**smartPath**|path where you keep smart/container components|relative from `sourceBase`|✓|
+|**dumbPath**|path where you keep your dumb/pure components|realtive from `sourceBase`|✓|
+|**formPath**|path where you keep your form components|realtive from `sourceBase`. Assumes you're using redux-form| |
+|**duckPath**|path where you keep your Redux Ducks|realtive from `sourceBase`.| |
+|**reducerPath**|path where you keep your reducers|realtive from `sourceBase`.| |
 
 
 ### Commands
@@ -47,7 +48,13 @@ Relative from your sourceBase path:
 `redux dumb <ComponentName>` - generates a dumb component and test file  
 `redux smart <ComponentName>` - generates a smart component and test file  
 `redux form <ComponentName>` - generates a form component and test file  
+
+All component names can be passed as `PascalCase`, `snake_case`, `dash-names`,
+or `camelCase` and they will be converted to Pascal Case in the generated files.
+
 `redux duck <duckName>` - generates redux duck and test file testing reducer  
+
+Duck names will be converted to camelCase automatically.
 
 
 ### Development Setup

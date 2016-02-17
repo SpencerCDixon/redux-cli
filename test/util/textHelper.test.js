@@ -50,4 +50,50 @@ describe('textHelpers', () => {
       expect(createString).to.match(/create/);
     });
   });
+
+  describe('#normalizeComponentName', () => {
+    it('turns snake case into capitalized', () => {
+      const string = 'my_component_name';
+      const expected = 'MyComponentName';
+
+      expect(th.normalizeComponentName(string)).to.eql(expected);
+    });
+
+    it('turns dashes into capitalized', () => {
+      const string = 'my-component-name';
+      const expected = 'MyComponentName';
+
+      expect(th.normalizeComponentName(string)).to.eql(expected);
+    });
+
+    it('turns camelcase into capitalized', () => {
+      const string = 'myComponent-name';
+      const expected = 'MyComponentName';
+
+      expect(th.normalizeComponentName(string)).to.eql(expected);
+    });
+  });
+
+  describe('#normalizeDuckName', () => {
+    it('camelizes snake case', () => {
+      const string = 'my_duck';
+      const expected = 'myDuck';
+
+      expect(th.normalizeDuckName(string)).to.eql(expected);
+    });
+
+    it('camelizes pascal case', () => {
+      const string = 'MyDuck';
+      const expected = 'myDuck';
+
+      expect(th.normalizeDuckName(string)).to.eql(expected);
+    });
+
+    it('camelizes dashes', () => {
+      const string = 'my-duck';
+      const expected = 'myDuck';
+
+      expect(th.normalizeDuckName(string)).to.eql(expected);
+    });
+  });
 });

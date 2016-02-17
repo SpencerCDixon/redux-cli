@@ -2,12 +2,12 @@ import commander from 'commander';
 
 import ProjectSettings from '../projectSettings';
 import Generator from '../generator';
-import { info } from '../util/textHelper';
+import { info, normalizeComponentName } from '../util/textHelper';
 import { version } from '../version';
 
 class SmartComponent {
   constructor(componentName) {
-    this.componentName = componentName;
+    this.componentName = normalizeComponentName(componentName);
     this.settings = new ProjectSettings();
   }
 

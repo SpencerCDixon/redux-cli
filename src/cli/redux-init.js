@@ -1,19 +1,27 @@
 import prompt from 'prompt';
+import figlet from 'figlet';
 
 import ProjectSettings from '../projectSettings';
 import { danger, warning, success, create } from '../util/textHelper';
 import initPrompt from '../prompts/initPrompt';
 import { setupPrompt } from '../prompts/setup';
 
-setupPrompt('init', prompt);
+setupPrompt('initialization', prompt);
+console.log(success(
+  figlet.textSync('Redux-CLI', {
+    font: 'Doom',
+    horizontalLayout: 'default',
+    verticalLayout: 'default'
+  }
+)));
 
-console.log(success('Redux CLI Initialization:'));
-console.log();
+console.log(danger('*****************************************************'));
 console.log(
-  danger('**NOTE**'),
-  warning('All paths need to be relative to project root'),
-  danger('**NOTE**')
+  danger('*'),
+  warning('  All paths need to be relative to project root  '),
+  danger('*')
 );
+console.log(danger('*****************************************************'));
 console.log();
 
 prompt.get(initPrompt, (err, result) => {
