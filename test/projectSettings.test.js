@@ -1,5 +1,6 @@
 import ProjectSettings from 'projectSettings';
 import fs from 'fs';
+import fse from 'fs-extra';
 import config from 'config';
 import { fileExists } from 'util/fs';
 
@@ -9,11 +10,11 @@ const templatePath = basePath + '/templates/.reduxrc';
 
 describe('ProjectSettings', () => {
   beforeEach(() => {
-    fileExists(settingsPath) && fs.unlinkSync(settingsPath);
+    fileExists(settingsPath) && fse.removeSync(settingsPath);
   });
 
   afterEach(() => {
-    fileExists(settingsPath) && fs.unlinkSync(settingsPath);
+    fileExists(settingsPath) && fse.removeSync(settingsPath);
   });
 
   const settings = new ProjectSettings();
@@ -92,6 +93,33 @@ describe('ProjectSettings', () => {
       const settings = new ProjectSettings();
       expect(settings.getSetting('testOne')).to.eql('works');
       expect(settings.getSetting('testTwo')).to.eql('works as well!');
+    });
+  });
+
+  describe('#setSetting', () => {
+    it('sets new settings', () => {
+      const mockedSettings = { testOne: 'works' };
+      fs.writeFileSync(settingsPath, JSON.stringify(mockedSettings));
+
+      const settings = new ProjectSettings();
+      expect(settings.getSetting('testOne')).to.eql('works');
+
+      settings.setSetting('testOne', 'new setting');
+      expect(settings.getSetting('testOne')).to.eql('new setting');
+    });
+  });
+
+  describe('#save', () => {
+    it('saves the current settings to the file', () => {
+      const mockedSettings = { testOne: 'works' };
+      fs.writeFileSync(settingsPath, JSON.stringify(mockedSettings));
+
+      const settings = new ProjectSettings();
+      settings.setSetting('testOne', 'new setting');
+      settings.save();
+
+      const newFile = fs.readFileSync(settingsPath, 'utf8');
+      expect(newFile).to.match(/new setting/);
     });
   });
 });
