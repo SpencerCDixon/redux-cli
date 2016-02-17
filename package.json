@@ -11,12 +11,14 @@
     "lint": "./node_modules/.bin/eslint ./src ./test",
     "cover": "./node_modules/.bin/istanbul cover",
     "clean": "rimraf lib",
-    "publish:patch": "npm run clean && npm test && npm run build && npm version patch && npm publish"
+    "publish:patch": "npm test && npm run clean && npm run build && npm version patch && npm publish",
+    "publish:minor": "npm test && npm run clean && npm run build && npm version minor && npm publish"
   },
   "keywords": [
     "redux",
     "react",
-    "cli"
+    "cli",
+    "generator"
   ],
   "author": "Spencer Dixon",
   "license": "MIT",
