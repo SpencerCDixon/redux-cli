@@ -3,29 +3,39 @@ import fse from 'fs-extra';
 import fs from 'fs';
 import config from 'config';
 import path from 'path';
+import { expectFile } from './helpers/fsHelpers';
 
-const { basePath } = config;
+const { basePath, pkgBasePath } = config;
 
 describe('Generator', () => {
-  const templatePath = '/components/Dumb.js';
-  const sourceBase = './src';
+  const templatePath = './tmp/templates/Dumb.js';
+  const testTemplatePath = './tmp/templates/Dumb.test.js';
+  const sourceBase = './tmp/src';
   const creationPath = '/components';
+  const testCreationPath = './tmp/test';
   const componentName = 'Example';
 
   describe('#generate', () => {
-    describe('when file already exists...', () => {
-      const args = { templatePath, creationPath, componentName };
-      const generator = new Generator(args);
-      const finalPath = generator.componentPath();
+    const args = {
+      templatePath, creationPath, componentName,
+      testTemplatePath, testCreationPath, sourceBase
+    };
 
+    const generator = new Generator(args);
+    const finalPath = generator.componentPath();
+    const finalTestPath = generator.componentTestPath();
+
+    const finalTemplatePath = path.join(pkgBasePath, '..', templatePath);
+    const finalTestTemplatePath = path.join(pkgBasePath, '..', testTemplatePath);
+
+    describe('when file already exists...', () => {
       beforeEach(() => {
-        fse.createFileSync(finalPath, 'already created file');
+        fse.outputFileSync(finalPath, 'already created file');
       });
 
       afterEach(() => {
         fse.removeSync(finalPath);
       });
-
 
       it('throws error if file already exists in location', () => {
         expect(() => generator.generate()).to.throw(/Not going to generate/);
@@ -42,15 +52,27 @@ describe('Generator', () => {
       });
     });
 
-    it('creates component and test file', () => {
-      const args = { templatePath, creationPath, componentName };
-      const generator = new Generator(args);
-      const compSpy = sinon.stub(generator, 'createComponent');
-      const testSpy = sinon.stub(generator, 'createTest');
+    describe('when file doesnt exists...', () => {
+      beforeEach(() => {
+        fse.outputFileSync(finalTemplatePath, 'component <%= name %> template');
+        fse.outputFileSync(finalTestTemplatePath, 'component <%= name %> template test');
+      });
 
-      generator.generate();
-      expect(compSpy.calledOnce).to.be.true;
-      expect(testSpy.calledOnce).to.be.true;
+      afterEach(() => {
+        fse.removeSync(finalTestPath);
+        fse.removeSync(finalPath);
+      });
+
+      it('creates component and test file', () => {
+        generator.generate();
+
+        expectFile('tmp/src/components/Example.js', {
+          contains: ['component Example template']
+        });
+        expectFile('tmp/test/components/Example.test.js', {
+          contains: ['component Example template test']
+        });
+      });
     });
   });
 
@@ -65,14 +87,14 @@ describe('Generator', () => {
 
     it('concats creationPath with componentName', () => {
       const generator = new Generator(args);
-      const expectedPath = path.join(basePath, 'src/components/HelloWorld.jsx');
+      const expectedPath = path.join(basePath, './tmp/src/components/HelloWorld.jsx');
       expect(generator.componentPath()).to.eql(expectedPath);
     });
 
     it('defaults to .js if extension not given', () => {
       const withoutExtension = Object.assign({}, args, {extension: undefined});
       const generator = new Generator(withoutExtension);
-      const expectedPath = path.join(basePath, 'src/components/HelloWorld.js');
+      const expectedPath = path.join(basePath, './tmp/src/components/HelloWorld.js');
 
       expect(generator.componentPath()).to.eql(expectedPath);
     });
@@ -110,7 +132,7 @@ describe('Generator', () => {
       const args = { sourceBase, creationPath: './components' };
       const generator = new Generator(args);
 
-      const expectedPath = 'src/components';
+      const expectedPath = 'tmp/src/components';
       expect(generator.componentDirPath()).to.eql(expectedPath);
     });
   });
@@ -160,7 +182,6 @@ describe('Generator', () => {
     afterEach(() => {
       console.log.restore();
     });
-
 
     describe('#createComponent', () => {
       it('renders template and writes it to componentPath', () => {

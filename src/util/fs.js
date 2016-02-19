@@ -1,4 +1,7 @@
 import fs from 'fs';
+import path from 'path';
+
+const rootPath = process.cwd();
 
 /*
  Node deprecated existsSync so this is a simple
@@ -11,6 +14,15 @@ export const fileExists = (filename) => {
     fs.accessSync(filename);
     return true;
   } catch (e) {
-    return false;
+    if (e.code === 'ENOENT') {
+      return false;
+    } else {
+      throw e;
+    }
   }
+};
+
+export const readFile = (filename) => {
+  const filePath = path.join(rootPath, filename);
+  return fs.readFileSync(filePath, 'utf8');
 };
