@@ -1,7 +1,15 @@
-# Redux CLI
 [![Build Status](https://travis-ci.org/SpencerCDixon/redux-cli.svg?branch=master)](https://travis-ci.org/SpencerCDixon/redux-cli)
 [![Code Climate](https://codeclimate.com/github/SpencerCDixon/redux-cli/badges/gpa.svg)](https://codeclimate.com/github/SpencerCDixon/redux-cli)
 [![codecov.io](https://codecov.io/github/SpencerCDixon/redux-cli/coverage.svg?branch=master)](https://codecov.io/github/SpencerCDixon/redux-cli?branch=master)
+
+```
+______         _                   _____  _     _____  
+| ___ \       | |                 /  __ \| |   |_   _| 
+| |_/ /___  __| |_   ___  ________| /  \/| |     | |   
+|    // _ \/ _` | | | \ \/ /______| |    | |     | |   
+| |\ \  __/ (_| | |_| |>  <       | \__/\| |_____| |_  
+\_| \_\___|\__,_|\__,_/_/\_\       \____/\_____/\___/  
+```
 
 **Getting Project Setup**:
 There is an `init` subcommand for you to specify all pathes to where components
