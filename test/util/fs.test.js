@@ -1,5 +1,6 @@
 import { fileExists, readFile } from 'util/fs';
 import fse from 'fs-extra';
+import fs from 'fs';
 import path from 'path';
 
 describe('(Util) fs', () => {
@@ -14,6 +15,20 @@ describe('(Util) fs', () => {
 
     it('returns false when file doesnt exist', () => {
       expect(fileExists('tmp/some/random/path')).to.be.false;
+    });
+
+    it('throws error when not file present error', () => {
+      const error = {
+        message: 'random error',
+        code: 'random code'
+      };
+      sinon.stub(fs, 'accessSync').throws(error);
+
+      try {
+        fileExists('tmp/example.js');
+      } catch (e) {
+        expect(e.code).to.eql('random code');
+      }
     });
   });
 

@@ -61,6 +61,8 @@ describe('Generator', () => {
       afterEach(() => {
         fse.removeSync(finalTestPath);
         fse.removeSync(finalPath);
+        fse.removeSync(finalTemplatePath);
+        fse.removeSync(finalTestTemplatePath);
       });
 
       it('creates component and test file', () => {
