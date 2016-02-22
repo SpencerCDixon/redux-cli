@@ -1,5 +1,5 @@
 import commander from 'commander';
-import { which, test, mkdir, cd, exec, rm, pwd } from 'shelljs';
+import { which, test, mkdir, cd, exec, rm } from 'shelljs';
 import logUpdate from 'log-update';
 import elegantSpinner from 'elegant-spinner';
 import chalk from 'chalk';
@@ -56,9 +56,8 @@ class AppGenerator {
     // Should maybe prompt user for permission to do this since it's dangerous.
     info('Removing the starter kit .git folder');
     rm('-rf', '.git');
-    exec('git add -A && git commit -m"Initial commit"', {silent: true}, (code, stdout, stderr) => {
-      if (stdout) info(stdout);
-      if (stderr) error(stderr);
+    exec('git init && git add -A && git commit -m"Initial commit"', {silent: true}, () => {
+      create('Created new .git history for your project');
     });
   }
 
@@ -69,18 +68,15 @@ class AppGenerator {
       logUpdate(`${content}${chalk.cyan.bold.dim(frame())}`);
     }, 100);
 
-    exec('git pull https://github.com/davezuko/react-redux-starter-kit.git', {silent: true}, (code, stdout, stderr) => {
+    exec('git pull https://github.com/davezuko/react-redux-starter-kit.git', {silent: true}, (code) => {
       clearInterval(interval);
 
       if (code !== 0) {
-        console.log('Current directory: ', pwd());
-        console.log('Error code: ', code);
-        error('Something went wrong... please try again');
+        error('Something went wrong... please try again.  Make sure you have internet access');
+        error(`Error code: ${code}`);
         process.exit(1);
       }
 
-      if (stdout) info(stdout);
-      if (stderr) error(stderr);
       this.resetGitHistory();
     });
   }
