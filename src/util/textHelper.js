@@ -23,6 +23,10 @@ export const create = (text) => {
   return chalk.green(`    create: `) + text;
 };
 
+export const error = (text) => {
+  return chalk.red(`    error: `) + text;
+};
+
 // Random string/text helpers
 export const normalizeComponentName = (name) => {
   return pascalize(name);

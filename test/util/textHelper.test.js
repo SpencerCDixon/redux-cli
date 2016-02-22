@@ -51,6 +51,15 @@ describe('textHelpers', () => {
     });
   });
 
+  describe('#error', () => {
+    const string = 'something went wrong';
+    const errorString = th.error(string);
+
+    it('prepends "error" to text', () => {
+      expect(errorString).to.match(/error/);
+    });
+  });
+
   describe('#normalizeComponentName', () => {
     it('turns snake case into capitalized', () => {
       const string = 'my_component_name';
