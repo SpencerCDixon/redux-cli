@@ -33,12 +33,16 @@ describe('textHelpers', () => {
   });
 
   describe('#info', () => {
-    it('applies blue color to text', () => {
-      const string = 'INFO: this is some useful information';
-      const infoString = th.info(string);
+    const string = '.reduxrc was created';
 
-      expect(infoString).to.eq(chalk.blue(string));
-      expect(infoString).to.not.eq(chalk.green(string));
+    it('applies blue color to text', () => {
+      const arg = chalk.cyan('    info: ') + chalk.white(string);
+      const spy = sinon.spy(console, 'log');
+      th.info(string);
+
+      expect(spy.calledOnce).to.be.true;
+      expect(spy.calledWith(arg)).to.be.true;
+      spy.restore();
     });
   });
 

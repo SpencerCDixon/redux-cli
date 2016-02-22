@@ -14,19 +14,32 @@ export const warning = (text) => {
   return chalk.yellow(text);
 };
 
-export const info = (text) => {
-  return chalk.blue(text);
-};
-
 // Action specific helpers for the command line.
-export const create = (text) => {
-  return console.log(
-    chalk.green(`    create: `) + chalk.white(text)
-  );
+export const info = (text, log = true) => {
+  let content = chalk.blue('    info: ') + chalk.white(text);
+  if (log) {
+    console.log(content);
+  } else {
+    return content;
+  }
 };
 
-export const error = (text) => {
-  return console.log(chalk.red(`    error: ${text}`));
+export const create = (text, log = true) => {
+  let content = chalk.green(`    create: `) + chalk.white(text);
+  if (log) {
+    console.log(content);
+  } else {
+    return content;
+  }
+};
+
+export const error = (text, log = true) => {
+  let content = chalk.red('    error: ') + chalk.white(text);
+  if (log) {
+    console.log(content);
+  } else {
+    return content;
+  }
 };
 
 // Random string/text helpers

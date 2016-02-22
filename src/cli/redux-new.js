@@ -1,6 +1,11 @@
 import commander from 'commander';
-import { error, create } from '../util/textHelper';
-import { which, test, mkdir, cd, exec } from 'shelljs';
+import { which, test, mkdir, cd, exec, rm, pwd } from 'shelljs';
+import logUpdate from 'log-update';
+import elegantSpinner from 'elegant-spinner';
+import chalk from 'chalk';
+import { info, error, create } from '../util/textHelper';
+
+const frame = elegantSpinner();
 
 class AppGenerator {
   constructor(dirName) {
@@ -41,17 +46,42 @@ class AppGenerator {
 
   initGit() {
     create('setting up tracking with git...');
-    console.log();
-    exec('git init');
+    exec('git init', {silent: true}, (code, stdout, stderr) => {
+      if (stdout) info(stdout);
+      if (stderr) error(stderr);
+    });
+  }
+
+  resetGitHistory() {
+    // Should maybe prompt user for permission to do this since it's dangerous.
+    info('Removing the starter kit .git folder');
+    rm('-rf', '.git');
+    exec('git add -A && git commit -m"Initial commit"', {silent: true}, (code, stdout, stderr) => {
+      if (stdout) info(stdout);
+      if (stderr) error(stderr);
+    });
   }
 
   pullDownKit() {
-    exec('git pull https://github.com/davezuko/react-redux-starter-kit.git', function(code) {
+    let interval = setInterval(() => {
+      const content = info('Fetching the Redux Starter Kit...  ', false);
+
+      logUpdate(`${content}${chalk.cyan.bold.dim(frame())}`);
+    }, 100);
+
+    exec('git pull https://github.com/davezuko/react-redux-starter-kit.git', {silent: true}, (code, stdout, stderr) => {
+      clearInterval(interval);
+
       if (code !== 0) {
+        console.log('Current directory: ', pwd());
+        console.log('Error code: ', code);
         error('Something went wrong... please try again');
         process.exit(1);
       }
-      create('Completed... project ready to go!');
+
+      if (stdout) info(stdout);
+      if (stderr) error(stderr);
+      this.resetGitHistory();
     });
   }
 }
