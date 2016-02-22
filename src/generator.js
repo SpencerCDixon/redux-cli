@@ -35,13 +35,13 @@ export default class Generator {
   createComponent() {
     const file = this.renderTemplate(this.templatePath);
     outputFileSync(this.componentPath(), file);
-    console.log(create(`${this.componentPath()}`));
+    create(`${this.componentPath()}`);
   }
 
   createTest() {
     const file = this.renderTemplate(this.testTemplatePath);
     outputFileSync(this.componentTestPath(), file);
-    console.log(create(`${this.componentTestPath()}`));
+    create(`${this.componentTestPath()}`);
   }
 
   componentPath() {

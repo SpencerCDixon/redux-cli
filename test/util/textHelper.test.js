@@ -44,19 +44,29 @@ describe('textHelpers', () => {
 
   describe('#create', () => {
     const string = '.reduxrc was created';
-    const createString = th.create(string);
 
     it('prepends "create" to text', () => {
-      expect(createString).to.match(/create/);
+      const arg = chalk.green('    create: ') + chalk.white(string);
+      const spy = sinon.spy(console, 'log');
+      th.create(string);
+
+      expect(spy.calledOnce).to.be.true;
+      expect(spy.calledWith(arg)).to.be.true;
+      spy.restore();
     });
   });
 
   describe('#error', () => {
     const string = 'something went wrong';
-    const errorString = th.error(string);
 
     it('prepends "error" to text', () => {
-      expect(errorString).to.match(/error/);
+      const arg = chalk.red(`    error: ${string}`);
+      const spy = sinon.spy(console, 'log');
+      th.error(string);
+
+      expect(spy.calledOnce).to.be.true;
+      expect(spy.calledWith(arg)).to.be.true;
+      spy.restore();
     });
   });
 

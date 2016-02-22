@@ -20,11 +20,13 @@ export const info = (text) => {
 
 // Action specific helpers for the command line.
 export const create = (text) => {
-  return chalk.green(`    create: `) + text;
+  return console.log(
+    chalk.green(`    create: `) + chalk.white(text)
+  );
 };
 
 export const error = (text) => {
-  return chalk.red(`    error: `) + text;
+  return console.log(chalk.red(`    error: ${text}`));
 };
 
 // Random string/text helpers
