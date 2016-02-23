@@ -7,11 +7,7 @@ program
   .version(version());
 
 program
-  .command('init', 'initialize a .reduxrc file for project details')
-  .command('dumb', 'creates a dumb/pure component in appropriate path with matching test file')
-  .command('smart', 'creates a smart/container component in appropriate path with matching test file')
-  .command('form', 'creates a redux-form component in appropriate path with matching test file')
-  .command('duck', 'creates a redux duck in appropriate path with matching test file');
+  .command('init', 'initialize a .reduxrc file for project details');
 
 program
   .command('new', 'creates a new redux project');
