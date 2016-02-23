@@ -92,7 +92,12 @@ or `camelCase` and they will be converted to Pascal Case in the generated files.
 |`redux g duck <duck name>`|generates a redux duck and test file||
 
 
-### Development Setup
+### Development Setup/Contributing
+This CLI is very much in the beginning phases and I would love to have people
+help me to make it more robust.  Currently, it's pretty opinonated to use the
+tooling/templates I prefer in my projects but I'm open to PR's to make it more
+universal.
+
 ```
 nvm use 5.1.0    // install node V5.1 if not present (nvm install 5.1.0)
 npm install
@@ -111,8 +116,3 @@ npm start        // will watch files in src and compile using babel
 npm test         // runs test suite with linting.  throws when lints failing
 npm run lint     // lints all files in src and test
 ```
-
-Useful libraries to look into:  
-*  [Prompt](https://github.com/flatiron/prompt) - getting user input
-*  [Cliff](https://github.com/flatiron/cliff) - terminal formatting
-*  [Chalk](https://github.com/chalk/chalk) - terminal coloring

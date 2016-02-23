@@ -3,7 +3,9 @@ import { which, test, mkdir, cd, exec, rm } from 'shelljs';
 import logUpdate from 'log-update';
 import elegantSpinner from 'elegant-spinner';
 import chalk from 'chalk';
+
 import { info, error, create } from '../util/textHelper';
+import ProjectSettings from '../projectSettings';
 
 const frame = elegantSpinner();
 
@@ -61,6 +63,20 @@ class AppGenerator {
     });
   }
 
+  createProjectSettings() {
+    const settings = new ProjectSettings();
+    settings.setSetting('sourceBase', 'src');
+    settings.setSetting('testPath', 'tests');
+    settings.setSetting('smartPath', 'containers');
+    settings.setSetting('dumbPath', 'components');
+    settings.setSetting('formPath', 'forms');
+    settings.setSetting('duckPath', 'redux/modules');
+    settings.setSetting('reducerPath', '');
+    settings.setSetting('fileExtension', 'js');
+    settings.save();
+    create('.reduxrc with starter kit settings saved.');
+  }
+
   pullDownKit() {
     let interval = setInterval(() => {
       const content = info('Fetching the Redux Starter Kit...  ', false);
@@ -78,6 +94,7 @@ class AppGenerator {
       }
 
       this.resetGitHistory();
+      this.createProjectSettings();
     });
   }
 }

@@ -31,13 +31,13 @@ describe('GeneratorBlueprint', () => {
 
     describe('#infoMessage', () => {
       it('should throw error with message to blueprint builder', () => {
-        expect(() => blueprint.infoMessage()).to.throw;
+        expect(() => blueprint.infoMessage()).to.throw(/implement an info message/);
       });
     });
 
     describe('#generatorArgs', () => {
       it('should throw error with message to blueprint builder', () => {
-        expect(() => blueprint.generatorArgs()).to.throw;
+        expect(() => blueprint.generatorArgs()).to.throw(/implement generator args/);
       });
     });
   });
