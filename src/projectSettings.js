@@ -1,6 +1,7 @@
 import path from 'path';
 import { copySync } from 'fs-extra';
 import jf from 'jsonfile';
+import { pwd } from 'shelljs';
 
 import { fileExists } from './util/fs';
 import config from './config';
@@ -32,7 +33,7 @@ export default class ProjectSettings {
   }
 
   settingsPath() {
-    return path.join(basePath, '.reduxrc');
+    return path.join(pwd(), '.reduxrc');
   }
 
   settingsExist() {
