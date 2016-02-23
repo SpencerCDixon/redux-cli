@@ -29,6 +29,7 @@ redux g dumb SimpleButton
 2.  [Configuring Existing Project](#config-existing-project)
 3.  [Commands](#commands)
 4.  [Generators](#generators)
+5.  [Roadmap](#roadmap)
 
 ### Getting Started
 Running `redux new <project name>` will pull down the amazing [Redux Starter Kit](https://github.com/davezuko/react-redux-starter-kit) and
@@ -90,6 +91,13 @@ or `camelCase` and they will be converted to Pascal Case in the generated files.
 |`redux g smart <smart name>`|generates a smart connected component and test file||
 |`redux g form <form name>`|generates a form component (assumes redux-form)||
 |`redux g duck <duck name>`|generates a redux duck and test file||
+
+### Roadmap
+- [ ] support for view components
+- [ ] support for layout components
+- [ ] support for fields option in form generator
+- [ ] support for routing (generates both view and route and adds to routes)
+- [ ] template overriding so people can customize templates
 
 
 ### Development Setup/Contributing
