@@ -13,14 +13,14 @@ class ReduxDuck extends GeneratorBlueprint {
   }
 
   generatorArgs() {
-    const { sourceBase, creationPath,
+    const { sourceBase, duckPath,
             extension, testCreationPath } = this.settings.getAllSettings();
 
     return {
       templatePath: '/templates/duck.js',
       testTemplatePath: '/templates/duck.test.js',
       componentName: this.componentName,
-      creationPath,
+      creationPath: duckPath,
       extension,
       testCreationPath,
       sourceBase
