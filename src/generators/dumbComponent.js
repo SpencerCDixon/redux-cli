@@ -1,25 +1,23 @@
-import commander from 'commander';
-
-import ProjectSettings from '../projectSettings';
-import Generator from '../generator';
+import GeneratorBlueprint from './generatorBlueprint';
 import { info, normalizeComponentName } from '../util/textHelper';
-import { version } from '../version';
 
-class DumbComponent {
-  constructor(componentName) {
+export class DumbComponent extends GeneratorBlueprint {
+  constructor(componentName, settings) {
     this.componentName = normalizeComponentName(componentName);
-    this.settings = new ProjectSettings();
+    this.settings = settings;
   }
 
-  generate() {
+  infoMessage() {
     info(`Generating new Dumb Component named: ${this.componentName}`);
+  }
 
+  generatorArgs() {
     const sourceBase = this.settings.getSetting('sourceBase');
     const creationPath = this.settings.getSetting('dumbPath');
     const extension = this.settings.getSetting('fileExtension');
     const testCreationPath = this.settings.getSetting('testPath');
 
-    const args = {
+    return {
       templatePath: '/templates/Dumb.js',
       testTemplatePath: '/templates/Dumb.test.js',
       componentName: this.componentName,
@@ -28,18 +26,5 @@ class DumbComponent {
       testCreationPath,
       sourceBase
     };
-
-    const generator = new Generator(args);
-    generator.generate();
   }
 }
-
-commander
-  .version(version())
-  .option('-f, --functional', 'create a stateless functional component instead of class extending')
-  .arguments('<ComponentName>')
-  .action(name => {
-    const component = new DumbComponent(name);
-    component.generate();
-  })
-  .parse(process.argv);

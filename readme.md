@@ -11,17 +11,30 @@ ______         _                   _____  _     _____
 \_| \_\___|\__,_|\__,_/_/\_\       \____/\_____/\___/  
 ```
 
-**Getting Project Setup**:
+## Quick Start
+
+```javascript
+npm i redux-cli -g  // install redux-cli globally so you can use cli without prepending node_modules
+redux new <project name>  // create a new redux project
+redux init                // OR configure a current project to use the CLI
+
+// Start generating components/tests and save time \(• ◡ •)/
+//    (generate)
+redux g dumb SimpleButton
+```
+
+## Table Of Contents
+
+1.  Getting Started
+2.  Configuring Existing Project
+3.  Commands
+4.  Generators
+
+### Getting Started
 There is an `init` subcommand for you to specify all pathes to where components
 live in your project.  The `init` command just creates a `.reduxrc` in your
 project root.  If you want to you can just create the `.reduxrc` manually.
 
-```javascript
-npm i redux-cli -g  // install redux-cli globally so you can use cli without prepending node_modules
-redux init          // Then follow along with questions to create .reduxrc file 
-
-// Start generating components/tests and save time \(• ◡ •)/
-```
 
 Final `.reduxrc` might look like this:
 
