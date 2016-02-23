@@ -49,13 +49,14 @@ Final `.reduxrc` might look like this:
 ```javascript
 {
   "sourceBase":"src",
-  "testPath":"./test",
+  "testBase":"./test",
   "smartPath":"containers",
   "dumbPath":"components",
   "formPath":"components/forms",
-  "fileExtension":"js",
   "duckPath":"redux/modules",
-  "reducerPath":""
+  "reducerPath":"",
+  "fileExtension":"js",
+  "fileCasing": "default"
 }
 ```  
 
@@ -63,13 +64,14 @@ Final `.reduxrc` might look like this:
 |Key Name|Description|Extra Info|Required|
 |---|---|---|---|
 |**sourceBase**|where you keep your pre-compiled source|usually going to be `./src`|✓|
-|**testPath**|where you keep your tests|usually going to be `./test` or `./tests`  |✓|
-|**fileExtension**|do you use .js or .jsx for your React components| |✓|
+|**testBase**|where you keep your tests|usually going to be `./test` or `./tests`  |✓|
 |**smartPath**|path where you keep smart/container components|relative from `sourceBase`|✓|
 |**dumbPath**|path where you keep your dumb/pure components|realtive from `sourceBase`|✓|
 |**formPath**|path where you keep your form components|realtive from `sourceBase`. Assumes you're using redux-form| |
 |**duckPath**|path where you keep your Redux Ducks|realtive from `sourceBase`.| |
 |**reducerPath**|path where you keep your reducers|realtive from `sourceBase`.| |
+|**fileExtension**|do you use .js or .jsx for your React components| |✓|
+|**fileCasing**|how do you want generated files to be named (pasal/camel/snake/default)| |✓|
 
 
 ### Commands
