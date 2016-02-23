@@ -58,9 +58,8 @@ class AppGenerator {
     // Should maybe prompt user for permission to do this since it's dangerous.
     info('Removing the starter kit .git folder');
     rm('-rf', '.git');
-    exec('git init && git add -A && git commit -m"Initial commit"', {silent: true}, () => {
-      create('Created new .git history for your project');
-    });
+    exec('git init && git add -A && git commit -m"Initial commit"', {silent: true});
+    create('Created new .git history for your project');
   }
 
   createProjectSettings() {
@@ -84,18 +83,17 @@ class AppGenerator {
       logUpdate(`${content}${chalk.cyan.bold.dim(frame())}`);
     }, 100);
 
-    exec('git pull https://github.com/davezuko/react-redux-starter-kit.git', {silent: true}, (code) => {
-      clearInterval(interval);
+    const pull = exec('git pull https://github.com/davezuko/react-redux-starter-kit.git', {silent: true});
+    clearInterval(interval);
 
-      if (code !== 0) {
-        error('Something went wrong... please try again.  Make sure you have internet access');
-        error(`Error code: ${code}`);
-        process.exit(1);
-      }
+    if (pull.code !== 0) {
+      error('Something went wrong... please try again.  Make sure you have internet access');
+      error(`Error code: ${pull.code}`);
+      process.exit(1);
+    }
 
-      this.resetGitHistory();
-      this.createProjectSettings();
-    });
+    this.resetGitHistory();
+    this.createProjectSettings();
   }
 }
 
