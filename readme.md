@@ -14,12 +14,12 @@ ______         _                   _____  _     _____
 ## Quick Start
 
 ```javascript
-npm i redux-cli -g  // install redux-cli globally so you can use cli without prepending node_modules
-redux new <project name>  // create a new redux project
-redux init                // OR configure a current project to use the CLI
+npm i redux-cli -g       // install redux-cli globally 
+redux new <project name> // create a new redux project
+redux init               // OR configure a current project to use the CLI
 
 // Start generating components/tests and save time \(• ◡ •)/
-//    (generate)
+//(g is alias for generate)
 redux g dumb SimpleButton
 ```
 
