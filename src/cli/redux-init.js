@@ -42,5 +42,5 @@ prompt.get(initPrompt, (err, result) => {
   settings.setSetting('reducerPath', reducerPath);
   settings.setSetting('fileExtension', fileExtension);
   settings.save();
-  console.log(create('.reduxrc with configuration saved in project root.'));
+  create('.reduxrc with configuration saved in project root.');
 });

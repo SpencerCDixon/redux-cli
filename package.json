@@ -1,8 +1,11 @@
 {
   "name": "redux-cli",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "An opinionated CLI to make working on redux apps much faster.",
   "main": "bin/index.js",
+  "engine": {
+    "node": ">=5.1"
+  },
   "scripts": {
     "test": "npm run lint && env NODE_PATH=$NODE_PATH:$PWD/src ./node_modules/.bin/babel-node node_modules/isparta/bin/isparta cover --report html ./node_modules/.bin/_mocha -- --compilers js:babel-register --opts ./.mocha.opts && ./node_modules/.bin/codecov --token=75e3e765-443c-4d31-a8f5-b0ca3be8e55f",
     "start": "npm run build:watch",
@@ -20,25 +23,27 @@
     "cli",
     "generator"
   ],
-  "author": "Spencer Dixon",
+  "author": "Spencer Dixon <spencercdixon@gmail.com>",
   "license": "MIT",
   "bin": {
     "redux": "bin/index.js",
     "redux-init": "bin/redux-init.js",
-    "redux-dumb": "bin/redux-dumb.js",
-    "redux-smart": "bin/redux-smart.js",
-    "redux-form": "bin/redux-form.js",
-    "redux-duck": "bin/redux-duck.js"
+    "redux-generate": "bin/redux-generate.js",
+    "redux-g": "bin/redux-generate.js",
+    "redux-new": "bin/redux-new.js"
   },
   "dependencies": {
     "chalk": "^1.1.1",
     "commander": "^2.9.0",
     "ejs": "^2.4.1",
+    "elegant-spinner": "^1.0.1",
     "figlet": "^1.1.1",
     "fs-extra": "^0.26.5",
     "humps": "^1.0.0",
     "jsonfile": "^2.2.3",
-    "prompt": "^1.0.0"
+    "log-update": "^1.0.2",
+    "prompt": "^1.0.0",
+    "shelljs": "^0.6.0"
   },
   "devDependencies": {
     "babel-cli": "^6.5.1",

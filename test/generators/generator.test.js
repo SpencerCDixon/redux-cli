@@ -1,9 +1,9 @@
-import Generator from 'generator';
+import Generator from 'generators/generator';
 import fse from 'fs-extra';
 import fs from 'fs';
 import config from 'config';
 import path from 'path';
-import { expectFile } from './helpers/fsHelpers';
+import { expectFile } from '../helpers/fsHelpers';
 
 const { basePath, pkgBasePath } = config;
 
@@ -42,13 +42,13 @@ describe('Generator', () => {
       });
 
       it('logs an error message', () => {
-        sinon.stub(console, 'error');
+        sinon.stub(console, 'log');
         try {
           generator.generate();
         } catch (e) {
-          expect(console.error.calledOnce).to.be.true;
+          expect(console.log.calledOnce).to.be.true;
         }
-        console.error.restore();
+        console.log.restore();
       });
     });
 

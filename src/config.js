@@ -1,7 +1,7 @@
 import path from 'path';
 
 let config = {
-  basePath: process.env['PWD'],
+  basePath: process.cwd(),
   pkgBasePath: path.dirname(module.id)
 };
 

@@ -1,11 +1,9 @@
 import path from 'path';
 import { copySync } from 'fs-extra';
 import jf from 'jsonfile';
+import { pwd } from 'shelljs';
 
 import { fileExists } from './util/fs';
-import config from './config';
-
-const { basePath } = config;
 
 export default class ProjectSettings {
   constructor() {
@@ -32,7 +30,7 @@ export default class ProjectSettings {
   }
 
   settingsPath() {
-    return path.join(basePath, '.reduxrc');
+    return path.join(pwd(), '.reduxrc');
   }
 
   settingsExist() {
@@ -41,6 +39,10 @@ export default class ProjectSettings {
 
   getSetting(key) {
     return this.settings[key];
+  }
+
+  getAllSettings() {
+    return this.settings;
   }
 
   setSetting(key, val) {
