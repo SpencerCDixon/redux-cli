@@ -28,10 +28,6 @@
   "bin": {
     "redux": "bin/index.js",
     "redux-init": "bin/redux-init.js",
-    "redux-dumb": "bin/redux-dumb.js",
-    "redux-smart": "bin/redux-smart.js",
-    "redux-form": "bin/redux-form.js",
-    "redux-duck": "bin/redux-duck.js",
     "redux-generate": "bin/redux-generate.js",
     "redux-g": "bin/redux-generate.js",
     "redux-new": "bin/redux-new.js"
