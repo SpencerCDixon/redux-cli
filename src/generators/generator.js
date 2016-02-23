@@ -9,7 +9,7 @@ import config from '../config';
 
 const { pkgBasePath, basePath } = config;
 
-export default class Generator {
+class Generator {
   constructor(args) {
     this.sourceBase = args.sourceBase;
     this.creationPath = args.creationPath;
@@ -67,3 +67,5 @@ export default class Generator {
     return ejs.render(template, ejsArgs);
   }
 }
+
+export default Generator;
