@@ -2,6 +2,7 @@ import fs from 'fs';
 import { outputFileSync } from 'fs-extra';
 import path from 'path';
 import ejs from 'ejs';
+import { depascalize, pascalize, camelize } from 'humps';
 
 import { create, error } from '../util/textHelper';
 import { fileExists } from '../util/fs';
@@ -11,13 +12,17 @@ const { pkgBasePath, basePath } = config;
 
 class Generator {
   constructor(args) {
-    this.sourceBase = args.sourceBase;
-    this.creationPath = args.creationPath;
-    this.componentName = args.componentName;
-    this.templatePath = args.templatePath;
+    // generator specific settings
+    this.creationPath     = args.creationPath;
+    this.componentName    = args.componentName;
+    this.templatePath     = args.templatePath;
     this.testTemplatePath = args.testTemplatePath;
-    this.testCreationPath = args.testCreationPath;
-    this.extension = args.extension || 'js';
+
+    // project wide settings
+    this.sourceBase    = args.settings.getSetting('sourceBase');
+    this.testBase      = args.settings.getSetting('testBase');
+    this.fileCasing    = args.settings.getSetting('fileCasing') || 'default';
+    this.fileExtension = args.settings.getSetting('fileExtension') || 'js';
   }
 
   generate() {
@@ -42,18 +47,33 @@ class Generator {
     create(`${this.componentTestPath()}`);
   }
 
+  normalizeCasing(string) {
+    if (this.fileCasing === 'snake') {
+      return depascalize(pascalize(string));
+    } else if (this.fileCasing === 'pascal') {
+      return pascalize(string);
+    } else if (this.fileCasing === 'camel') {
+      return camelize(string);
+    } else {
+      return string;
+    }
+    return string;
+  }
+
   componentPath() {
-    const compPath = `${this.componentDirPath()}/${this.componentName}.${this.extension}`;
+    const fileName = this.normalizeCasing(this.componentName);
+    const compPath = `${this.componentDirPath()}/${fileName}.${this.fileExtension}`;
     return path.join(basePath, path.normalize(compPath));
   }
 
   componentTestPath() {
-    const testPath = `${this.testDirPath()}/${this.componentName}.test.${this.extension}`;
+    const fileName = this.normalizeCasing(this.componentName);
+    const testPath = `${this.testDirPath()}/${fileName}.test.${this.fileExtension}`;
     return path.join(basePath, path.normalize(testPath));
   }
 
   testDirPath() {
-    return path.normalize(`${this.testCreationPath}/${this.creationPath}`);
+    return path.normalize(`${this.testBase}/${this.creationPath}`);
   }
 
   componentDirPath() {

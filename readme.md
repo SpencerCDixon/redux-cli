@@ -30,6 +30,7 @@ redux g dumb SimpleButton
 3.  [Commands](#commands)
 4.  [Generators](#generators)
 5.  [Roadmap](#roadmap)
+6.  [Issues/Contributing](#contributing)
 
 ### Getting Started
 Running `redux new <project name>` will pull down the amazing [Redux Starter Kit](https://github.com/davezuko/react-redux-starter-kit) and
@@ -48,13 +49,14 @@ Final `.reduxrc` might look like this:
 ```javascript
 {
   "sourceBase":"src",
-  "testPath":"./test",
+  "testBase":"./test",
   "smartPath":"containers",
   "dumbPath":"components",
   "formPath":"components/forms",
-  "fileExtension":"js",
   "duckPath":"redux/modules",
-  "reducerPath":""
+  "reducerPath":"",
+  "fileExtension":"js",
+  "fileCasing": "default"
 }
 ```  
 
@@ -62,13 +64,14 @@ Final `.reduxrc` might look like this:
 |Key Name|Description|Extra Info|Required|
 |---|---|---|---|
 |**sourceBase**|where you keep your pre-compiled source|usually going to be `./src`|✓|
-|**testPath**|where you keep your tests|usually going to be `./test` or `./tests`  |✓|
-|**fileExtension**|do you use .js or .jsx for your React components| |✓|
+|**testBase**|where you keep your tests|usually going to be `./test` or `./tests`  |✓|
 |**smartPath**|path where you keep smart/container components|relative from `sourceBase`|✓|
 |**dumbPath**|path where you keep your dumb/pure components|realtive from `sourceBase`|✓|
 |**formPath**|path where you keep your form components|realtive from `sourceBase`. Assumes you're using redux-form| |
 |**duckPath**|path where you keep your Redux Ducks|realtive from `sourceBase`.| |
 |**reducerPath**|path where you keep your reducers|realtive from `sourceBase`.| |
+|**fileExtension**|do you use .js or .jsx for your React components| |✓|
+|**fileCasing**|how do you want generated files to be named (pasal/camel/snake/default)| |✓|
 
 
 ### Commands
@@ -99,12 +102,15 @@ or `camelCase` and they will be converted to Pascal Case in the generated files.
 - [ ] support for routing (generates both view and route and adds to routes)
 - [ ] template overriding so people can customize templates
 
-
-### Development Setup/Contributing
+### Contributing
 This CLI is very much in the beginning phases and I would love to have people
 help me to make it more robust.  Currently, it's pretty opinonated to use the
 tooling/templates I prefer in my projects but I'm open to PR's to make it more
-universal.
+universal and support other platforms (I'm on Mac).
+
+#### Development Setup/Contributing
+Use `npm link` is to install the CLI locally when testing it and adding
+features.
 
 ```
 nvm use 5.1.0    // install node V5.1 if not present (nvm install 5.1.0)
@@ -114,13 +120,13 @@ npm start        // to compile src into lib
 npm test         // make sure all tests are passing
 
 // to test the cli in the local directory you can:
-npm i . -g       // will install the npm package locally so you can run 'redux <commands>'
-redux init       // will prompt you to init a .reduxrc file to be used in the CLI
+npm link         // will install the npm package locally so you can run 'redux <commands>'
+redux <run commands here>
 ```
 
 ### Package Utility Scripts:  
 ```
 npm start        // will watch files in src and compile using babel
-npm test         // runs test suite with linting.  throws when lints failing
+npm test         // runs test suite with linting.  Throws when lint failing
 npm run lint     // lints all files in src and test
 ```

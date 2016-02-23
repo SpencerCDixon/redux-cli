@@ -3,3 +3,4 @@ lib
 npm-debug.log
 coverage/
 tmp/
+.reduxrc
