@@ -65,13 +65,14 @@ class AppGenerator {
   createProjectSettings() {
     const settings = new ProjectSettings();
     settings.setSetting('sourceBase', 'src');
-    settings.setSetting('testPath', 'tests');
+    settings.setSetting('testBase', 'tests');
     settings.setSetting('smartPath', 'containers');
     settings.setSetting('dumbPath', 'components');
     settings.setSetting('formPath', 'forms');
     settings.setSetting('duckPath', 'redux/modules');
     settings.setSetting('reducerPath', '');
     settings.setSetting('fileExtension', 'js');
+    settings.setSetting('fileCasing', 'default');
     settings.save();
     create('.reduxrc with starter kit settings saved.');
   }

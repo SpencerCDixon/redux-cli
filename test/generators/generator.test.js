@@ -4,27 +4,29 @@ import fs from 'fs';
 import config from 'config';
 import path from 'path';
 import { expectFile } from '../helpers/fsHelpers';
+import MockSettings from '../helpers/mockSettings';
 
 const { basePath, pkgBasePath } = config;
 
 describe('Generator', () => {
   const templatePath = './tmp/templates/Dumb.js';
   const testTemplatePath = './tmp/templates/Dumb.test.js';
-  const sourceBase = './tmp/src';
   const creationPath = '/components';
-  const testCreationPath = './tmp/test';
   const componentName = 'Example';
+  const settings = new MockSettings();
 
   describe('#generate', () => {
     const args = {
-      templatePath, creationPath, componentName,
-      testTemplatePath, testCreationPath, sourceBase
+      creationPath,
+      componentName,
+      templatePath,
+      testTemplatePath,
+      settings
     };
-
     const generator = new Generator(args);
+
     const finalPath = generator.componentPath();
     const finalTestPath = generator.componentTestPath();
-
     const finalTemplatePath = path.join(pkgBasePath, '..', templatePath);
     const finalTestTemplatePath = path.join(pkgBasePath, '..', testTemplatePath);
 
@@ -68,23 +70,57 @@ describe('Generator', () => {
       it('creates component and test file', () => {
         generator.generate();
 
-        expectFile('tmp/src/components/Example.js', {
+        expectFile('/tmp/src/components/Example.js', {
           contains: ['component Example template']
         });
-        expectFile('tmp/test/components/Example.test.js', {
+        expectFile('/tmp/test/components/Example.test.js', {
           contains: ['component Example template test']
         });
       });
     });
   });
 
+  describe('#normalizeCasing', () => {
+    const string = 'string-to-test';
+
+    it('converts to snake when settings are set to "snake"', () => {
+      const args = { settings: new MockSettings({fileCasing: 'snake'}) };
+      const generator = new Generator(args);
+      const expected = 'string_to_test';
+      expect(generator.normalizeCasing(string)).to.eql(expected);
+    });
+
+    it('converts to PascalCase when settings are set to "pascal"', () => {
+      const args = { settings: new MockSettings({fileCasing: 'pascal'}) };
+      const generator = new Generator(args);
+      const expected = 'StringToTest';
+      expect(generator.normalizeCasing(string)).to.eql(expected);
+    });
+
+    it('converts to camelCase when settings are set to "camel"', () => {
+      const args = { settings: new MockSettings({fileCasing: 'camel'}) };
+      const generator = new Generator(args);
+      const expected = 'stringToTest';
+      expect(generator.normalizeCasing(string)).to.eql(expected);
+    });
+
+    it('leaves string alone when set to "default"', () => {
+      const args = { settings: new MockSettings({fileCasing: 'default'}) };
+      const generator = new Generator(args);
+      expect(generator.normalizeCasing(string)).to.eql(string);
+    });
+  });
+
   describe('#componentPath', () => {
     const args = {
-      sourceBase,
-      templatePath,
       creationPath: './components',
       componentName: 'HelloWorld',
-      extension: 'jsx'
+      templatePath: './tmp/templates/Example.js',
+      testTemplatePath: './tmp/templates/Example.test.js',
+      settings: new MockSettings({
+        fileExtension: 'jsx',
+        fileCasing: 'default'
+      })
     };
 
     it('concats creationPath with componentName', () => {
@@ -94,9 +130,49 @@ describe('Generator', () => {
     });
 
     it('defaults to .js if extension not given', () => {
-      const withoutExtension = Object.assign({}, args, {extension: undefined});
+      const withoutExtension = Object.assign({}, args, {
+        settings: new MockSettings({
+          fileExtension: undefined
+        })
+      });
       const generator = new Generator(withoutExtension);
       const expectedPath = path.join(basePath, './tmp/src/components/HelloWorld.js');
+
+      expect(generator.componentPath()).to.eql(expectedPath);
+    });
+
+    it('uses snake_case when settings is activated', () => {
+      const snake_case = Object.assign({}, args, {
+        settings: new MockSettings({
+          fileCasing: 'snake'
+        })
+      });
+      const generator = new Generator(snake_case);
+      const expectedPath = path.join(basePath, './tmp/src/components/hello_world.js');
+
+      expect(generator.componentPath()).to.eql(expectedPath);
+    });
+
+    it('uses PascalCase when setting is activated', () => {
+      const PascalCase = Object.assign({}, args, {
+        settings: new MockSettings({
+          fileCasing: 'pascal'
+        })
+      });
+      const generator = new Generator(PascalCase);
+      const expectedPath = path.join(basePath, './tmp/src/components/HelloWorld.js');
+
+      expect(generator.componentPath()).to.eql(expectedPath);
+    });
+
+    it('uses camelCase when setting is activated', () => {
+      const camelCase = Object.assign({}, args, {
+        settings: new MockSettings({
+          fileCasing: 'camel'
+        })
+      });
+      const generator = new Generator(camelCase);
+      const expectedPath = path.join(basePath, './tmp/src/components/helloWorld.js');
 
       expect(generator.componentPath()).to.eql(expectedPath);
     });
@@ -104,11 +180,13 @@ describe('Generator', () => {
 
   describe('#componentTestPath', () => {
     const args = {
-      sourceBase: './src',
-      testCreationPath: './test',
       componentName: 'HelloWorld',
       creationPath: './components',
-      extension: 'js'
+      settings: new MockSettings({
+        testBase: 'test',
+        fileExtension: 'js',
+        fileCasing: 'pascal'
+      })
     };
 
     it('concats testCreationPath with componentName and extension', () => {
@@ -121,7 +199,12 @@ describe('Generator', () => {
 
   describe('#testDirPath', () => {
     it('concats test creation path with creation path to properly nest test folders', () => {
-      const args = { testCreationPath: './test', creationPath: './components' };
+      const args = {
+        creationPath: './components',
+        settings: new MockSettings({
+          testBase: 'test'
+        })
+      };
       const generator = new Generator(args);
 
       const expectedPath = 'test/components';
@@ -131,7 +214,12 @@ describe('Generator', () => {
 
   describe('#componentDirPath', () => {
     it('concats sourceBase with creationPath', () => {
-      const args = { sourceBase, creationPath: './components' };
+      const args = {
+        creationPath: './components',
+        settings: new MockSettings({
+          sourceBase: 'tmp/src'
+        })
+      };
       const generator = new Generator(args);
 
       const expectedPath = 'tmp/src/components';
@@ -140,15 +228,16 @@ describe('Generator', () => {
   });
 
   describe('#renderTemplate', () => {
-    const templatePath = '/tmp/components/Dumb.js';
-    const sourceBase = './tmp/src';
     const creationPath = '/components';
     const componentName = 'Example';
+    const templatePath = '/tmp/components/Dumb.js';
     const args = {
       templatePath,
-      sourceBase,
       creationPath,
-      componentName
+      componentName,
+      settings: new MockSettings({
+        sourceBase: './tmp/src'
+      })
     };
 
     it('renders an ejs template', () => {
@@ -164,16 +253,16 @@ describe('Generator', () => {
 
   describe('creating component and test files', () => {
     const templatePath = '/tmp/components/Dumb.js';
-    const sourceBase = './tmp/src';
     const creationPath = '/components';
-    const testCreationPath = '/tmp/test';
     const componentName = 'Example';
     const args = {
       templatePath,
-      sourceBase,
       creationPath,
       componentName,
-      testCreationPath
+      settings: new MockSettings({
+        sourceBase: './tmp/src',
+        testBase: './tmp/test'
+      })
     };
     const generator = new Generator(args);
 
