@@ -1,16 +1,31 @@
 import commander from 'commander';
 import ProjectSettings from '../projectSettings';
 import { version } from '../version';
-import { config } from 'generators/config';
+import DumbComponent from '../generators/DumbComponent';
+import { error, info, success } from '../util/textHelper';
+
+const availableGenerators = [
+  'dumb',
+  'form',
+  'smart',
+  'duck'
+];
 
 commander
   .version(version())
-  .arguments('<generator name>')
+  .arguments('<generator name> [component name]')
   .description('generates code based off a blueprint')
-  .action(name => {
+  .action((generatorName, compName) => {
     const settings = new ProjectSettings();
-    const Constructor = config[name];
-    const component = new Constructor(name, settings);
+    let component;
+
+    if (generatorName === 'dumb') {
+      component = new DumbComponent(compName, settings);
+    } else {
+      error('not a valid generator type');
+      info(`valid generator types: ${success(availableGenerators.join(', '))}`);
+      return;
+    }
     component.run();
   })
   .parse(process.argv);

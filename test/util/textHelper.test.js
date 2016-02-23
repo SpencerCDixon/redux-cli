@@ -44,6 +44,12 @@ describe('textHelpers', () => {
       expect(spy.calledWith(arg)).to.be.true;
       spy.restore();
     });
+
+    it('returns text when passing false to logging option', () => {
+      const infoString = th.info(string, false);
+      const expected = chalk.blue('    info: ') + chalk.white(string);
+      expect(infoString).to.eql(expected);
+    });
   });
 
   describe('#create', () => {
@@ -58,6 +64,12 @@ describe('textHelpers', () => {
       expect(spy.calledWith(arg)).to.be.true;
       spy.restore();
     });
+
+    it('returns text when passing false to logging option', () => {
+      const createString = th.create(string, false);
+      const expected = chalk.green('    create: ') + chalk.white(string);
+      expect(createString).to.eql(expected);
+    });
   });
 
   describe('#error', () => {
@@ -71,6 +83,12 @@ describe('textHelpers', () => {
       expect(spy.calledOnce).to.be.true;
       expect(spy.calledWith(arg)).to.be.true;
       spy.restore();
+    });
+
+    it('returns text when passing false to logging option', () => {
+      const errorString = th.error(string, false);
+      const expected = chalk.red('    error: ') + chalk.white(string);
+      expect(errorString).to.eql(expected);
     });
   });
 

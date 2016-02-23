@@ -96,6 +96,21 @@ describe('ProjectSettings', () => {
     });
   });
 
+  describe('#getAllSettings', () => {
+    it('returns json of all settings', () => {
+      const mockedSettings = {
+        testOne: 'works',
+        testTwo: 'works as well!'
+      };
+      fs.writeFileSync(settingsPath, JSON.stringify(mockedSettings));
+
+      const settings = new ProjectSettings();
+      const { testOne, testTwo } = settings.getAllSettings();
+      expect(testOne).to.eql('works');
+      expect(testTwo).to.eql('works as well!');
+    });
+  });
+
   describe('#setSetting', () => {
     it('sets new settings', () => {
       const mockedSettings = { testOne: 'works' };

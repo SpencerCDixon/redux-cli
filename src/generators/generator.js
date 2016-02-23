@@ -3,9 +3,9 @@ import { outputFileSync } from 'fs-extra';
 import path from 'path';
 import ejs from 'ejs';
 
-import { danger, create } from './util/textHelper';
-import { fileExists } from './util/fs';
-import config from './config';
+import { create, error } from '../util/textHelper';
+import { fileExists } from '../util/fs';
+import config from '../config';
 
 const { pkgBasePath, basePath } = config;
 
@@ -22,9 +22,7 @@ export default class Generator {
 
   generate() {
     if (fileExists(this.componentPath())) {
-      console.error(
-        danger(`File already exists at path: ${this.componentPath()}.  Aborting generator`)
-      );
+      error(`File already exists at path: ${this.componentPath()}.  Aborting generator`);
       throw new Error('Not going to generate file since it already exists');
     } else {
       this.createComponent();

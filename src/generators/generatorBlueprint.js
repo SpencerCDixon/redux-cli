@@ -16,3 +16,5 @@ class GeneratorBlueprint {
     throw new Error('Must implement generator args');
   }
 }
+
+export default GeneratorBlueprint;

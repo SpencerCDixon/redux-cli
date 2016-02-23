@@ -43,6 +43,10 @@ export default class ProjectSettings {
     return this.settings[key];
   }
 
+  getAllSettings() {
+    return this.settings;
+  }
+
   setSetting(key, val) {
     this.settings[key] = val;
   }

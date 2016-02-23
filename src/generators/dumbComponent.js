@@ -1,8 +1,9 @@
 import GeneratorBlueprint from './generatorBlueprint';
 import { info, normalizeComponentName } from '../util/textHelper';
 
-export class DumbComponent extends GeneratorBlueprint {
+class DumbComponent extends GeneratorBlueprint {
   constructor(componentName, settings) {
+    super();
     this.componentName = normalizeComponentName(componentName);
     this.settings = settings;
   }
@@ -12,10 +13,8 @@ export class DumbComponent extends GeneratorBlueprint {
   }
 
   generatorArgs() {
-    const sourceBase = this.settings.getSetting('sourceBase');
-    const creationPath = this.settings.getSetting('dumbPath');
-    const extension = this.settings.getSetting('fileExtension');
-    const testCreationPath = this.settings.getSetting('testPath');
+    const { sourceBase, creationPath,
+            extension, testCreationPath } = this.settings.getAllSettings();
 
     return {
       templatePath: '/templates/Dumb.js',
@@ -28,3 +27,5 @@ export class DumbComponent extends GeneratorBlueprint {
     };
   }
 }
+
+export default DumbComponent;
