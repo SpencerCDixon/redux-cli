@@ -25,12 +25,18 @@ redux g dumb SimpleButton
 
 ## Table Of Contents
 
-1.  Getting Started
-2.  Configuring Existing Project
-3.  Commands
-4.  Generators
+1.  [Getting Started](#getting-started)
+2.  [Configuring Existing Project](#config-existing-project)
+3.  [Commands](#commands)
+4.  [Generators](#generators)
 
 ### Getting Started
+Running `redux new <project name>` will pull down the amazing [Redux Starter Kit](https://github.com/davezuko/react-redux-starter-kit) and
+initialize a new git repo.  Running `new` will automatically set up a `.reduxrc`
+to work with this specific starter kit.  If you want to integrate the CLI in an
+existing project or store your components in different pathes please see [config existing project](#config-existing-project)
+
+### Config Existing Project
 There is an `init` subcommand for you to specify all pathes to where components
 live in your project.  The `init` command just creates a `.reduxrc` in your
 project root.  If you want to you can just create the `.reduxrc` manually.
@@ -56,7 +62,7 @@ Final `.reduxrc` might look like this:
 |---|---|---|---|
 |**sourceBase**|where you keep your pre-compiled source|usually going to be `./src`|✓|
 |**testPath**|where you keep your tests|usually going to be `./test` or `./tests`  |✓|
-|**fileExtension**|do you use .js or .jsx for your React components|   |  |
+|**fileExtension**|do you use .js or .jsx for your React components| |✓|
 |**smartPath**|path where you keep smart/container components|relative from `sourceBase`|✓|
 |**dumbPath**|path where you keep your dumb/pure components|realtive from `sourceBase`|✓|
 |**formPath**|path where you keep your form components|realtive from `sourceBase`. Assumes you're using redux-form| |
@@ -66,16 +72,24 @@ Final `.reduxrc` might look like this:
 
 ### Commands
 
-`redux dumb <ComponentName>` - generates a dumb component and test file  
-`redux smart <ComponentName>` - generates a smart component and test file  
-`redux form <ComponentName>` - generates a form component and test file  
+|Command|Description|Alias|
+|---|---|---|
+|`redux new <project name>`|creates a new redux project||
+|`redux init`|configure an existing redux app to use the CLI||
+|`redux generate <generator name> `|generates files and tests for you automatically|`redux g`|
 
-All component names can be passed as `PascalCase`, `snake_case`, `dash-names`,
+
+### Generators
+
+**Note**: All component names can be passed as `PascalCase`, `snake_case`, `dash-names`,
 or `camelCase` and they will be converted to Pascal Case in the generated files.
 
-`redux duck <duckName>` - generates redux duck and test file testing reducer  
-
-Duck names will be converted to camelCase automatically.
+|Name|Description|Options|
+|---|---|---|
+|`redux g dumb <comp name>`|generates a dumb component and test file||
+|`redux g smart <smart name>`|generates a smart connected component and test file||
+|`redux g form <form name>`|generates a form component (assumes redux-form)||
+|`redux g duck <duck name>`|generates a redux duck and test file||
 
 
 ### Development Setup
