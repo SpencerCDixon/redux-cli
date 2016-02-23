@@ -13,16 +13,18 @@ class SmartComponent extends GeneratorBlueprint {
   }
 
   generatorArgs() {
-    const { sourceBase, creationPath,
-            extension, testCreationPath } = this.settings.getAllSettings();
+    const sourceBase = this.settings.getSetting('sourceBase');
+    const creationPath = this.settings.getSetting('smartPath');
+    const extension = this.settings.getSetting('fileExtension');
+    const testCreationPath = this.settings.getSetting('testPath');
 
     return {
       templatePath: '/templates/Smart.js',
       testTemplatePath: '/templates/Smart.test.js',
       componentName: this.componentName,
+      testCreationPath,
       creationPath,
       extension,
-      testCreationPath,
       sourceBase
     };
   }
