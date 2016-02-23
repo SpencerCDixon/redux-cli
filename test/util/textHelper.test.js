@@ -36,7 +36,7 @@ describe('textHelpers', () => {
     const string = '.reduxrc was created';
 
     it('applies blue color to text', () => {
-      const arg = chalk.cyan('    info: ') + chalk.white(string);
+      const arg = chalk.blue('    info: ') + chalk.white(string);
       const spy = sinon.spy(console, 'log');
       th.info(string);
 
@@ -64,7 +64,7 @@ describe('textHelpers', () => {
     const string = 'something went wrong';
 
     it('prepends "error" to text', () => {
-      const arg = chalk.red(`    error: ${string}`);
+      const arg = chalk.red('    error: ') + chalk.white(string);
       const spy = sinon.spy(console, 'log');
       th.error(string);
 
