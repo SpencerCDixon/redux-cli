@@ -1,10 +1,10 @@
 import GeneratorBlueprint from './generatorBlueprint';
-import { info } from '../util/textHelper';
+import { info, normalizeDuckName } from '../util/textHelper';
 
 class ReduxDuck extends GeneratorBlueprint {
   constructor(duckName, settings) {
     super();
-    this.componentName = duckName;
+    this.componentName = normalizeDuckName(duckName);
     this.settings = settings;
   }
 
@@ -13,19 +13,14 @@ class ReduxDuck extends GeneratorBlueprint {
   }
 
   generatorArgs() {
-    const sourceBase = this.settings.getSetting('sourceBase');
     const creationPath = this.settings.getSetting('duckPath');
-    const extension = this.settings.getSetting('fileExtension');
-    const testCreationPath = this.settings.getSetting('testPath');
 
     return {
+      settings: this.settings,
       templatePath: '/templates/duck.js',
       testTemplatePath: '/templates/duck.test.js',
       componentName: this.componentName,
-      creationPath,
-      testCreationPath,
-      extension,
-      sourceBase
+      creationPath
     };
   }
 }

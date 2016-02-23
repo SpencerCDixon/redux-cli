@@ -28,19 +28,24 @@ prompt.get(initPrompt, (err, result) => {
   console.log(success('Saving your settings...'));
 
   const {
-    testPath, smartPath, dumbPath, formPath,
-    fileExtension, sourceBase, duckPath, reducerPath
+    testBase, smartPath, dumbPath, formPath,
+    fileExtension, sourceBase, duckPath, reducerPath, fileCasing
   } = result;
 
   const settings = new ProjectSettings();
   settings.setSetting('sourceBase', sourceBase);
-  settings.setSetting('testPath', testPath);
+  settings.setSetting('testBase', testBase);
+
+  // generator specific
   settings.setSetting('smartPath', smartPath);
   settings.setSetting('dumbPath', dumbPath);
   settings.setSetting('formPath', formPath);
   settings.setSetting('duckPath', duckPath);
   settings.setSetting('reducerPath', reducerPath);
+
+  // project wide file naming conventions
   settings.setSetting('fileExtension', fileExtension);
+  settings.setSetting('fileCasing', fileCasing);
   settings.save();
   create('.reduxrc with configuration saved in project root.');
 });

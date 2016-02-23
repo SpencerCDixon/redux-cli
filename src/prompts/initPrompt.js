@@ -7,8 +7,8 @@ const schema = {
       type: 'string',
       required: true
     },
-    testPath: {
-      description: chalk.blue('What is the path to your test folder?'),
+    testBase: {
+      description: chalk.blue('Path to your test code?'),
       type: 'string',
       required: true
     },
@@ -27,18 +27,24 @@ const schema = {
       type: 'string',
       required: true
     },
-    fileExtension: {
-      description: chalk.blue('Do you use .js or .jsx for your React components? (js|jsx)'),
-      type: 'string',
-      required: true,
-      pattern: /(js|jsx)/
-    },
     duckPath: {
       description: chalk.blue('Where is path to your redux Ducks? If none, leave blank.'),
       type: 'string'
     },
     reducerPath: {
       description: chalk.blue('Where is path to your reducers?'),
+      type: 'string'
+    },
+    fileExtension: {
+      description: chalk.blue('Do you use .js or .jsx for your React components? (js|jsx)'),
+      type: 'string',
+      required: true,
+      pattern: /(js|jsx)/
+    },
+    fileCasing: {
+      description: chalk.blue('How do you want file casing to be configured? (default|snake|pascal|camel)'),
+      pattern: /(default|snake|pascal|camel)/,
+      required: true,
       type: 'string'
     }
   }

@@ -13,19 +13,14 @@ class DumbComponent extends GeneratorBlueprint {
   }
 
   generatorArgs() {
-    const sourceBase = this.settings.getSetting('sourceBase');
     const creationPath = this.settings.getSetting('dumbPath');
-    const extension = this.settings.getSetting('fileExtension');
-    const testCreationPath = this.settings.getSetting('testPath');
 
     return {
+      settings: this.settings,
       templatePath: '/templates/Dumb.js',
       testTemplatePath: '/templates/Dumb.test.js',
       componentName: this.componentName,
-      testCreationPath,
-      creationPath,
-      extension,
-      sourceBase
+      creationPath
     };
   }
 }
