@@ -4,9 +4,6 @@ import jf from 'jsonfile';
 import { pwd } from 'shelljs';
 
 import { fileExists } from './util/fs';
-import config from './config';
-
-const { basePath } = config;
 
 export default class ProjectSettings {
   constructor() {
