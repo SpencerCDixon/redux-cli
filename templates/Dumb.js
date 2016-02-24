@@ -6,7 +6,10 @@ const propTypes = {
 class <%= name %> extends Component {
   render() {
     return (
-
+      <% if (topType) { %>
+        <<%= topType %>>
+        </<%= topType %>>
+      <% } %>
     )
   }
 }

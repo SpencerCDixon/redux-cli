@@ -14,6 +14,7 @@ describe('Generator', () => {
   const creationPath = '/components';
   const componentName = 'Example';
   const settings = new MockSettings();
+  const renderArgs = { name: 'Example' };
 
   describe('#generate', () => {
     const args = {
@@ -21,7 +22,8 @@ describe('Generator', () => {
       componentName,
       templatePath,
       testTemplatePath,
-      settings
+      settings,
+      renderArgs
     };
     const generator = new Generator(args);
 
@@ -206,7 +208,10 @@ describe('Generator', () => {
       componentName,
       settings: new MockSettings({
         sourceBase: './tmp/src'
-      })
+      }),
+      renderArgs: {
+        name: 'Example'
+      }
     };
 
     it('renders an ejs template', () => {

@@ -17,6 +17,9 @@ class Generator {
     this.templatePath     = args.templatePath;
     this.testTemplatePath = args.testTemplatePath;
 
+    // template rendering
+    this.renderArgs = args.renderArgs;
+
     // project wide settings
     this.sourceBase    = args.settings.getSetting('sourceBase');
     this.testBase      = args.settings.getSetting('testBase');
@@ -69,7 +72,7 @@ class Generator {
   renderTemplate(templatePath, args) {
     const finalPath = path.join(pkgBasePath, '..', templatePath);
     const template = fs.readFileSync(finalPath, 'utf8');
-    const ejsArgs = Object.assign({}, {name: this.componentName}, args);
+    const ejsArgs = Object.assign({}, this.renderArgs, args);
     return ejs.render(template, ejsArgs);
   }
 }
