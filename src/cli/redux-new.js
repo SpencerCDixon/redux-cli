@@ -80,12 +80,14 @@ class AppGenerator {
       logUpdate(`${content}${chalk.cyan.bold.dim(frame())}`);
     }, 100);
 
-    exec('git clone https://github.com/davezuko/react-redux-starter-kit.git', {silent: true}, (code) => {
+    exec('git pull git@github.com:davezuko/react-redux-starter-kit.git', {silent: true}, (code, stdout, stderr) => {
       clearInterval(interval);
 
       if (code !== 0) {
         error('Something went wrong... please try again.  Make sure you have internet access');
         error(`Error code: ${code}`);
+        error(stdout);
+        error(stderr);
         process.exit(1);
       }
 
