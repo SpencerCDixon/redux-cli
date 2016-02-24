@@ -25,7 +25,7 @@ class AppGenerator {
 
   confirmGit() {
     if (!which('git')) {
-      console.log(error('This script requires you have git installed'));
+      error('This script requires you have git installed');
       process.exit(1);
     }
   }
@@ -39,7 +39,7 @@ class AppGenerator {
 
   createDirectory() {
     mkdir('-p', this.dirName);
-    create('project directory created');
+    create('Project directory created');
   }
 
   cdDir() {
@@ -47,11 +47,8 @@ class AppGenerator {
   }
 
   initGit() {
-    create('setting up tracking with git...');
-    exec('git init', {silent: true}, (code, stdout, stderr) => {
-      if (stdout) info(stdout);
-      if (stderr) error(stderr);
-    });
+    create('Setting up tracking with git...');
+    exec('git init', {silent: true});
   }
 
   resetGitHistory() {
@@ -60,41 +57,40 @@ class AppGenerator {
     rm('-rf', '.git');
     exec('git init && git add -A && git commit -m"Initial commit"', {silent: true});
     create('Created new .git history for your project');
+    info('Congrats! New Redux app ready to go.  CLI generators configured and ready to go');
   }
 
   createProjectSettings() {
-    const settings = new ProjectSettings();
-    settings.setSetting('sourceBase', 'src');
-    settings.setSetting('testBase', 'tests');
-    settings.setSetting('smartPath', 'containers');
-    settings.setSetting('dumbPath', 'components');
-    settings.setSetting('formPath', 'forms');
-    settings.setSetting('duckPath', 'redux/modules');
-    settings.setSetting('reducerPath', '');
-    settings.setSetting('fileExtension', 'js');
-    settings.setSetting('fileCasing', 'default');
+    // All settings for react-redux-starter-kit live in this template so when
+    // new projects get created users can immediately start using the CLI
+    const reduxStarterKitTemplate = '../templates/.starterrc';
+    const settings = new ProjectSettings(reduxStarterKitTemplate);
     settings.save();
+
     create('.reduxrc with starter kit settings saved.');
   }
 
   pullDownKit() {
-    let interval = setInterval(() => {
-      const content = info('Fetching the Redux Starter Kit...  ', false);
+    const content = info('Fetching the Redux Starter Kit...  ', false);
 
+    let interval = setInterval(() => {
       logUpdate(`${content}${chalk.cyan.bold.dim(frame())}`);
     }, 100);
 
-    const pull = exec('git pull https://github.com/davezuko/react-redux-starter-kit.git', {silent: true});
-    clearInterval(interval);
+    exec('git pull git@github.com:davezuko/react-redux-starter-kit.git', {silent: true}, (code, stdout, stderr) => {
+      clearInterval(interval);
 
-    if (pull.code !== 0) {
-      error('Something went wrong... please try again.  Make sure you have internet access');
-      error(`Error code: ${pull.code}`);
-      process.exit(1);
-    }
+      if (code !== 0) {
+        error('Something went wrong... please try again.  Make sure you have internet access');
+        error(`Error code: ${code}`);
+        error(stdout);
+        error(stderr);
+        process.exit(1);
+      }
 
-    this.resetGitHistory();
-    this.createProjectSettings();
+      this.createProjectSettings();
+      this.resetGitHistory();
+    });
   }
 }
 

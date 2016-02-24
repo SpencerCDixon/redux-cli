@@ -12,11 +12,18 @@ class FormComponent extends GeneratorBlueprint {
     info(`Generating new Form Component named: ${this.componentName}`);
   }
 
+  renderArgs() {
+    return {
+      name: this.componentName
+    };
+  }
+
   generatorArgs() {
     const creationPath = this.settings.getSetting('formPath');
 
     return {
       settings: this.settings,
+      renderArgs: this.renderArgs(),
       templatePath: '/templates/Form.js',
       testTemplatePath: '/templates/Form.test.js',
       componentName: this.componentName,

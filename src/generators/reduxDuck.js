@@ -12,10 +12,17 @@ class ReduxDuck extends GeneratorBlueprint {
     info(`Generating new Redux Duck named: ${this.componentName}`);
   }
 
+  renderArgs() {
+    return {
+      name: this.componentName
+    };
+  }
+
   generatorArgs() {
     const creationPath = this.settings.getSetting('duckPath');
     return {
       settings: this.settings,
+      renderArgs: this.renderArgs(),
       templatePath: '/templates/duck.js',
       testTemplatePath: '/templates/duck.test.js',
       componentName: this.componentName,

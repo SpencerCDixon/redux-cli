@@ -2,9 +2,8 @@ import fs from 'fs';
 import { outputFileSync } from 'fs-extra';
 import path from 'path';
 import ejs from 'ejs';
-import { depascalize, pascalize, camelize } from 'humps';
 
-import { create, error } from '../util/textHelper';
+import { create, error, normalizeCasing } from '../util/textHelper';
 import { fileExists } from '../util/fs';
 import config from '../config';
 
@@ -17,6 +16,9 @@ class Generator {
     this.componentName    = args.componentName;
     this.templatePath     = args.templatePath;
     this.testTemplatePath = args.testTemplatePath;
+
+    // template rendering
+    this.renderArgs = args.renderArgs;
 
     // project wide settings
     this.sourceBase         = args.settings.getSetting('sourceBase');
@@ -48,21 +50,8 @@ class Generator {
     create(`${this.componentTestPath()}`);
   }
 
-  normalizeCasing(string) {
-    if (this.fileCasing === 'snake') {
-      return depascalize(pascalize(string));
-    } else if (this.fileCasing === 'pascal') {
-      return pascalize(string);
-    } else if (this.fileCasing === 'camel') {
-      return camelize(string);
-    } else {
-      return string;
-    }
-    return string;
-  }
-
   componentPath() {
-    const fileBase = this.normalizeCasing(this.componentName);
+    const fileBase = normalizeCasing(this.componentName);
     let compPath = `${this.componentDirPath()}/`;
     if (this.wrapFilesInFolders) compPath += `${fileBase}/`;
     compPath += `${fileBase}.${this.fileExtension}`;
@@ -70,7 +59,7 @@ class Generator {
   }
 
   componentTestPath() {
-    const fileBase = this.normalizeCasing(this.componentName);
+    const fileBase = normalizeCasing(this.componentName);
     let testPath = `${this.testDirPath()}/`;
     if (this.wrapFilesInFolders) testPath += `${fileBase}/`;
     testPath += `${fileBase}.test.${this.fileExtension}`;
@@ -88,7 +77,7 @@ class Generator {
   renderTemplate(templatePath, args) {
     const finalPath = path.join(pkgBasePath, '..', templatePath);
     const template = fs.readFileSync(finalPath, 'utf8');
-    const ejsArgs = Object.assign({}, {name: this.componentName}, args);
+    const ejsArgs = Object.assign({}, this.renderArgs, args);
     return ejs.render(template, ejsArgs);
   }
 }

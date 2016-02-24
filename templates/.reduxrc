@@ -1,10 +1,11 @@
 {
   "sourceBase":"",
-  "testPath":"",
+  "testBase":"",
   "smartPath":"",
   "dumbPath":"",
   "formPath":"",
   "fileExtension":"",
+  "fileCasing":"",
   "duckPath":"",
   "reducerPath":""
 }
