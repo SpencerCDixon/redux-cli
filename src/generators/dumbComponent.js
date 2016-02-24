@@ -14,14 +14,12 @@ class DumbComponent extends GeneratorBlueprint {
 
   generatorArgs() {
     const creationPath = this.settings.getSetting('dumbPath');
-    const wrapFilesInFolders = this.settings.getSetting('wrapFilesInFolders');
 
     return {
       settings: this.settings,
       templatePath: '/templates/Dumb.js',
       testTemplatePath: '/templates/Dumb.test.js',
       componentName: this.componentName,
-      wrapFilesInFolders,
       creationPath
     };
   }

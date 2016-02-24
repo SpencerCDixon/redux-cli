@@ -14,14 +14,12 @@ class SmartComponent extends GeneratorBlueprint {
 
   generatorArgs() {
     const creationPath = this.settings.getSetting('smartPath');
-    const wrapFilesInFolders = this.settings.getSetting('wrapFilesInFolders');
 
     return {
       settings: this.settings,
       templatePath: '/templates/Smart.js',
       testTemplatePath: '/templates/Smart.test.js',
       componentName: this.componentName,
-      wrapFilesInFolders,
       creationPath
     };
   }

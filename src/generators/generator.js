@@ -17,12 +17,13 @@ class Generator {
     this.componentName    = args.componentName;
     this.templatePath     = args.templatePath;
     this.testTemplatePath = args.testTemplatePath;
-    this.wrapFilesInFolders = args.wrapFilesInFolders;
+
     // project wide settings
-    this.sourceBase    = args.settings.getSetting('sourceBase');
-    this.testBase      = args.settings.getSetting('testBase');
-    this.fileCasing    = args.settings.getSetting('fileCasing') || 'default';
-    this.fileExtension = args.settings.getSetting('fileExtension') || 'js';
+    this.sourceBase         = args.settings.getSetting('sourceBase');
+    this.testBase           = args.settings.getSetting('testBase');
+    this.fileCasing         = args.settings.getSetting('fileCasing') || 'default';
+    this.fileExtension      = args.settings.getSetting('fileExtension') || 'js';
+    this.wrapFilesInFolders = args.settings.getSetting('wrapFilesInFolders') || false;
   }
 
   generate() {
