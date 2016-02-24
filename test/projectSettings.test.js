@@ -40,6 +40,12 @@ describe('ProjectSettings', () => {
     it('returns current directory with proper template appended', () => {
       expect(settings.templatePath()).to.eql(templatePath);
     });
+
+    it('can take a custom template path in constructor for different configs', () => {
+      const settings = new ProjectSettings('../templates/.starterrc');
+      const expectedPath = basePath + '/templates/.starterrc';
+      expect(settings.templatePath()).to.eql(expectedPath);
+    });
   });
 
   describe('#buildFromTemplate', () => {

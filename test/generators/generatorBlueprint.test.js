@@ -40,5 +40,11 @@ describe('GeneratorBlueprint', () => {
         expect(() => blueprint.generatorArgs()).to.throw(/implement generator args/);
       });
     });
+
+    describe('#renderArgs', () => {
+      it('should throw error with message to blueprint builder', () => {
+        expect(() => blueprint.renderArgs()).to.throw(/implement render args/);
+      });
+    });
   });
 });

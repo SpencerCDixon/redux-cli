@@ -30,7 +30,9 @@ redux g dumb SimpleButton
 3.  [Commands](#commands)
 4.  [Generators](#generators)
 5.  [Roadmap](#roadmap)
-6.  [Issues/Contributing](#contributing)
+6.  [Examples](#examples)
+7.  [Issues/Contributing](#contributing)
+8.  [Changelog](#changelog)
 
 ### Getting Started
 Running `redux new <project name>` will pull down the amazing [Redux Starter Kit](https://github.com/davezuko/react-redux-starter-kit) and
@@ -90,10 +92,27 @@ or `camelCase` and they will be converted to Pascal Case in the generated files.
 
 |Name|Description|Options|
 |---|---|---|
-|`redux g dumb <comp name>`|generates a dumb component and test file||
-|`redux g smart <smart name>`|generates a smart connected component and test file||
+|`redux g dumb <comp name> [html tag]`|generates a dumb component and test file|html tag can be passed to prepopulate the render|
+|`redux g smart <smart name> [html tag]`|generates a smart connected component and test file|html tag can be passed to prepopulate the render|
 |`redux g form <form name>`|generates a form component (assumes redux-form)||
 |`redux g duck <duck name>`|generates a redux duck and test file||
+
+### Eamples
+Below are some examples of using the generator to speed up development:
+
+```
+// generates a dumb component with <button></button> in render
+redux g dumb SimpleButton button  
+
+// generates a smart component with <div> in render
+redux g smart CommentContainer div
+
+// generate a redux-form with <form> tags in render statement
+redux g form ContactForm
+
+// generate a Redux 'duck' (reducer, constants, action creators)
+redux g duck todos
+```
 
 ### Roadmap
 - [ ] support for view components
@@ -130,3 +149,9 @@ npm start        // will watch files in src and compile using babel
 npm test         // runs test suite with linting.  Throws when lint failing
 npm run lint     // lints all files in src and test
 ```
+
+### Changelog
+
+`1.1.1` - adds support for html tag in render when generating components
+`1.0.1` - adds fileCasing to generators so Linux users can use snake_case_file_names
+`1.0` - first public release with stable api (new/generate/init)

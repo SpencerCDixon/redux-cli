@@ -14,6 +14,7 @@ describe('Generator', () => {
   const creationPath = '/components';
   const componentName = 'Example';
   const settings = new MockSettings();
+  const renderArgs = { name: 'Example' };
 
   describe('#generate', () => {
     const args = {
@@ -21,7 +22,8 @@ describe('Generator', () => {
       componentName,
       templatePath,
       testTemplatePath,
-      settings
+      settings,
+      renderArgs
     };
     const generator = new Generator(args);
 
@@ -77,37 +79,6 @@ describe('Generator', () => {
           contains: ['component Example template test']
         });
       });
-    });
-  });
-
-  describe('#normalizeCasing', () => {
-    const string = 'string-to-test';
-
-    it('converts to snake when settings are set to "snake"', () => {
-      const args = { settings: new MockSettings({fileCasing: 'snake'}) };
-      const generator = new Generator(args);
-      const expected = 'string_to_test';
-      expect(generator.normalizeCasing(string)).to.eql(expected);
-    });
-
-    it('converts to PascalCase when settings are set to "pascal"', () => {
-      const args = { settings: new MockSettings({fileCasing: 'pascal'}) };
-      const generator = new Generator(args);
-      const expected = 'StringToTest';
-      expect(generator.normalizeCasing(string)).to.eql(expected);
-    });
-
-    it('converts to camelCase when settings are set to "camel"', () => {
-      const args = { settings: new MockSettings({fileCasing: 'camel'}) };
-      const generator = new Generator(args);
-      const expected = 'stringToTest';
-      expect(generator.normalizeCasing(string)).to.eql(expected);
-    });
-
-    it('leaves string alone when set to "default"', () => {
-      const args = { settings: new MockSettings({fileCasing: 'default'}) };
-      const generator = new Generator(args);
-      expect(generator.normalizeCasing(string)).to.eql(string);
     });
   });
 
@@ -237,7 +208,10 @@ describe('Generator', () => {
       componentName,
       settings: new MockSettings({
         sourceBase: './tmp/src'
-      })
+      }),
+      renderArgs: {
+        name: 'Example'
+      }
     };
 
     it('renders an ejs template', () => {

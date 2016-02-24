@@ -137,4 +137,33 @@ describe('textHelpers', () => {
       expect(th.normalizeDuckName(string)).to.eql(expected);
     });
   });
+
+  describe('#normalizeCasing', () => {
+    const string = 'string-to-test';
+
+    it('converts to snake when settings are set to "snake"', () => {
+      const expected = 'string_to_test';
+      expect(th.normalizeCasing(string, 'snake')).to.eql(expected);
+    });
+
+    it('converts to PascalCase when settings are set to "pascal"', () => {
+      const expected = 'StringToTest';
+      expect(th.normalizeCasing(string, 'pascal')).to.eql(expected);
+    });
+
+    it('converts to camelCase when settings are set to "camel"', () => {
+      const expected = 'stringToTest';
+      expect(th.normalizeCasing(string, 'camel')).to.eql(expected);
+    });
+
+    it('leaves string alone when set to "default"', () => {
+      expect(th.normalizeCasing(string, 'default')).to.eql(string);
+    });
+
+    it('throws error if not one of the allowed conversions', () => {
+      expect(() => th.normalizeCasing(string)).to.throw(
+        /Casing must be one of: default, snake, pascal, camel/
+      );
+    });
+  });
 });
