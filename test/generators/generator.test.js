@@ -80,37 +80,6 @@ describe('Generator', () => {
     });
   });
 
-  describe('#normalizeCasing', () => {
-    const string = 'string-to-test';
-
-    it('converts to snake when settings are set to "snake"', () => {
-      const args = { settings: new MockSettings({fileCasing: 'snake'}) };
-      const generator = new Generator(args);
-      const expected = 'string_to_test';
-      expect(generator.normalizeCasing(string)).to.eql(expected);
-    });
-
-    it('converts to PascalCase when settings are set to "pascal"', () => {
-      const args = { settings: new MockSettings({fileCasing: 'pascal'}) };
-      const generator = new Generator(args);
-      const expected = 'StringToTest';
-      expect(generator.normalizeCasing(string)).to.eql(expected);
-    });
-
-    it('converts to camelCase when settings are set to "camel"', () => {
-      const args = { settings: new MockSettings({fileCasing: 'camel'}) };
-      const generator = new Generator(args);
-      const expected = 'stringToTest';
-      expect(generator.normalizeCasing(string)).to.eql(expected);
-    });
-
-    it('leaves string alone when set to "default"', () => {
-      const args = { settings: new MockSettings({fileCasing: 'default'}) };
-      const generator = new Generator(args);
-      expect(generator.normalizeCasing(string)).to.eql(string);
-    });
-  });
-
   describe('#componentPath', () => {
     const args = {
       creationPath: './components',

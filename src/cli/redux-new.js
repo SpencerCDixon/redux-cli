@@ -25,7 +25,7 @@ class AppGenerator {
 
   confirmGit() {
     if (!which('git')) {
-      console.log(error('This script requires you have git installed'));
+      error('This script requires you have git installed');
       process.exit(1);
     }
   }
