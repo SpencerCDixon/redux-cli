@@ -80,7 +80,7 @@ class AppGenerator {
       logUpdate(`${content}${chalk.cyan.bold.dim(frame())}`);
     }, 100);
 
-    exec('git pull https://github.com/davezuko/react-redux-starter-kit.git', {silent: true}, (code) => {
+    exec('git clone https://github.com/davezuko/react-redux-starter-kit.git', {silent: true}, (code) => {
       clearInterval(interval);
 
       if (code !== 0) {
