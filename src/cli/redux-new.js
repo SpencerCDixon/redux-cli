@@ -39,7 +39,7 @@ class AppGenerator {
 
   createDirectory() {
     mkdir('-p', this.dirName);
-    create('project directory created');
+    create('Project directory created');
   }
 
   cdDir() {
@@ -47,7 +47,7 @@ class AppGenerator {
   }
 
   initGit() {
-    create('setting up tracking with git...');
+    create('Setting up tracking with git...');
     exec('git init', {silent: true}, (code, stdout, stderr) => {
       if (stdout) info(stdout);
       if (stderr) error(stderr);
@@ -63,18 +63,11 @@ class AppGenerator {
   }
 
   createProjectSettings() {
-    const settings = new ProjectSettings();
-    settings.setSetting('sourceBase', 'src');
-    settings.setSetting('testBase', 'tests');
-    settings.setSetting('smartPath', 'containers');
-    settings.setSetting('dumbPath', 'components');
-    settings.setSetting('formPath', 'forms');
-    settings.setSetting('duckPath', 'redux/modules');
-    settings.setSetting('reducerPath', '');
-    settings.setSetting('fileExtension', 'js');
-    settings.setSetting('fileCasing', 'default');
+    const reduxStarterKitTemplate = '../templates/.starterrc';
+    const settings = new ProjectSettings(reduxStarterKitTemplate);
     settings.save();
     create('.reduxrc with starter kit settings saved.');
+    info('Congrats! New Redux app ready to go.  CLI generators configured and ready to go');
   }
 
   pullDownKit() {

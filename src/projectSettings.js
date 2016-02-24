@@ -6,7 +6,8 @@ import { pwd } from 'shelljs';
 import { fileExists } from './util/fs';
 
 export default class ProjectSettings {
-  constructor() {
+  constructor(relativePath) {
+    this.relativePath = relativePath || '../templates/.reduxrc';
     this.loadSettings();
   }
 
@@ -21,7 +22,7 @@ export default class ProjectSettings {
 
   templatePath() {
     return path.join(
-      path.dirname(module.id), '../templates/.reduxrc'
+      path.dirname(module.id), this.relativePath
     );
   }
 
