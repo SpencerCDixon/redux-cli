@@ -48,10 +48,7 @@ class AppGenerator {
 
   initGit() {
     create('Setting up tracking with git...');
-    exec('git init', {silent: true}, (code, stdout, stderr) => {
-      if (stdout) info(stdout);
-      if (stderr) error(stderr);
-    });
+    exec('git init', {silent: true});
   }
 
   resetGitHistory() {
