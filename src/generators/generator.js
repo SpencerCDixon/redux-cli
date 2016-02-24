@@ -70,9 +70,9 @@ class Generator {
 
   componentTestPath() {
     const fileBase = this.normalizeCasing(this.componentName);
-    let testPath = `${this.componentDirPath()}/`;
+    let testPath = `${this.testDirPath()}/`;
     if (this.wrapFilesInFolders) testPath += `${fileBase}/`;
-    testPath += `${fileBase}.${this.fileExtension}`;
+    testPath += `${fileBase}.test.${this.fileExtension}`;
     return path.join(basePath, path.normalize(testPath));
   }
 

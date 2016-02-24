@@ -304,4 +304,57 @@ describe('Generator', () => {
       });
     });
   });
+  describe('creating component and test files wrapped in a folder', () => {
+    const templatePath = '/tmp/components/Dumb.js';
+    const creationPath = '/components';
+    const componentName = 'Example';
+    const args = {
+      templatePath,
+      creationPath,
+      componentName,
+      settings: new MockSettings({
+        sourceBase: './tmp/src',
+        testBase: './tmp/test',
+        wrapFilesInFolders: true
+      })
+    };
+    const generator = new Generator(args);
+
+    beforeEach(() => {
+      sinon.spy(console, 'log');
+    });
+
+    afterEach(() => {
+      console.log.restore();
+    });
+
+    describe('#createComponent', () => {
+      it('renders template and writes it to componentPath', () => {
+        sinon.stub(generator, 'renderTemplate').returns('component file');
+
+        generator.createComponent();
+        const file = fs.readFileSync(generator.componentPath(), 'utf8');
+        expect(console.log.calledOnce).to.be.true;
+        expect(file).to.eq('component file');
+
+        fse.removeSync(generator.componentPath());
+        generator.renderTemplate.restore();
+      });
+    });
+
+    describe('#createTest', () => {
+      it('renders template and write it to testPath', () => {
+        sinon.stub(generator, 'renderTemplate').returns('test file');
+
+        generator.createTest();
+
+        const file = fs.readFileSync(generator.componentTestPath(), 'utf8');
+        expect(console.log.calledOnce).to.be.true;
+        expect(file).to.eq('test file');
+
+        fse.removeSync(generator.componentTestPath());
+        generator.renderTemplate.restore();
+      });
+    });
+  });
 });
