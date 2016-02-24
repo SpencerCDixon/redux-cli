@@ -20,7 +20,6 @@ class ReduxDuck extends GeneratorBlueprint {
 
   generatorArgs() {
     const creationPath = this.settings.getSetting('duckPath');
-
     return {
       settings: this.settings,
       renderArgs: this.renderArgs(),

@@ -21,10 +21,11 @@ class Generator {
     this.renderArgs = args.renderArgs;
 
     // project wide settings
-    this.sourceBase    = args.settings.getSetting('sourceBase');
-    this.testBase      = args.settings.getSetting('testBase');
-    this.fileCasing    = args.settings.getSetting('fileCasing') || 'default';
-    this.fileExtension = args.settings.getSetting('fileExtension') || 'js';
+    this.sourceBase         = args.settings.getSetting('sourceBase');
+    this.testBase           = args.settings.getSetting('testBase');
+    this.fileCasing         = args.settings.getSetting('fileCasing') || 'default';
+    this.fileExtension      = args.settings.getSetting('fileExtension') || 'js';
+    this.wrapFilesInFolders = args.settings.getSetting('wrapFilesInFolders') || false;
   }
 
   generate() {
@@ -50,14 +51,18 @@ class Generator {
   }
 
   componentPath() {
-    const fileName = normalizeCasing(this.componentName, this.fileCasing);
-    const compPath = `${this.componentDirPath()}/${fileName}.${this.fileExtension}`;
+    const fileBase = normalizeCasing(this.componentName, this.fileCasing);
+    let compPath = `${this.componentDirPath()}/`;
+    if (this.wrapFilesInFolders) compPath += `${fileBase}/`;
+    compPath += `${fileBase}.${this.fileExtension}`;
     return path.join(basePath, path.normalize(compPath));
   }
 
   componentTestPath() {
-    const fileName = normalizeCasing(this.componentName, this.fileCasing);
-    const testPath = `${this.testDirPath()}/${fileName}.test.${this.fileExtension}`;
+    const fileBase = normalizeCasing(this.componentName, this.fileCasing);
+    let testPath = `${this.testDirPath()}/`;
+    if (this.wrapFilesInFolders) testPath += `${fileBase}/`;
+    testPath += `${fileBase}.test.${this.fileExtension}`;
     return path.join(basePath, path.normalize(testPath));
   }
 

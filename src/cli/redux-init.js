@@ -29,7 +29,8 @@ prompt.get(initPrompt, (err, result) => {
 
   const {
     testBase, smartPath, dumbPath, formPath,
-    fileExtension, sourceBase, duckPath, reducerPath, fileCasing
+    fileExtension, sourceBase, duckPath, reducerPath,
+    fileCasing, wrapFilesInFolders
   } = result;
 
   const settings = new ProjectSettings();
@@ -46,6 +47,7 @@ prompt.get(initPrompt, (err, result) => {
   // project wide file naming conventions
   settings.setSetting('fileExtension', fileExtension);
   settings.setSetting('fileCasing', fileCasing);
+  settings.setSetting('wrapFilesInFolders', wrapFilesInFolders);
   settings.save();
   create('.reduxrc with configuration saved in project root.');
 });

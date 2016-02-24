@@ -46,6 +46,11 @@ const schema = {
       pattern: /(default|snake|pascal|camel)/,
       required: true,
       type: 'string'
+    },
+    wrapFilesInFolders: {
+      description: chalk.blue('Would you like your generated files wrapped in a folder? (true|false)'),
+      required: true,
+      type: 'boolean'
     }
   }
 };
