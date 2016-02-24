@@ -17,11 +17,12 @@ const availableGenerators = [
 commander.on('--help', () => {
   console.log('  Examples:');
   console.log('');
-  console.log('    $ redux g dumb');
-  console.log('    $ redux g dumb div');
+  console.log('    $ redux g dumb SimpleComponent');
+  console.log('    $ redux g dumb SimpleButton button');
+  console.log('    $ redux g smart CommentContainer');
+  console.log('    $ redux g smart CommentContainer div');
   console.log('');
 });
-
 
 commander
   .version(version())
