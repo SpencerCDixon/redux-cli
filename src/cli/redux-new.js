@@ -60,6 +60,7 @@ class AppGenerator {
     rm('-rf', '.git');
     exec('git init && git add -A && git commit -m"Initial commit"', {silent: true});
     create('Created new .git history for your project');
+    info('Congrats! New Redux app ready to go.  CLI generators configured and ready to go');
   }
 
   createProjectSettings() {
@@ -70,7 +71,6 @@ class AppGenerator {
     settings.save();
 
     create('.reduxrc with starter kit settings saved.');
-    info('Congrats! New Redux app ready to go.  CLI generators configured and ready to go');
   }
 
   pullDownKit() {
@@ -91,8 +91,8 @@ class AppGenerator {
         process.exit(1);
       }
 
-      this.resetGitHistory();
       this.createProjectSettings();
+      this.resetGitHistory();
     });
   }
 }
