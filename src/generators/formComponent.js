@@ -14,12 +14,14 @@ class FormComponent extends GeneratorBlueprint {
 
   generatorArgs() {
     const creationPath = this.settings.getSetting('formPath');
+    const wrapFilesInFolders = this.settings.getSetting('wrapFilesInFolders');
 
     return {
       settings: this.settings,
       templatePath: '/templates/Form.js',
       testTemplatePath: '/templates/Form.test.js',
       componentName: this.componentName,
+      wrapFilesInFolders,
       creationPath
     };
   }

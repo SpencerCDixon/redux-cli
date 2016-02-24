@@ -4,7 +4,8 @@ class MockSettings {
       sourceBase: './tmp/src',
       testBase: './tmp/test',
       fileCasing: 'default',
-      fileExtension: 'js'
+      fileExtension: 'js',
+      wrapFilesInFolders: false
     };
     this.settings = Object.assign({}, defaults, args);
   }

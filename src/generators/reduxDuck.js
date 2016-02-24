@@ -14,12 +14,13 @@ class ReduxDuck extends GeneratorBlueprint {
 
   generatorArgs() {
     const creationPath = this.settings.getSetting('duckPath');
-
+    const wrapFilesInFolders = this.settings.getSetting('wrapFilesInFolders');
     return {
       settings: this.settings,
       templatePath: '/templates/duck.js',
       testTemplatePath: '/templates/duck.test.js',
       componentName: this.componentName,
+      wrapFilesInFolders,
       creationPath
     };
   }

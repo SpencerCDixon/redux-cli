@@ -17,7 +17,7 @@ class Generator {
     this.componentName    = args.componentName;
     this.templatePath     = args.templatePath;
     this.testTemplatePath = args.testTemplatePath;
-
+    this.wrapFilesInFolders = args.wrapFilesInFolders;
     // project wide settings
     this.sourceBase    = args.settings.getSetting('sourceBase');
     this.testBase      = args.settings.getSetting('testBase');
@@ -61,14 +61,18 @@ class Generator {
   }
 
   componentPath() {
-    const fileName = this.normalizeCasing(this.componentName);
-    const compPath = `${this.componentDirPath()}/${fileName}.${this.fileExtension}`;
+    const fileBase = this.normalizeCasing(this.componentName);
+    let compPath = `${this.componentDirPath()}/`;
+    if (this.wrapFilesInFolders) compPath += `${fileBase}/`;
+    compPath += `${fileBase}.${this.fileExtension}`;
     return path.join(basePath, path.normalize(compPath));
   }
 
   componentTestPath() {
-    const fileName = this.normalizeCasing(this.componentName);
-    const testPath = `${this.testDirPath()}/${fileName}.test.${this.fileExtension}`;
+    const fileBase = this.normalizeCasing(this.componentName);
+    let testPath = `${this.componentDirPath()}/`;
+    if (this.wrapFilesInFolders) testPath += `${fileBase}/`;
+    testPath += `${fileBase}.${this.fileExtension}`;
     return path.join(basePath, path.normalize(testPath));
   }
 

@@ -4,7 +4,7 @@
 
 ```
 ______         _                   _____  _     _____  
-| ___ \       | |                 /  __ \| |   |_   _| 
+| ___ \       | |                 /  __ \| |   |_   _|
 | |_/ /___  __| |_   ___  ________| /  \/| |     | |   
 |    // _ \/ _` | | | \ \/ /______| |    | |     | |   
 | |\ \  __/ (_| | |_| |>  <       | \__/\| |_____| |_  
@@ -14,7 +14,7 @@ ______         _                   _____  _     _____
 ## Quick Start
 
 ```javascript
-npm i redux-cli -g       // install redux-cli globally 
+npm i redux-cli -g       // install redux-cli globally
 redux new <project name> // create a new redux project
 redux init               // OR configure a current project to use the CLI
 
@@ -56,7 +56,8 @@ Final `.reduxrc` might look like this:
   "duckPath":"redux/modules",
   "reducerPath":"",
   "fileExtension":"js",
-  "fileCasing": "default"
+  "fileCasing": "default",
+  "wrapFilesInFolders": false
 }
 ```  
 
@@ -72,6 +73,7 @@ Final `.reduxrc` might look like this:
 |**reducerPath**|path where you keep your reducers|realtive from `sourceBase`.| |
 |**fileExtension**|do you use .js or .jsx for your React components| |✓|
 |**fileCasing**|how do you want generated files to be named (pasal/camel/snake/default)| |✓|
+|**wrapFilesInFolders**|Would you like your generated files wrapped in a folder? (true|false)| | |
 
 
 ### Commands
