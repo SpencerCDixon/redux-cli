@@ -51,7 +51,7 @@ class Generator {
   }
 
   componentPath() {
-    const fileBase = normalizeCasing(this.componentName);
+    const fileBase = normalizeCasing(this.componentName, this.fileCasing);
     let compPath = `${this.componentDirPath()}/`;
     if (this.wrapFilesInFolders) compPath += `${fileBase}/`;
     compPath += `${fileBase}.${this.fileExtension}`;
@@ -59,7 +59,7 @@ class Generator {
   }
 
   componentTestPath() {
-    const fileBase = normalizeCasing(this.componentName);
+    const fileBase = normalizeCasing(this.componentName, this.fileCasing);
     let testPath = `${this.testDirPath()}/`;
     if (this.wrapFilesInFolders) testPath += `${fileBase}/`;
     testPath += `${fileBase}.test.${this.fileExtension}`;
