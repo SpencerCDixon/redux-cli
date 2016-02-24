@@ -31,6 +31,7 @@ redux g dumb SimpleButton
 4.  [Generators](#generators)
 5.  [Roadmap](#roadmap)
 6.  [Issues/Contributing](#contributing)
+7.  [Changelog](#changelog)
 
 ### Getting Started
 Running `redux new <project name>` will pull down the amazing [Redux Starter Kit](https://github.com/davezuko/react-redux-starter-kit) and
@@ -130,3 +131,8 @@ npm start        // will watch files in src and compile using babel
 npm test         // runs test suite with linting.  Throws when lint failing
 npm run lint     // lints all files in src and test
 ```
+
+### Changelog
+
+`1.0.1` - adds fileCasing to generators so Linux users can use snake_case_file_names
+`1.0` - first public release with stable api (new/generate/init)
