@@ -63,9 +63,12 @@ class AppGenerator {
   }
 
   createProjectSettings() {
+    // All settings for react-redux-starter-kit live in this template so when
+    // new projects get created users can immediately start using the CLI
     const reduxStarterKitTemplate = '../templates/.starterrc';
     const settings = new ProjectSettings(reduxStarterKitTemplate);
     settings.save();
+
     create('.reduxrc with starter kit settings saved.');
     info('Congrats! New Redux app ready to go.  CLI generators configured and ready to go');
   }
