@@ -152,6 +152,6 @@ npm run lint     // lints all files in src and test
 
 ### Changelog
 
-`1.1.1` - adds support for html tag in render when generating components
-`1.0.1` - adds fileCasing to generators so Linux users can use snake_case_file_names
-`1.0` - first public release with stable api (new/generate/init)
+`1.1.1` - adds support for html tag in render when generating components  
+`1.0.1` - adds fileCasing to generators so Linux users can use snake_case_file_names  
+`1.0` - first public release with stable api (new/generate/init)  
