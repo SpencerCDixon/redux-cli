@@ -76,7 +76,7 @@ Final `.reduxrc` might look like this:
 |**reducerPath**|path where you keep your reducers|realtive from `sourceBase`.| |
 |**fileExtension**|do you use .js or .jsx for your React components| |✓|
 |**fileCasing**|how do you want generated files to be named (pasal/camel/snake/default)| |✓|
-|**wrapFilesInFolders**|Would you like your generated files wrapped in a folder? (true|false)| | |
+|**wrapFilesInFolders**|Would you like your generated files wrapped in a folder? (true/false)| | |
 
 
 ### Commands
