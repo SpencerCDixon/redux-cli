@@ -176,6 +176,30 @@ describe('Generator', () => {
 
       expect(generator.componentPath()).to.eql(expectedPath);
     });
+
+    it('uses wraps files in folders when setting is activated', () => {
+      const camelCase = Object.assign({}, args, {
+        settings: new MockSettings({
+          fileCasing: 'snake',
+          wrapFilesInFolders: true
+        })
+      });
+      const generator = new Generator(camelCase);
+      const expectedPath = path.join(basePath, './tmp/src/components/hello_world/hello_world.js');
+
+      expect(generator.componentPath()).to.eql(expectedPath);
+    });
+    it('uses wraps files in folders with proper casing when settings are activated', () => {
+      const camelCase = Object.assign({}, args, {
+        settings: new MockSettings({
+          wrapFilesInFolders: true
+        })
+      });
+      const generator = new Generator(camelCase);
+      const expectedPath = path.join(basePath, './tmp/src/components/HelloWorld/HelloWorld.js');
+
+      expect(generator.componentPath()).to.eql(expectedPath);
+    });
   });
 
   describe('#componentTestPath', () => {
