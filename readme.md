@@ -1,6 +1,7 @@
 [![Build Status](https://travis-ci.org/SpencerCDixon/redux-cli.svg?branch=master)](https://travis-ci.org/SpencerCDixon/redux-cli)
 [![Code Climate](https://codeclimate.com/github/SpencerCDixon/redux-cli/badges/gpa.svg)](https://codeclimate.com/github/SpencerCDixon/redux-cli)
 [![codecov.io](https://codecov.io/github/SpencerCDixon/redux-cli/coverage.svg?branch=master)](https://codecov.io/github/SpencerCDixon/redux-cli?branch=master)
+<a href="https://zenhub.io"><img src="https://raw.githubusercontent.com/ZenHubIO/support/master/zenhub-badge.png"></a>
 
 ```
 ______         _                   _____  _     _____  
@@ -126,6 +127,11 @@ This CLI is very much in the beginning phases and I would love to have people
 help me to make it more robust.  Currently, it's pretty opinonated to use the
 tooling/templates I prefer in my projects but I'm open to PR's to make it more
 universal and support other platforms (I'm on Mac).
+
+This repo uses Zenhub for managing issues.  If you want to see what's currently
+being worked on or in the pipeline make sure to install the [Zenhub Chrome
+Extension](https://chrome.google.com/webstore/detail/zenhub-for-github/ogcgkffhplmphkaahpmffcafajaocjbd?hl=en-US)
+and check out this projects 'Boards'.
 
 #### Development Setup/Contributing
 Use `npm link` is to install the CLI locally when testing it and adding
