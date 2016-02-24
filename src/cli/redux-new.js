@@ -78,23 +78,24 @@ class AppGenerator {
   }
 
   pullDownKit() {
-    let interval = setInterval(() => {
-      const content = info('Fetching the Redux Starter Kit...  ', false);
+    const content = info('Fetching the Redux Starter Kit...  ', false);
 
+    let interval = setInterval(() => {
       logUpdate(`${content}${chalk.cyan.bold.dim(frame())}`);
     }, 100);
 
-    const pull = exec('git pull https://github.com/davezuko/react-redux-starter-kit.git', {silent: true});
-    clearInterval(interval);
+    exec('git pull https://github.com/davezuko/react-redux-starter-kit.git', {silent: true}, (code) => {
+      clearInterval(interval);
 
-    if (pull.code !== 0) {
-      error('Something went wrong... please try again.  Make sure you have internet access');
-      error(`Error code: ${pull.code}`);
-      process.exit(1);
-    }
+      if (code !== 0) {
+        error('Something went wrong... please try again.  Make sure you have internet access');
+        error(`Error code: ${code}`);
+        process.exit(1);
+      }
 
-    this.resetGitHistory();
-    this.createProjectSettings();
+      this.resetGitHistory();
+      this.createProjectSettings();
+    });
   }
 }
 
