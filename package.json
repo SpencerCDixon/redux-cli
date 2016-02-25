@@ -21,7 +21,12 @@
     "redux",
     "react",
     "cli",
-    "generator"
+    "generator",
+    "react.js",
+    "kit",
+    "app-kit",
+    "react-starter-kit",
+    "react-redux-starter-kit"
   ],
   "author": "Spencer Dixon <spencercdixon@gmail.com>",
   "license": "MIT",
