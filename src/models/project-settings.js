@@ -3,11 +3,17 @@ import { copySync } from 'fs-extra';
 import jf from 'jsonfile';
 import { pwd } from 'shelljs';
 
-import { fileExists } from './util/fs';
+import { fileExists } from '../util/fs';
+
+/*
+  Look into using Yam for finding settings so it will get the first
+  .reduxrc it finds and use that for project settings just like how
+  eslintrc and ember-cli works
+*/
 
 export default class ProjectSettings {
   constructor(relativePath) {
-    this.relativePath = relativePath || '../templates/.reduxrc';
+    this.relativePath = relativePath || '../../templates/.reduxrc';
     this.loadSettings();
   }
 
@@ -48,6 +54,10 @@ export default class ProjectSettings {
 
   setSetting(key, val) {
     this.settings[key] = val;
+  }
+
+  setAllSettings(json) {
+    this.settings = json;
   }
 
   save() {

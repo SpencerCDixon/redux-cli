@@ -1,7 +1,12 @@
 import fs from 'fs';
+import fse from 'fs-extra';
 import path from 'path';
+import temp from 'temp';
+import denodeify from 'denodeify';
 
 const rootPath = process.cwd();
+const mkdir    = denodeify(fs.mkdir);
+const mkTmpDir = denodeify(temp.mkdir);
 
 /*
  Node deprecated existsSync so this is a simple
@@ -25,4 +30,21 @@ export const fileExists = (filename) => {
 export const readFile = (filename) => {
   const filePath = path.join(rootPath, filename);
   return fs.readFileSync(filePath, 'utf8');
+};
+
+// Promise based fs helpers
+export const dirExists = (dirPath) => {
+  return new Promise(resolve => {
+    fse.exists(dirPath, resolve);
+  });
+};
+
+export const mkTmpDirIn = (dirPath) => {
+  return dirExists(dirPath).then(doesExist => {
+    if (!doesExist) {
+      return mkdir(dirPath);
+    }
+  }).then(() => {
+    return mkTmpDir({ dir: dirPath});
+  });
 };

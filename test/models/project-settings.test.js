@@ -1,4 +1,4 @@
-import ProjectSettings from 'projectSettings';
+import ProjectSettings from 'models/project-settings';
 import fs from 'fs';
 import fse from 'fs-extra';
 import config from 'config';
@@ -42,7 +42,7 @@ describe('ProjectSettings', () => {
     });
 
     it('can take a custom template path in constructor for different configs', () => {
-      const settings = new ProjectSettings('../templates/.starterrc');
+      const settings = new ProjectSettings('../../templates/.starterrc');
       const expectedPath = basePath + '/templates/.starterrc';
       expect(settings.templatePath()).to.eql(expectedPath);
     });
@@ -127,6 +127,23 @@ describe('ProjectSettings', () => {
 
       settings.setSetting('testOne', 'new setting');
       expect(settings.getSetting('testOne')).to.eql('new setting');
+    });
+  });
+
+  describe('#setAllSettings', () => {
+    it('takes a javascript object and overrides current settings', () => {
+      const preWrittenSettings = { testOne: 'some information' };
+      fs.writeFileSync(settingsPath, JSON.stringify(preWrittenSettings));
+
+      const settings = new ProjectSettings();
+      expect(settings.getSetting('testOne')).to.eql('some information');
+
+      const overrideAll = {
+        testOne: 'new information',
+        anotherKey: 'with some value'
+      };
+      settings.setAllSettings(overrideAll);
+      expect(settings.getAllSettings()).to.eql(overrideAll);
     });
   });
 

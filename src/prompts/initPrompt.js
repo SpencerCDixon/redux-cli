@@ -3,12 +3,12 @@ import chalk from 'chalk';
 const schema = {
   properties: {
     sourceBase: {
-      description: chalk.blue('Path to your source code?'),
+      description: chalk.blue('Path to your source code? (relative from root)'),
       type: 'string',
       required: true
     },
     testBase: {
-      description: chalk.blue('Path to your test code?'),
+      description: chalk.blue('Path to your test code? (relative from root)'),
       type: 'string',
       required: true
     },
