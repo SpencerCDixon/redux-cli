@@ -6,6 +6,7 @@ import SmartComponent from '../generators/smartComponent';
 import FormComponent from '../generators/formComponent';
 import ReduxDuck from '../generators/reduxDuck';
 import { error, info, success } from '../util/textHelper';
+import CreateAndStepIntoDirectory from '../tasks/createAndStepIntoDirectory';
 
 const availableGenerators = [
   'dumb',
@@ -44,12 +45,18 @@ commander
     } else if (generatorName === 'duck') {
       topType && error('Redux ducks dont need a top level component.');
       component = new ReduxDuck(compName, settings);
+    } else if (generatorName === 'dir') {
+      component = new CreateAndStepIntoDirectory();
     } else {
       error('not a valid generator type');
       info(`valid generator types: ${success(availableGenerators.join(', '))}`);
       return;
     }
-    component.run();
+    component.run(
+      {dirName: compName}
+    ).then(initial => {
+      console.log('Initial: ', initial.initialDirectory);
+    });
   })
   .parse(process.argv);
 

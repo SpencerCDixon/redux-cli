@@ -6,6 +6,7 @@ import chalk from 'chalk';
 
 import { info, error, create } from '../util/textHelper';
 import ProjectSettings from '../projectSettings';
+import NewCommand from '../sub-commands/new';
 
 const frame = elegantSpinner();
 
@@ -97,7 +98,11 @@ class AppGenerator {
 commander
   .arguments('<project name>')
   .action(dirName => {
-    const generator = new AppGenerator(dirName);
-    generator.run();
+    const command = new NewCommand();
+    // const generator = new AppGenerator(dirName);
+    // generator.run();
+    command.run({
+      dirName: dirName
+    });
   })
   .parse(process.argv);
