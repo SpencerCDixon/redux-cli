@@ -3,8 +3,8 @@ import fse from 'fs-extra';
 import fs from 'fs';
 import config from 'config';
 import path from 'path';
-import { expectFile } from '../helpers/fsHelpers';
-import MockSettings from '../helpers/mockSettings';
+import { expectFile } from '../helpers/fs-helpers';
+import MockSettings from '../helpers/mock-settings';
 
 const { basePath, pkgBasePath } = config;
 

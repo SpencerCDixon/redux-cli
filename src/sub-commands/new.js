@@ -1,4 +1,4 @@
-import { which, pwd } from 'shelljs';
+import { which } from 'shelljs';
 import SubCommand from '../models/sub-command';
 import CreateAndStepIntoDirectory from '../tasks/create-and-step-into-directory';
 import GitPull from '../tasks/git-pull';
@@ -6,7 +6,6 @@ import GitPull from '../tasks/git-pull';
 class New extends SubCommand {
   constructor() {
     super();
-
     this.createDirTask = new CreateAndStepIntoDirectory(this.environment);
     this.gitPullTask = new GitPull(this.environment);
   }
