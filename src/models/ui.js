@@ -80,7 +80,7 @@ class UI {
   startProgress(string) {
     if (this.writeLevelVisible(this.writeLevel)) {
       this.progressInterval = setInterval(() => {
-        logUpdate(`${string} ${chalk.cyan.bold.dim(frame())}`);
+        logUpdate(`  ${chalk.green('loading:')} ${string} ${chalk.cyan.bold.dim(frame())}`);
       }, 100);
     }
   }
