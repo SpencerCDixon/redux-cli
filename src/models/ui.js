@@ -1,6 +1,9 @@
 import os from 'os';
 import chalk from 'chalk';
+import logUpdate from 'log-update';
+import elegantSpinner from 'elegant-spinner';
 
+const frame = elegantSpinner();
 const EOL = os.EOL;
 const DEFAULT_WRITE_LEVEL = 'INFO';
 const WRITE_LEVELS = {
@@ -72,6 +75,20 @@ class UI {
     }
 
     this.writeLevel = newLevel;
+  }
+
+  startProgress(string) {
+    if (this.writeLevelVisible(this.writeLevel)) {
+      this.progressInterval = setInterval(() => {
+        logUpdate(`${string} ${chalk.cyan.bold.dim(frame())}`);
+      }, 100);
+    }
+  }
+
+  stopProgress() {
+    if (this.progressInterval) {
+      clearInterval(this.progressInterval);
+    }
   }
 }
 

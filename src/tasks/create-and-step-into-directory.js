@@ -7,8 +7,11 @@ import Task from '../models/task';
 const mkdir = denodeify(fs.mkdir);
 
 export default class extends Task {
+  constructor(environment) {
+    super(environment);
+  }
+
   run(options) {
-    this.ui = options.ui;
     const dirName = this.dirName = options.dirName;
     this.confirmDir();
 
