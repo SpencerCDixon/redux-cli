@@ -1,4 +1,4 @@
-import { test, cd, pwd } from 'shelljs';
+import { test, cd, pwd, exec } from 'shelljs';
 import fs from 'fs';
 import denodeify from 'denodeify';
 
@@ -12,7 +12,7 @@ export default class extends Task {
   }
 
   run(options) {
-    const dirName = this.dirName = options.dirName;
+    this.dirName = options.dirName;
     this.confirmDir();
 
     this.ui.writeInfo('Creating new directory...');
@@ -20,7 +20,8 @@ export default class extends Task {
       .then(() => {
         this.ui.writeCreate(`Created directory: ${this.dirName}`);
         const oldDirectory = pwd();
-        cd(dirName);
+        cd(this.dirName);
+        this.initGit();
         return { initialDirectory: oldDirectory };
       });
   }
@@ -30,5 +31,10 @@ export default class extends Task {
       this.ui.writeError(`${this.dirName} directory already exists!  Please choose another name`);
       process.exit(1);
     }
+  }
+
+  initGit() {
+    this.ui.writeInfo('Setting up tracking with git...');
+    exec('git init', {silent: true});
   }
 }

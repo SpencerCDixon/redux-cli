@@ -1,5 +1,5 @@
-import InitCommand from '../sub-commands/init-command';
+import Init from '../sub-commands/init-command';
 
-const command = new InitCommand();
+const command = new Init();
 command.run();
 

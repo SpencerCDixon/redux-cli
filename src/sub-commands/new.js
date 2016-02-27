@@ -1,5 +1,5 @@
 import { which } from 'shelljs';
-import SubCommand from '../models/subCommand';
+import SubCommand from '../models/sub-command';
 import CreateAndStepIntoDirectory from '../tasks/create-and-step-into-directory';
 // import GitPull from '../tasks/git-pull';
 
@@ -13,6 +13,10 @@ class New extends SubCommand {
 
   run(cliArgs) {
     this.confirmGit();
+    this.createDirTask.run(cliArgs)
+      .then((initial) => {
+        console.log('Initial was', initial);
+      });
   }
 
   confirmGit() {

@@ -1,13 +1,13 @@
 import prompt from 'prompt';
 import figlet from 'figlet';
 
-import SubCommand from '../models/subCommand';
+import SubCommand from '../models/sub-command';
 
 import initPrompt from '../prompts/initPrompt';
 import { setupPrompt } from '../prompts/setup';
 import { success } from '../util/textHelper';
 
-class InitCommand extends SubCommand {
+class Init extends SubCommand {
   constructor() {
     super();
     setupPrompt('initialization', prompt);
@@ -34,4 +34,4 @@ class InitCommand extends SubCommand {
   }
 }
 
-export default InitCommand;
+export default Init;
