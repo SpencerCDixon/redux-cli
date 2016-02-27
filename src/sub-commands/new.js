@@ -1,21 +1,21 @@
-import { which } from 'shelljs';
+import { which, pwd } from 'shelljs';
 import SubCommand from '../models/sub-command';
 import CreateAndStepIntoDirectory from '../tasks/create-and-step-into-directory';
-// import GitPull from '../tasks/git-pull';
+import GitPull from '../tasks/git-pull';
 
 class New extends SubCommand {
   constructor() {
     super();
 
     this.createDirTask = new CreateAndStepIntoDirectory(this.environment);
-    // this.gitPullTask = new GitPull(this.environment);
+    this.gitPullTask = new GitPull(this.environment);
   }
 
   run(cliArgs) {
     this.confirmGit();
     this.createDirTask.run(cliArgs)
-      .then((initial) => {
-        console.log('Initial was', initial);
+      .then(() => {
+        this.gitPullTask.run('git@github.com:davezuko/react-redux-starter-kit.git');
       });
   }
 

@@ -1,4 +1,4 @@
-import { test, cd, pwd, exec } from 'shelljs';
+import { test, cd, exec } from 'shelljs';
 import fs from 'fs';
 import denodeify from 'denodeify';
 
@@ -19,10 +19,8 @@ export default class extends Task {
     return mkdir(this.dirName)
       .then(() => {
         this.ui.writeCreate(`Created directory: ${this.dirName}`);
-        const oldDirectory = pwd();
         cd(this.dirName);
         this.initGit();
-        return { initialDirectory: oldDirectory };
       });
   }
 

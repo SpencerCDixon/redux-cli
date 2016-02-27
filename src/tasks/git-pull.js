@@ -11,7 +11,7 @@ export default class extends Task {
     ui.startProgress(`Fetching ${gitUrl} from github.`);
 
     exec(`git pull ${gitUrl}`, {silent: true}, (code, stdout, stderr) => {
-      this.ui.stopProgress();
+      ui.stopProgress();
 
       if (code !== 0) {
         ui.writeError('Something went wrong... please try again.  Make sure you have internet access');
@@ -20,6 +20,7 @@ export default class extends Task {
         ui.writeError(stderr);
         process.exit(1);
       }
+      ui.writeInfo('pulled down repo');
     });
   }
 }
