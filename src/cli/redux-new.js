@@ -52,24 +52,6 @@ import New from '../sub-commands/new';
     // exec('git init', {silent: true});
   // }
 
-  // resetGitHistory() {
-    // // Should maybe prompt user for permission to do this since it's dangerous.
-    // info('Removing the starter kit .git folder');
-    // rm('-rf', '.git');
-    // exec('git init && git add -A && git commit -m"Initial commit"', {silent: true});
-    // create('Created new .git history for your project');
-    // info('Congrats! New Redux app ready to go.  CLI generators configured and ready to go');
-  // }
-
-  // createProjectSettings() {
-    // // All settings for react-redux-starter-kit live in this template so when
-    // // new projects get created users can immediately start using the CLI
-    // const reduxStarterKitTemplate = '../templates/.starterrc';
-    // const settings = new ProjectSettings(reduxStarterKitTemplate);
-    // settings.save();
-
-    // create('.reduxrc with starter kit settings saved.');
-  // }
 
   // pullDownKit() {
     // const content = info('Fetching the Redux Starter Kit...  ', false);
@@ -95,12 +77,15 @@ import New from '../sub-commands/new';
   // }
 // }
 
+const command = new New();
+
+commander.on('--help', () => {
+  command.printUserHelp();
+});
+
 commander
   .arguments('<project name>')
   .action(dirName => {
-    const command = new New();
-    // const generator = new AppGenerator(dirName);
-    // generator.run();
     command.run({
       dirName: dirName
     });

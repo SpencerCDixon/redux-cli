@@ -1,5 +1,7 @@
-import { exec } from 'shelljs';
 import Task from '../models/task';
+import denodeify from 'denodeify';
+
+const exec = denodeify(require('child_process').exec);
 
 export default class extends Task {
   constructor(environment) {
@@ -10,17 +12,18 @@ export default class extends Task {
     const ui = this.ui;
     ui.startProgress(`Fetching ${gitUrl} from github.`);
 
-    exec(`git pull ${gitUrl}`, {silent: true}, (code, stdout, stderr) => {
+    return exec(`git pull ${gitUrl}`, {silent: true}).then((err, stdout, stderr) => {
       ui.stopProgress();
 
-      if (code !== 0) {
+      if (err) {
         ui.writeError('Something went wrong... please try again.  Make sure you have internet access');
-        ui.writeError(`Error code: ${code}`);
+        ui.writeError(`Error code: ${err}`);
         ui.writeError(stdout);
         ui.writeError(stderr);
         process.exit(1);
       }
       ui.writeInfo('pulled down repo');
+      Promise.resolve();
     });
   }
 }

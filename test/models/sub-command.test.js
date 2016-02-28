@@ -14,4 +14,13 @@ describe('(Model) SubCommand', () => {
       );
     });
   });
+
+  it('creates an environment which can be passed to tasks', function() {
+    const options = {
+      ui: 'cli interface',
+      settings: 'project settings'
+    };
+    const command = new SubCommand(options);
+    expect(command.environment).to.eql(options);
+  });
 });

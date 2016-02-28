@@ -1,28 +1,18 @@
 import commander from 'commander';
-import ProjectSettings from '../projectSettings';
 import { version } from '../version';
-import DumbComponent from '../generators/dumbComponent';
-import SmartComponent from '../generators/smartComponent';
-import FormComponent from '../generators/formComponent';
-import ReduxDuck from '../generators/reduxDuck';
-import { error, info, success } from '../util/textHelper';
-import CreateAndStepIntoDirectory from '../tasks/createAndStepIntoDirectory';
 
-const availableGenerators = [
-  'dumb',
-  'form',
-  'smart',
-  'duck'
-];
+import Blueprint from '../models/blueprint';
+import config from '../config';
+import path from 'path';
 
 commander.on('--help', () => {
-  console.log('  Examples:');
-  console.log('');
-  console.log('    $ redux g dumb SimpleComponent');
-  console.log('    $ redux g dumb SimpleButton button');
-  console.log('    $ redux g smart CommentContainer');
-  console.log('    $ redux g smart CommentContainer div');
-  console.log('');
+  // console.log('  Examples:');
+  // console.log('');
+  // console.log('    $ redux g dumb SimpleComponent');
+  // console.log('    $ redux g dumb SimpleButton button');
+  // console.log('    $ redux g smart CommentContainer');
+  // console.log('    $ redux g smart CommentContainer div');
+  // console.log('');
 });
 
 commander
@@ -30,33 +20,9 @@ commander
   .arguments('<generator name> [component name] [top level type]')
   .description('generates code based off a blueprint')
   .action((generatorName, compName, topType) => {
-    const settings = new ProjectSettings();
-    let component;
-
-    // TODO: come up with a better way to approach this.  Don't know enough
-    // about Node to figure how to do proper implement polymorphism
-    if (generatorName === 'dumb') {
-      component = new DumbComponent(compName, topType, settings);
-    } else if (generatorName === 'smart') {
-      component = new SmartComponent(compName, topType, settings);
-    } else if (generatorName === 'form') {
-      topType && error('Form components will automatically use <form> as their top level');
-      component = new FormComponent(compName, settings);
-    } else if (generatorName === 'duck') {
-      topType && error('Redux ducks dont need a top level component.');
-      component = new ReduxDuck(compName, settings);
-    } else if (generatorName === 'dir') {
-      component = new CreateAndStepIntoDirectory();
-    } else {
-      error('not a valid generator type');
-      info(`valid generator types: ${success(availableGenerators.join(', '))}`);
-      return;
-    }
-    component.run(
-      {dirName: compName}
-    ).then(initial => {
-      console.log('Initial: ', initial.initialDirectory);
-    });
+    const blueprintPath = path.resolve(config.basePath, 'blueprints/smart')
+    console.log('path is: ', blueprintPath);
+    Blueprint.load(blueprintPath);
   })
   .parse(process.argv);
 
