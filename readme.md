@@ -68,8 +68,10 @@ your own so that the generators will write files to the correct location.
 [See: creating custom blueprints](#creating-blueprints).
 
 Alternatively, if you use this CLI as a result of `redux new <project name>` the
-starter kit will come pre-configured with a bunch of generators that work with
-that starter kit.
+starter kit will come pre-configured with a bunch of blueprints (generators)
+that work out of the gate.  Currently, I'm working on a PR for the
+`react-redux-starter-kit` with a bunch of blueprints.  More starter kits and
+blueprints to come!
 
 ### Initial Configuration
 |Key Name|Required|Description|
@@ -93,8 +95,8 @@ that starter kit.
 
 |Name|Description|Options|
 |---|---|---|
-|`redux g dumb <comp name> [html tag]`|generates a dumb component and test file|html tag can be passed to prepopulate the render|
-|`redux g smart <smart name> [html tag]`|generates a smart connected component and test file|html tag can be passed to prepopulate the render|
+|`redux g dumb <comp name>`|generates a dumb component and test file||
+|`redux g smart <smart name>`|generates a smart connected component and test file||
 |`redux g form <form name>`|generates a form component (assumes redux-form)||
 |`redux g duck <duck name>`|generates a redux duck and test file||
 
