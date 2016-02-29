@@ -1,8 +1,8 @@
 module.exports = {
-  fileMapTokens: function(options) {
+  fileMapTokens() {
     return {
-      __duck__: function(options) {
-        return options.settings.getSetting('duckPath');
+      __duck__: (options) => {
+        return 'redux/modules';
       }
     };
   }
