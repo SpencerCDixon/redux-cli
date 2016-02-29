@@ -1,5 +1,5 @@
 module.exports = {
-  testFunction() {
-    console.log('inside test function');
+  description() {
+    return 'generates a smart (container) component';
   }
 };

@@ -227,6 +227,8 @@ export default class Blueprint {
   fileMapTokens() {}
   beforeInstall() {}
   afterInstall() {}
+
+  // TODO: add uninstall hooks once support for uninstall exists
   // beforeUninstall() {}
   // afterUninstall() {}
 
@@ -234,18 +236,6 @@ export default class Blueprint {
   // via the CLI
   // normalizeEntityName(options) {
     // return normalizeEntityName(name);
-  // }
-
-  // static renamedFiles() {
-    // return {
-      // '.gitignore': 'gitignore'
-    // };
-  // }
-
-  // static ignoredFiles() {
-    // return [
-      // '.DS_store'
-    // ];
   // }
 }
 
