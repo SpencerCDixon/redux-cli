@@ -146,6 +146,7 @@ export default class Blueprint {
     const standardLocals = {
       pascalEntityName: normalizeCasing(entityName, 'pascal'),
       camelEntityName:  normalizeCasing(entityName, 'camel'),
+      snakeEntityName: normalizeCasing(entityName, 'snake'),
       fileMap
     };
 
@@ -204,11 +205,9 @@ export default class Blueprint {
     };
   */
   install(options) {
-    const ui       = this.ui = options.ui;
-    const settings = this.settings = options.settings;
+    const ui = this.ui = options.ui;
 
     ui.writeInfo('installing blueprint...');
-
     return this._process(
       options,
       this.beforeInstall,
