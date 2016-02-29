@@ -21,8 +21,7 @@ export default class Blueprint {
     this.name = path.basename(path);
   }
 
-  // Hook that can be overridden.  Defaults to look
-  // in blueprint/files.
+  // Hook that can be overridden.  Defaults to look in <blueprint-name>/files.
   filesPath() {
     return path.join(this.path, 'files');
   }
@@ -155,7 +154,6 @@ export default class Blueprint {
 
   _process(options, beforeHook, process, afterHook) {
     const locals = this._locals(options);
-    console.log('locals are: ', locals);
     return Promise.resolve()
       .then(beforeHook.bind(this, options, locals))
       .then(process.bind(this, locals))
