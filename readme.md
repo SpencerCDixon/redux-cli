@@ -102,11 +102,11 @@ that starter kit.
 Below are some examples of using the generator to speed up development:
 
 ```
-// generates a dumb component with <button></button> in render
-redux g dumb SimpleButton button  
+// generates a dumb component 
+redux g dumb SimpleButton 
 
-// generates a smart component with <div> in render
-redux g smart CommentContainer div
+// generates a smart component 
+redux g smart CommentContainer 
 
 // generate a redux-form with <form> tags in render statement
 redux g form ContactForm
@@ -142,9 +142,11 @@ Blueprints follow a simple structure. Let's take the built-in
 blueprints/smart
 ├── files
 │   ├── __root__
-│   │   └── __name__.js
+│   │   └── __smart__
+│   │       └── __name__.js
 │   └── __test__
-│       └── __name__.test.js
+│       └── __smart__
+│           └── __name__.test.js
 └── index.js
 ```
 
@@ -172,6 +174,10 @@ The `__path__` token is substituted with the blueprint
 name at install time. For example, when the user invokes
 `redux generate smart foo` then `__path__` becomes
 `smart`.  
+
+The `__smart__` token is a custom token I added in the `index.js` it pulls from
+your `.reduxrc` configuration file to use whatever you have set as your
+`smartPath`.
 
 #### Template Variables (AKA Locals)
 
