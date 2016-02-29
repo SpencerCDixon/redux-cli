@@ -3,5 +3,5 @@
   "testBase":"tests",
   "smartPath":"containers",
   "dumbPath":"components",
-  "fileCasing":"default",
+  "fileCasing":"default"
 }
