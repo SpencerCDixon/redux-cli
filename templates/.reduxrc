@@ -3,9 +3,5 @@
   "testBase":"",
   "smartPath":"",
   "dumbPath":"",
-  "formPath":"",
-  "fileExtension":"",
-  "fileCasing":"",
-  "duckPath":"",
-  "reducerPath":""
+  "fileCasing":""
 }

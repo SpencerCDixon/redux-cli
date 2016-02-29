@@ -8,6 +8,7 @@
   },
   "scripts": {
     "test": "npm run lint && env NODE_PATH=$NODE_PATH:$PWD/src ./node_modules/.bin/babel-node node_modules/isparta/bin/isparta cover --report html ./node_modules/.bin/_mocha -- --compilers js:babel-register --opts ./.mocha.opts && ./node_modules/.bin/codecov --token=75e3e765-443c-4d31-a8f5-b0ca3be8e55f",
+    "test:nocov": "env NODE_PATH=$NODE_PATH:$PWD/src ./node_modules/.bin/babel-node ./node_modules/.bin/_mocha --compilers js:babel-register --opts ./.mocha.opts ",
     "start": "npm run build:watch",
     "build": "./node_modules/.bin/babel src -d lib",
     "build:watch": "./node_modules/.bin/babel src --watch -d lib",
@@ -40,6 +41,7 @@
   "dependencies": {
     "chalk": "^1.1.1",
     "commander": "^2.9.0",
+    "denodeify": "^1.2.1",
     "ejs": "^2.4.1",
     "elegant-spinner": "^1.0.1",
     "figlet": "^1.1.1",
@@ -48,7 +50,10 @@
     "jsonfile": "^2.2.3",
     "log-update": "^1.0.2",
     "prompt": "^1.0.0",
-    "shelljs": "^0.6.0"
+    "shelljs": "^0.6.0",
+    "temp": "^0.8.3",
+    "through": "^2.3.8",
+    "walk-sync": "^0.2.6"
   },
   "devDependencies": {
     "babel-cli": "^6.5.1",

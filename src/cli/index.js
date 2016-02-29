@@ -15,7 +15,7 @@ program
 // fake an alias for generate since commander doesn't support
 // aliases for sub-commands.
 program
-  .command('generate', 'generates code based off a blueprint')
+  .command('generate', 'generates new code from blueprints')
   .command('g', 'alias for generate');
 
 program.parse(process.argv);
