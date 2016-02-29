@@ -15,6 +15,10 @@ class New extends SubCommand {
     this.gitPullTask = new GitPull(this.environment);
   }
 
+  printUserHelp() {
+    this.ui.write('Command used for generating new redux projects');
+  }
+
   run(cliArgs) {
     this.confirmGit();
     this.createDirTask.run(cliArgs).then(() => {
@@ -31,10 +35,6 @@ class New extends SubCommand {
       this.ui.writeInfo('If you have homebrew installed try: brew install git');
       process.exit(1);
     }
-  }
-
-  printUserHelp() {
-    this.ui.write('Command used for generating new redux projects');
   }
 
   // Should maybe prompt user for permission to do this since it's dangerous.

@@ -1,16 +1,16 @@
 import commander from 'commander';
 import New from '../sub-commands/new';
 
-const command = new New();
+const subCommand = new New();
 
 commander.on('--help', () => {
-  command.printUserHelp();
+  subCommand.printUserHelp();
 });
 
 commander
   .arguments('<project name>')
   .action(dirName => {
-    command.run({
+    subCommand.run({
       dirName: dirName
     });
   })

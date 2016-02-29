@@ -1,28 +1,37 @@
 import commander from 'commander';
 import { version } from '../version';
+import Generate from '../sub-commands/generate';
 
-import Blueprint from '../models/blueprint';
-import config from '../config';
-import path from 'path';
+const subCommand = new Generate();
 
 commander.on('--help', () => {
-  // console.log('  Examples:');
-  // console.log('');
-  // console.log('    $ redux g dumb SimpleComponent');
-  // console.log('    $ redux g dumb SimpleButton button');
-  // console.log('    $ redux g smart CommentContainer');
-  // console.log('    $ redux g smart CommentContainer div');
-  // console.log('');
+  subCommand.printUserHelp();
 });
 
 commander
   .version(version())
-  .arguments('<generator name> [component name] [top level type]')
+  .arguments('<blueprint> [entity name]')
   .description('generates code based off a blueprint')
-  .action((generatorName, compName, topType) => {
-    const blueprintPath = path.resolve(config.basePath, 'blueprints/smart')
-    console.log('path is: ', blueprintPath);
-    Blueprint.load(blueprintPath);
+  .action((blueprintName, entityName) => {
+    const cliArgs = {
+      entity: {
+        name: entityName,
+        options: {}
+      }
+    };
+    subCommand.run(blueprintName, cliArgs);
+
+    /*
+     * blueprint arg structure:
+     * {
+     *  entity: {
+     *    name: 'foo',
+     *    options: {
+     *      type: 'button'
+     *    }
+     *  },
+     * }
+     */
   })
   .parse(process.argv);
 

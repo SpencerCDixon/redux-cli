@@ -52,7 +52,8 @@
     "prompt": "^1.0.0",
     "shelljs": "^0.6.0",
     "temp": "^0.8.3",
-    "through": "^2.3.8"
+    "through": "^2.3.8",
+    "walk-sync": "^0.2.6"
   },
   "devDependencies": {
     "babel-cli": "^6.5.1",

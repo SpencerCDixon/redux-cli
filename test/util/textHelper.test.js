@@ -1,7 +1,7 @@
 import chalk from 'chalk';
-import * as th from 'util/textHelper';
+import * as th from 'util/text-helper';
 
-describe('textHelpers', () => {
+describe('(Util) text-helpers', () => {
   describe('#success', () => {
     it('applies green color to text', () => {
       const string = 'Successfully created something important';

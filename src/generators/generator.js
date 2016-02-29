@@ -3,7 +3,7 @@ import { outputFileSync } from 'fs-extra';
 import path from 'path';
 import ejs from 'ejs';
 
-import { create, error, normalizeCasing } from '../util/textHelper';
+import { create, error, normalizeCasing } from '../util/text-helper';
 import { fileExists } from '../util/fs';
 import config from '../config';
 

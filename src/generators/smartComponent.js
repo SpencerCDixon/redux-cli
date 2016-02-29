@@ -1,5 +1,5 @@
 import GeneratorBlueprint from './generatorBlueprint';
-import { info, normalizeComponentName } from '../util/textHelper';
+import { info, normalizeComponentName } from '../util/text-helper';
 
 class SmartComponent extends GeneratorBlueprint {
   constructor(componentName, topType, settings) {

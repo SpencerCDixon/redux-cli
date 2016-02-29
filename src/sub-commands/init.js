@@ -5,12 +5,18 @@ import SubCommand from '../models/sub-command';
 
 import initPrompt from '../prompts/initPrompt';
 import { setupPrompt } from '../prompts/setup';
-import { success } from '../util/textHelper';
+import { success } from '../util/text-helper';
 
 class Init extends SubCommand {
   constructor() {
     super();
     setupPrompt('initialization', prompt);
+  }
+
+  printUserHelp() {
+    this.ui.write(
+      'inititialization command to create a .reduxrc which has project settings'
+    );
   }
 
   run() {

@@ -1,5 +1,5 @@
 import GeneratorBlueprint from './generatorBlueprint';
-import { info, normalizeDuckName } from '../util/textHelper';
+import { info, normalizeDuckName } from '../util/text-helper';
 
 class ReduxDuck extends GeneratorBlueprint {
   constructor(duckName, settings) {
