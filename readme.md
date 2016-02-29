@@ -45,27 +45,41 @@ existing project or store your components in different pathes please see [config
 ### Config Existing Project
 There is an `init` subcommand for you to specify all pathes to where components
 live in your project.  The `init` command just creates a `.reduxrc` in your
-project root.  If you want to you can just create the `.reduxrc` manually.
-
+project root.  If you want to you can just create the `.reduxrc` manually.  
 
 Final `.reduxrc` might look like this:
 
 ```javascript
 {
   "sourceBase":"src",
-  "testBase":"./test",
-  "fileExtension":"js",
+  "testBase":"tests",
+  "smartPath":"containers",
+  "dumbPath":"components",
   "fileCasing": "default",
-  "wrapFilesInFolders": false
 }
 ```  
 
+**Note on configuration**:  
+This project tries to walk on a fine line between convention and configuration.
+Since the majority of React applications will separate their smart/dumb
+components if you pass in those pathes you'll get those generators for free.
+However, some of the other generators might not write files to the exact pathes
+that you use for your project.  It's easy to override the CLI generators with
+your own so that the generators will write files to the correct location.  
+[See: creating custom blueprints](#creating-blueprints).
+
+Alternatively, if you use this CLI as a result of `redux new <project name>` the
+starter kit will come pre-configured with a bunch of generators that work with
+that starter kit.
+
 ### Initial Configuration
-|Key Name|Description|Extra Info|Required|
-|---|---|---|---|
-|**sourceBase**|where you keep your pre-compiled source|usually going to be `./src`|✓|
-|**testBase**|where you keep your tests|usually going to be `./test` or `./tests`  |✓|
-|**fileCasing**|how do you want generated files to be named (pasal/camel/snake/default)| |✓|
+|Key Name|Required|Description|
+|---|---|---|
+|**sourceBase**|✓|where you keep your pre-compiled source (relative from root of project)|
+|**testBase**|✓|where you keep your tests (relative from root of project)|
+|**smartPath**|✓|where you keep your smart (container) components|
+|**dumbPath**|✓|where you keep your dumb (pure) components|
+|**fileCasing**|✓|how do you want generated files to be named (pasal/camel/snake/default)|
 
 ### Commands
 

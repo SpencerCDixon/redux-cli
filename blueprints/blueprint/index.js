@@ -3,14 +3,6 @@ module.exports = {
     return 'generates a blueprint and definition';
   },
 
-  fileMapTokens() {
-    return {
-      __path__: (options) => {
-        return options.originalBlueprintName + 's';
-      }
-    };
-  },
-
   beforeInstall() {
     console.log('Before installation hook!');
   },

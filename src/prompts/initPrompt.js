@@ -12,6 +12,16 @@ const schema = {
       type: 'string',
       required: true
     },
+    smartPath: {
+      description: chalk.blue('Where is path to Smart/Container Components?'),
+      type: 'string',
+      required: true
+    },
+    dumbPath: {
+      description: chalk.blue('Where is path to Dumb/Pure Components?'),
+      type: 'string',
+      required: true
+    },
     fileCasing: {
       description: chalk.blue('How do you want file casing to be configured? (default|snake|pascal|camel)'),
       pattern: /(default|snake|pascal|camel)/,
