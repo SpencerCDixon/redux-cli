@@ -32,6 +32,7 @@ redux g dumb SimpleButton
 4.  [Generators](#generators)
 5.  [Roadmap](#roadmap)
 6.  [Examples](#examples)
+6.  [Creating Custom Blueprints](#creating-blueprints)
 7.  [Issues/Contributing](#contributing)
 8.  [Changelog](#changelog)
 
@@ -251,7 +252,7 @@ module.exports = {
 };
 ```
 
-## Blueprint Hooks
+#### Blueprint Hooks
 
 As shown above, the following hooks are available to
 blueprint authors:
@@ -262,7 +263,7 @@ blueprint authors:
 - `beforeInstall`
 - `afterInstall`
 
-### locals
+#### locals
 
 Use `locals` to add custom tempate variables. The method
 receives one argument: `options`. Options is an object
@@ -312,14 +313,14 @@ to override any of the default tokens.
 Tokens are used in the files folder (see `files`), and get replaced with
 values when the `mapFile` method is called.
 
-### filesPath
+#### filesPath
 
 Use `filesPath` to define where the blueprint files to install are located.
 This can be used to customize which set of files to install based on options
 or environmental variables. It defaults to the `files` directory within the
 blueprint's folder.
 
-### beforeInstall & beforeUninstall
+#### beforeInstall & afterInstall
 
 Called before any of the template files are processed and receives
 the the `options` and `locals` hashes as parameters. Typically used for
