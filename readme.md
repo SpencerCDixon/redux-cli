@@ -54,11 +54,6 @@ Final `.reduxrc` might look like this:
 {
   "sourceBase":"src",
   "testBase":"./test",
-  "smartPath":"containers",
-  "dumbPath":"components",
-  "formPath":"components/forms",
-  "duckPath":"redux/modules",
-  "reducerPath":"",
   "fileExtension":"js",
   "fileCasing": "default",
   "wrapFilesInFolders": false
@@ -70,15 +65,7 @@ Final `.reduxrc` might look like this:
 |---|---|---|---|
 |**sourceBase**|where you keep your pre-compiled source|usually going to be `./src`|✓|
 |**testBase**|where you keep your tests|usually going to be `./test` or `./tests`  |✓|
-|**smartPath**|path where you keep smart/container components|relative from `sourceBase`|✓|
-|**dumbPath**|path where you keep your dumb/pure components|realtive from `sourceBase`|✓|
-|**formPath**|path where you keep your form components|realtive from `sourceBase`. Assumes you're using redux-form| |
-|**duckPath**|path where you keep your Redux Ducks|realtive from `sourceBase`.| |
-|**reducerPath**|path where you keep your reducers|realtive from `sourceBase`.| |
-|**fileExtension**|do you use .js or .jsx for your React components| |✓|
 |**fileCasing**|how do you want generated files to be named (pasal/camel/snake/default)| |✓|
-|**wrapFilesInFolders**|Would you like your generated files wrapped in a folder? (true/false)| | |
-
 
 ### Commands
 
@@ -90,9 +77,6 @@ Final `.reduxrc` might look like this:
 
 
 ### Generators
-
-**Note**: All component names can be passed as `PascalCase`, `snake_case`, `dash-names`,
-or `camelCase` and they will be converted to Pascal Case in the generated files.
 
 |Name|Description|Options|
 |---|---|---|

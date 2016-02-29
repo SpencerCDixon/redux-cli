@@ -1,11 +1,5 @@
 {
   "sourceBase":"src",
   "testBase":"tests",
-  "smartPath":"containers",
-  "dumbPath":"components",
-  "formPath":"forms",
-  "fileExtension":"js",
-  "fileCasing":"default",
-  "duckPath":"redux/modules",
-  "reducerPath":""
+  "fileCasing":"default"
 }
