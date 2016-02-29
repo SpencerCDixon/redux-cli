@@ -21,7 +21,7 @@ export default class Blueprint {
     this.name = path.basename(path);
   }
 
-  // Hook that can be overridden.  Defaults to look in <blueprint-name>/files.
+  // HOOK: that can be overridden.  Defaults to look in <blueprint-name>/files.
   filesPath() {
     return path.join(this.path, 'files');
   }
@@ -41,6 +41,7 @@ export default class Blueprint {
 
   static defaultLookupPaths() {
     return [
+      path.resolve(path.join(basePath, 'blueprints')),
       path.resolve(__dirname, '..', '..', 'blueprints')
     ];
   }
