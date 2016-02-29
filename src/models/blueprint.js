@@ -4,6 +4,10 @@ import mixin from '../util/mixin';
 import walkSync from 'walk-sync';
 import _ from 'lodash';
 import { normalizeCasing } from '../util/text-helper';
+import FileInfo from './file-info';
+import config from '../config';
+
+const { basePath } = config;
 
 function generateLookupPaths(lookupPaths) {
   lookupPaths = lookupPaths || [];
@@ -80,7 +84,7 @@ export default class Blueprint {
     const standardTokens = {
       __name__: (options) => {
         const name = options.entity.name;
-        const casing = options.settings.getSetting('fileCasing');
+        const casing = options.settings.getSetting('fileCasing') || 'default';
         return normalizeCasing(name, casing);
       },
       __path__: (options) => {
@@ -109,7 +113,7 @@ export default class Blueprint {
   }
 
   // Set up options to be passed to fileMapTokens that get generated.
-  _generateFileMapVariables(locals, options) {
+  _generateFileMapVariables(entityName, locals, options) {
     const originalBlueprintName = options.originalBlueprintName || this.name;
     const { settings, entity } = options;
 
@@ -121,18 +125,69 @@ export default class Blueprint {
     };
   }
 
+  // Given a file and a fileMap from locals, convert path names
+  // to be correct string
+  mapFile(file, locals) {
+    let pattern, i;
+    const fileMap = locals.fileMap || { __name__: locals.camelEntityName };
+    for (i in fileMap) {
+      pattern = new RegExp(i, 'g');
+      file = file.replace(pattern, fileMap[i]);
+    }
+    return file;
+  }
+
   _locals(options) {
+    const entityName = options.entity && options.entity.name;
+    const customLocals = this.locals(options);
+    const fileMapVariables = this._generateFileMapVariables(entityName, customLocals, options);
+    const fileMap = this.generateFileMap(fileMapVariables);
+
+    const standardLocals = {
+      pascalEntityName: normalizeCasing(entityName, 'pascal'),
+      camelEntityName:  normalizeCasing(entityName, 'camel'),
+      fileMap
+    };
+
+    return Object.assign({}, standardLocals, customLocals);
   }
 
   _process(options, beforeHook, process, afterHook) {
     const locals = this._locals(options);
+    console.log('locals are: ', locals);
     return Promise.resolve()
       .then(beforeHook.bind(this, options, locals))
       .then(process.bind(this, locals))
       .then(afterHook.bind(this, options));
   }
 
-  processFiles() {
+  processFiles(locals) {
+    const files = this.files();
+    const fileInfos = files.map(file => this.buildFileInfo(locals, file));
+    const filesToWrite = fileInfos.filter(info => info.isFile());
+    filesToWrite.map(file => file.writeFile());
+  }
+
+  buildFileInfo(locals, file) {
+    const mappedPath = this.mapFile(file, locals);
+
+    return new FileInfo({
+      ui: this.ui,
+      templateVariables: locals,
+      originalPath: this.srcPath(file),
+      mappedPath: this.destPath(mappedPath),
+      outputPath: this.destPath(file)
+    });
+  }
+
+  // where the files will be written to
+  destPath(mappedPath) {
+    return path.resolve(basePath, mappedPath);
+  }
+
+  // location of the string templates
+  srcPath(file) {
+    return path.resolve(this.filesPath(), file);
   }
 
   /*
@@ -159,7 +214,7 @@ export default class Blueprint {
       this.beforeInstall,
       this.processFiles,
       this.afterInstall
-    ).finally(() => {
+    ).then(() => {
       ui.writeInfo('finished installing blueprint.');
     });
   }
@@ -167,7 +222,7 @@ export default class Blueprint {
   // uninstall() {
   // }
 
-  // hooks
+  // HOOKS:
   locals() {}
   fileMapTokens() {}
   beforeInstall() {}
@@ -175,10 +230,22 @@ export default class Blueprint {
   // beforeUninstall() {}
   // afterUninstall() {}
 
-  // hook for normalizing entity name that gets passed in as an arg
+  // HOOK: for normalizing entity name that gets passed in as an arg
   // via the CLI
   // normalizeEntityName(options) {
     // return normalizeEntityName(name);
+  // }
+
+  // static renamedFiles() {
+    // return {
+      // '.gitignore': 'gitignore'
+    // };
+  // }
+
+  // static ignoredFiles() {
+    // return [
+      // '.DS_store'
+    // ];
   // }
 }
 
