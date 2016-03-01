@@ -12,24 +12,41 @@ class FileInfo {
   }
 
   writeFile() {
+    this.ui.writeDebug('Attempting to write file: ', this.mappedPath);
     if (fileExists(this.mappedPath)) {
-      this.ui.writeWarning(
+      this.ui.writeDebug(
         `Not writing file.  File already exists at: ${this.mappedPath}`
       );
     } else {
       const fileContent = this.renderTemplate();
+      this.ui.writeDebug(`fileContent: ${fileContent}`);
+
       outputFileSync(this.mappedPath, fileContent);
       this.ui.writeCreate(this.mappedPath);
     }
+    return;
   }
 
   renderTemplate() {
+    let rendered;
+    this.ui.writeDebug(`rendering template: ${this.originalPath}`);
     const template = fs.readFileSync(this.originalPath, 'utf8');
-    return ejs.render(template, this.templateVariables);
+
+    try {
+      rendered = ejs.render(template, this.templateVariables);
+    } catch (err) {
+      this.ui.writeDebug('couldnt render');
+      err.message += ' (Error in blueprint template: ' + this.originalPath + ')';
+      this.ui.writeError(`error was: ${err.message}`);
+      throw err;
+    }
+    return rendered;
   }
 
   isFile() {
-    return fileExists(this.originalPath);
+    const fileCheck = fs.lstatSync(this.originalPath).isFile();
+    this.ui.writeDebug(`checking file: ${this.originalPath} - ${fileCheck}`);
+    return fileCheck;
   }
 }
 
