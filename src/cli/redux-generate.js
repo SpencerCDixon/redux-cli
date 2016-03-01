@@ -11,13 +11,17 @@ commander.on('--help', () => {
 commander
   .version(version())
   .arguments('<blueprint> [entity name]')
+  .option('-d, --debug', 'Turn debug mode on')
   .description('generates code based off a blueprint')
-  .action((blueprintName, entityName) => {
+  .action((blueprintName, entityName, command) => {
+    const debug = command.debug;
+
     const cliArgs = {
       entity: {
         name: entityName,
         options: {}
-      }
+      },
+      debug
     };
     subCommand.run(blueprintName, cliArgs);
 

@@ -13,7 +13,7 @@ class FileInfo {
 
   writeFile() {
     if (fileExists(this.mappedPath)) {
-      this.ui.writeError(
+      this.ui.writeWarning(
         `Not writing file.  File already exists at: ${this.mappedPath}`
       );
     } else {

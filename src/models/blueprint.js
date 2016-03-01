@@ -170,6 +170,7 @@ export default class Blueprint {
 
   buildFileInfo(locals, file) {
     const mappedPath = this.mapFile(file, locals);
+    this.ui.writeDebug(`mapped path: ${mappedPath}`);
 
     return new FileInfo({
       ui: this.ui,

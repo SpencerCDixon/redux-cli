@@ -130,14 +130,21 @@ describe('(Model) UI', () => {
     });
   });
 
-  // TODO: figure out how to test async setInterval. sinon.useFakeTiemrs()
-  // wasn't working
   context('async progress bar', function() {
     describe('#startProgress', function() {
-      it('sets an interval to logUpdate every 100 ms', function() {
+      it('starts streaming', function() {
         expect(ui.streaming).to.be.false;
         ui.startProgress('some async call');
         expect(ui.streaming).to.be.true;
+      });
+
+      it('calls stream every 100 ms', function() {
+        const clock = sinon.useFakeTimers();
+        const spy = sinon.spy();
+        ui.startProgress('some async call', spy);
+        clock.tick(101);
+        expect(spy.calledOnce).to.be.true;
+        clock.restore();
       });
     });
 
