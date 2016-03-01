@@ -1,6 +1,7 @@
 import ejs from 'ejs';
 import fs from 'fs';
 import { outputFileSync } from 'fs-extra';
+import { fileExists } from '../util/fs';
 
 class FileInfo {
   constructor(args) {
@@ -11,9 +12,15 @@ class FileInfo {
   }
 
   writeFile() {
-    const fileContent = this.renderTemplate();
-    outputFileSync(this.mappedPath, fileContent);
-    this.ui.writeCreate(this.mappedPath);
+    if (fileExists(this.mappedPath)) {
+      this.ui.writeError(
+        `Not writing file.  File already exists at: ${this.mappedPath}`
+      );
+    } else {
+      const fileContent = this.renderTemplate();
+      outputFileSync(this.mappedPath, fileContent);
+      this.ui.writeCreate(this.mappedPath);
+    }
   }
 
   renderTemplate() {
@@ -22,7 +29,7 @@ class FileInfo {
   }
 
   isFile() {
-    return fs.statSync(this.originalPath).isFile();
+    return fileExists(this.originalPath);
   }
 }
 

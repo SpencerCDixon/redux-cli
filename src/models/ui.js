@@ -19,7 +19,7 @@ class UI {
     this.errorStream  = options.errorStream || process.stderr;
 
     this.writeLevel  = options.writeLevel || DEFAULT_WRITE_LEVEL;
-    this.progressBar = false;
+    this.streaming = false;
   }
 
   write(data, writeLevel) {
@@ -77,6 +77,7 @@ class UI {
   startProgress(string) {
     const stream = logUpdate.create(this.inputStream);
     if (this.writeLevelVisible(this.writeLevel)) {
+      this.streaming = true;
       this.progressInterval = setInterval(() => {
         stream(`  ${chalk.green('loading:')} ${string} ${chalk.cyan.bold.dim(frame())}`);
       }, 100);
@@ -85,6 +86,7 @@ class UI {
 
   stopProgress() {
     if (this.progressInterval) {
+      this.streaming = false;
       clearInterval(this.progressInterval);
     }
   }

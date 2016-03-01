@@ -135,11 +135,18 @@ describe('(Model) UI', () => {
   context('async progress bar', function() {
     describe('#startProgress', function() {
       it('sets an interval to logUpdate every 100 ms', function() {
+        expect(ui.streaming).to.be.false;
+        ui.startProgress('some async call');
+        expect(ui.streaming).to.be.true;
       });
     });
 
     describe('#stopProgress', function() {
       it('clears interval when it exists', function() {
+        ui.startProgress('some async call');
+        expect(ui.streaming).to.be.true;
+        ui.stopProgress();
+        expect(ui.streaming).to.be.false;
       });
     });
   });
