@@ -12,9 +12,9 @@ class FileInfo {
   }
 
   writeFile() {
-    this.ui.writeDebug('Attempting to write file: ', this.mappedPath);
+    this.ui.writeDebug(`Attempting to write file: ${this.mappedPath}`);
     if (fileExists(this.mappedPath)) {
-      this.ui.writeDebug(
+      this.ui.writeError(
         `Not writing file.  File already exists at: ${this.mappedPath}`
       );
     } else {
@@ -44,7 +44,16 @@ class FileInfo {
   }
 
   isFile() {
-    const fileCheck = fs.lstatSync(this.originalPath).isFile();
+    let fileCheck;
+    try {
+      fileCheck = fs.lstatSync(this.originalPath).isFile();
+    } catch (e) {
+      if (e.code === 'ENOENT') {
+        return false;
+      } else {
+        throw e;
+      }
+    }
     this.ui.writeDebug(`checking file: ${this.originalPath} - ${fileCheck}`);
     return fileCheck;
   }
