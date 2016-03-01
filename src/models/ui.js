@@ -1,10 +1,9 @@
-import os from 'os';
+import { EOL } from 'os';
 import chalk from 'chalk';
-import logUpdate from 'log-update';
 import elegantSpinner from 'elegant-spinner';
+import logUpdate from 'log-update';
 
 const frame = elegantSpinner();
-const EOL = os.EOL;
 const DEFAULT_WRITE_LEVEL = 'INFO';
 const WRITE_LEVELS = {
   'DEBUG': 1,
@@ -19,7 +18,8 @@ class UI {
     this.outputStream = options.outputStream || process.stdout;
     this.errorStream  = options.errorStream || process.stderr;
 
-    this.writeLevel = options.writeLevel || DEFAULT_WRITE_LEVEL;
+    this.writeLevel  = options.writeLevel || DEFAULT_WRITE_LEVEL;
+    this.streaming = false;
   }
 
   write(data, writeLevel) {
@@ -59,11 +59,8 @@ class UI {
     this.writeLine(content, 'INFO');
   }
 
-  writeLevelVisible(writeLevel) {
-    const levels = WRITE_LEVELS;
-    writeLevel = writeLevel || DEFAULT_WRITE_LEVEL;
-
-    return levels[writeLevel] >= levels[this.writeLevel];
+  writeLevelVisible(writeLevel = DEFAULT_WRITE_LEVEL) {
+    return WRITE_LEVELS[writeLevel] >= WRITE_LEVELS[this.writeLevel];
   }
 
   setWriteLevel(newLevel) {
@@ -77,16 +74,19 @@ class UI {
     this.writeLevel = newLevel;
   }
 
-  startProgress(string) {
+  startProgress(string, customStream) {
+    const stream = customStream || logUpdate.create(this.inputStream);
     if (this.writeLevelVisible(this.writeLevel)) {
+      this.streaming = true;
       this.progressInterval = setInterval(() => {
-        logUpdate(`  ${chalk.green('loading:')} ${string} ${chalk.cyan.bold.dim(frame())}`);
+        stream(`  ${chalk.green('loading:')} ${string} ${chalk.cyan.bold.dim(frame())}`);
       }, 100);
     }
   }
 
   stopProgress() {
     if (this.progressInterval) {
+      this.streaming = false;
       clearInterval(this.progressInterval);
     }
   }

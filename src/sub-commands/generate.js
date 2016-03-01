@@ -4,7 +4,7 @@ import GenerateFromBluePrint from '../tasks/generate-from-blueprint';
 // Primary purpose is to take cli args and pass them through
 // to the proper task that will do the generation.
 //
-// Logic for displaying all blueprints and what their options 
+// Logic for displaying all blueprints and what their options
 // are will live in here.  For now it's pretty baren.
 class Generate extends SubCommand {
   constructor() {
@@ -17,6 +17,10 @@ class Generate extends SubCommand {
   }
 
   run(blueprintName, cliArgs) {
+    if (cliArgs.debug) {
+      this.ui.setWriteLevel('DEBUG');
+    }
+
     this.generateTask.run(blueprintName, cliArgs);
   }
 }

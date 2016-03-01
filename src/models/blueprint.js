@@ -164,12 +164,15 @@ export default class Blueprint {
   processFiles(locals) {
     const files = this.files();
     const fileInfos = files.map(file => this.buildFileInfo(locals, file));
+    this.ui.writeDebug(`built file infos: ${fileInfos.length}`);
     const filesToWrite = fileInfos.filter(info => info.isFile());
+    this.ui.writeDebug(`files to write: ${filesToWrite.length}`);
     filesToWrite.map(file => file.writeFile());
   }
 
   buildFileInfo(locals, file) {
     const mappedPath = this.mapFile(file, locals);
+    this.ui.writeDebug(`mapped path: ${mappedPath}`);
 
     return new FileInfo({
       ui: this.ui,

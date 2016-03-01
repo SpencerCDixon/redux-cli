@@ -1,12 +1,12 @@
 import fs from 'fs';
-import fse from 'fs-extra';
 import path from 'path';
-import temp from 'temp';
-import denodeify from 'denodeify';
+// import fse from 'fs-extra';
+// import temp from 'temp';
+// import denodeify from 'denodeify';
 
 const rootPath = process.cwd();
-const mkdir    = denodeify(fs.mkdir);
-const mkTmpDir = denodeify(temp.mkdir);
+// const mkdir    = denodeify(fs.mkdir);
+// const mkTmpDir = denodeify(temp.mkdir);
 
 /*
  Node deprecated existsSync so this is a simple
@@ -33,19 +33,22 @@ export const readFile = (filename) => {
 };
 
 // Promise based fs helpers
-export const dirExists = (dirPath) => {
-  return new Promise(resolve => {
-    fse.exists(dirPath, resolve);
-  });
-};
+// currently not being used after blueprint refactor.  Keeping in case
+// I want to use later...
 
-export const mkTmpDirIn = (dirPath) => {
-  return dirExists(dirPath).then(doesExist => {
-    if (!doesExist) {
-      return mkdir(dirPath);
-    }
-  }).then(() => {
-    return mkTmpDir({ dir: dirPath});
-  });
-};
+// export const dirExists = (dirPath) => {
+  // return new Promise(resolve => {
+    // fse.exists(dirPath, resolve);
+  // });
+// };
+
+// export const mkTmpDirIn = (dirPath) => {
+  // return dirExists(dirPath).then(doesExist => {
+    // if (!doesExist) {
+      // return mkdir(dirPath);
+    // }
+  // }).then(() => {
+    // return mkTmpDir({ dir: dirPath});
+  // });
+// };
 

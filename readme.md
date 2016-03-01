@@ -78,8 +78,8 @@ blueprints to come!
 |---|---|---|
 |**sourceBase**|✓|where you keep your pre-compiled source (relative from root of project)|
 |**testBase**|✓|where you keep your tests (relative from root of project)|
-|**smartPath**|✓|where you keep your smart (container) components|
-|**dumbPath**|✓|where you keep your dumb (pure) components|
+|**smartPath**|✓|where you keep your smart (container) components (relative of sourceBase)|
+|**dumbPath**|✓|where you keep your dumb (pure) components (relative of sourceBase)|
 |**fileCasing**|✓|how do you want generated files to be named (pasal/camel/snake/default)|
 
 ### Commands
@@ -377,7 +377,7 @@ npm run lint     // lints all files in src and test
 
 ### Changelog
 
-`1.3.0` - major internal refactor, addition of customizable blueprints
+`1.3.0` - major internal refactor, addition of customizable blueprints  
 `1.1.1` - adds support for html tag in render when generating components  
 `1.0.1` - adds fileCasing to generators so Linux users can use snake_case_file_names  
 `1.0` - first public release with stable api (new/generate/init)  
