@@ -2,7 +2,7 @@ import UI from 'models/ui';
 import through from 'through';
 
 export default class MockUI extends UI {
-  constructor() {
+  constructor(writeLevel) {
     super({
       inputStream: through(),
       outputStream: through(data => this.output += data),
@@ -10,6 +10,7 @@ export default class MockUI extends UI {
     });
     this.output = '';
     this.errors = '';
+    this.writeLevel = writeLevel;
   }
 
   clear() {
