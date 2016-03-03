@@ -100,7 +100,7 @@ blueprints to come!
 |`redux g form <form name>`|generates a form component (assumes redux-form)||
 |`redux g duck <duck name>`|generates a redux duck and test file||
 
-### Eamples
+### Examples
 Below are some examples of using the generator to speed up development:
 
 ```
