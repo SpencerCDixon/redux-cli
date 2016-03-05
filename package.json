@@ -1,6 +1,6 @@
 {
   "name": "redux-cli",
-  "version": "1.3.4",
+  "version": "1.3.5",
   "description": "An opinionated CLI to make working on redux apps much faster.",
   "main": "bin/index.js",
   "engine": {
