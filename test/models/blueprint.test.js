@@ -25,6 +25,11 @@ describe('(Model) Blueprint', function() {
       ];
       expect(files).to.eql(expectedFiles);
     });
+
+    it('defaults to empty array when no files', function() {
+      const blueprint = new Blueprint('ridiculous/path/that/doesnt/exist');
+      expect(blueprint.files()).to.eql([]);
+    });
   });
 
   describe('.defaultLookupPaths', function() {
@@ -34,6 +39,18 @@ describe('(Model) Blueprint', function() {
         path.join(__dirname, '..', '..', 'blueprints')
       ];
       expect(Blueprint.defaultLookupPaths()).to.eql(expectedFiles);
+    });
+  });
+
+  describe('.lookup', function() {
+    it('throws error when it cant find blueprint', function() {
+      expect(() => Blueprint.lookup('sdlfkjskf')).to.throw(/Unknown blueprint:/);
+    });
+
+    it('it returns loaded blueprint when found', function() {
+      const blueprint = Blueprint.lookup(basicBlueprint);
+      expect(blueprint.path).to.eql(basicBlueprint);
+      expect(blueprint.name).to.eql('basic');
     });
   });
 });
