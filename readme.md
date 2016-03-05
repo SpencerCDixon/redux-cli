@@ -277,7 +277,7 @@ containing general and entity-specific options.
 When the following is called on the command line:
 
 ```sh
-redux g dumb foo --type=array --dry-run
+redux g dumb foo --html=button --debug
 ```
 
 The object passed to `locals` looks like this:
@@ -287,10 +287,14 @@ The object passed to `locals` looks like this:
   entity: {
     name: 'foo',
     options: {
-      type: 'array'
-    }
+      _: ['dumb', 'foo'],
+      html: 'button'
+    },
+    rawArgs: [
+      ... array of rawArgs passed to cli ...
+    ]
   },
-  dryRun: true
+  debug: true
 }
 ```
 

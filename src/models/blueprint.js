@@ -1,8 +1,9 @@
 import path from 'path';
+import _ from 'lodash';
+import walkSync from 'walk-sync';
+
 import { fileExists } from '../util/fs';
 import mixin from '../util/mixin';
-import walkSync from 'walk-sync';
-import _ from 'lodash';
 import { normalizeCasing } from '../util/text-helper';
 import FileInfo from './file-info';
 import config from '../config';
@@ -18,7 +19,7 @@ function generateLookupPaths(lookupPaths) {
 export default class Blueprint {
   constructor(blueprintPath) {
     this.path = blueprintPath;
-    this.name = path.basename(path);
+    this.name = path.basename(blueprintPath);
   }
 
   // HOOK: that can be overridden.  Defaults to look in <blueprint-name>/files.
