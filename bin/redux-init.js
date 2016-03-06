@@ -1,3 +1,3 @@
-#!/usr/bin/env node --harmony
+#!/usr/bin/env node 
 
 require('../lib/cli/redux-init');
