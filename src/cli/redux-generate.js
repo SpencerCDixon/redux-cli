@@ -12,10 +12,10 @@ commander.on('--help', () => {
 commander
   .version(version())
   .arguments('<blueprint> [entity name]')
-  .option('-d, --debug', 'Turn debug mode on')
+  .option('-v, --verbose', 'Turn debug mode on')
   .description('generates code based off a blueprint')
   .action((blueprintName, entityName, command) => {
-    const debug = command.debug;
+    const debug = command.verbose;
     const rawArgs = command.rawArgs;
     const options = minimist(rawArgs.slice(2));
 
@@ -52,5 +52,3 @@ commander
      */
   })
   .parse(process.argv);
-
-
