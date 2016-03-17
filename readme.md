@@ -89,6 +89,7 @@ blueprints to come!
 |`redux new <project name>`|creates a new redux project||
 |`redux init`|configure an existing redux app to use the CLI||
 |`redux generate <generator name> `|generates files and tests for you automatically|`redux g`|
+|`redux help g`|show all generators you have available||
 
 
 ### Generators
@@ -381,6 +382,7 @@ npm run lint     // lints all files in src and test
 
 ### Changelog
 
+`1.4.0` - better generator help messages  
 `1.3.5` - properly passes cli options to blueprints so they can use them  
 `1.3.3` - fixes init command, adds --debug to generators, improves error messages for broken templates  
 `1.3.0` - major internal refactor, addition of customizable blueprints  
