@@ -1,6 +1,6 @@
 module.exports = {
   description() {
-    return 'generates a smart (container) component';
+    return 'Generates a smart (aka container) component';
   },
   fileMapTokens() {
     return {
