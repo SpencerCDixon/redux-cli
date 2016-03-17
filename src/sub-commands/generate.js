@@ -18,6 +18,8 @@ class Generate extends SubCommand {
     const blueprints = Blueprint.list();
 
     this.ui.writeLine(`Available Blueprints:`);
+    this.ui.writeLine('(sources on the top will override sources below)');
+    this.ui.writeLine('');
 
     blueprints.forEach(blueprintSource => {
       this.ui.writeLine(`  ${chalk.blue('Blueprint Source')} ===> ${chalk.green(blueprintSource.source)}:`);
@@ -26,6 +28,7 @@ class Generate extends SubCommand {
         this.ui.writeLine(`    ${blueprint.name} ${chalk.yellow('<name>')}`);
         this.ui.writeLine(`      ${chalk.gray(blueprint.description)}`);
       });
+      this.ui.writeLine('');
     });
   }
 

@@ -83,11 +83,13 @@ export default class Blueprint {
     let Constructor;
     const constructorPath = path.resolve(blueprintPath, 'index.js');
 
-    if (fileExists(constructorPath)) {
-      const blueprintModule = require(constructorPath);
-      Constructor = mixin(Blueprint, blueprintModule);
+    if (fs.lstatSync(blueprintPath).isDirectory()) {
+      if (fileExists(constructorPath)) {
+        const blueprintModule = require(constructorPath);
+        Constructor = mixin(Blueprint, blueprintModule);
 
-      return new Constructor(blueprintPath);
+        return new Constructor(blueprintPath);
+      }
     }
   }
 
@@ -125,7 +127,7 @@ export default class Blueprint {
 
       return {
         source,
-        blueprints
+        blueprints: _.compact(blueprints)
       };
     });
   }
