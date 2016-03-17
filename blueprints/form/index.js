@@ -1,5 +1,5 @@
 module.exports = {
   description() {
-    return 'generates a connected form component';
+    return 'Generates a connected form component using redux-form';
   }
 };

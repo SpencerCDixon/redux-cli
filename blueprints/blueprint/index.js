@@ -1,6 +1,6 @@
 module.exports = {
   description() {
-    return 'generates a blueprint and definition';
+    return 'Generates a blueprint template for creating new blueprints';
   },
 
   beforeInstall() {

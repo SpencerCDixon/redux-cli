@@ -1,6 +1,7 @@
 import path from 'path';
 import _ from 'lodash';
 import walkSync from 'walk-sync';
+import fs from 'fs';
 
 import { fileExists } from '../util/fs';
 import mixin from '../util/mixin';
@@ -14,6 +15,16 @@ function generateLookupPaths(lookupPaths) {
   lookupPaths = lookupPaths || [];
   lookupPaths = lookupPaths.concat(Blueprint.defaultLookupPaths());
   return _.uniq(lookupPaths);
+}
+
+function dir(fullPath) {
+  if (fileExists(fullPath)) {
+    return fs.readdirSync(fullPath).map(function(fileName) {
+      return path.join(fullPath, fileName);
+    });
+  } else {
+    return [];
+  }
 }
 
 export default class Blueprint {
@@ -78,7 +89,45 @@ export default class Blueprint {
 
       return new Constructor(blueprintPath);
     }
-    return;
+  }
+
+  static list(options = {}) {
+    return generateLookupPaths(options.paths).map(lookupPath => {
+      const blueprintFiles = dir(lookupPath);
+      const packagePath = path.join(lookupPath, '../package.json');
+      let source;
+
+      if (fileExists(packagePath)) {
+        source = require(packagePath).name;
+      } else {
+        source = path.basename(path.join(lookupPath, '..'));
+      }
+
+      const blueprints = blueprintFiles.map(filePath => {
+        const blueprint = this.load(filePath);
+
+        if (blueprint) {
+          let description;
+          const name = blueprint.name;
+
+          if (blueprint.description) {
+            description = blueprint.description();
+          } else {
+            description = 'N/A';
+          }
+
+          return {
+            name,
+            description
+          };
+        }
+      });
+
+      return {
+        source,
+        blueprints
+      };
+    });
   }
 
   _fileMapTokens(options) {

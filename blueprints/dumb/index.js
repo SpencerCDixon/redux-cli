@@ -1,6 +1,6 @@
 module.exports = {
   description() {
-    return 'generates a dumb (pure) component';
+    return 'Generates a dumb (aka Pure) component';
   },
   fileMapTokens() {
     return {
