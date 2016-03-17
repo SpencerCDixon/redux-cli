@@ -23,6 +23,8 @@ redux init               // OR configure a current project to use the CLI
 redux g dumb SimpleButton
 ```
 
+![Redux CLI Usage Gif](redux-cli.gif)
+
 ## Table Of Contents
 
 1.  [Getting Started](#getting-started)
