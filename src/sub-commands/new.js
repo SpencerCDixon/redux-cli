@@ -1,4 +1,8 @@
-import { which, rm, exec } from 'shelljs';
+import {
+  which,
+  rm,
+  exec
+} from 'shelljs';
 import SubCommand from '../models/sub-command';
 import CreateAndStepIntoDirectory from '../tasks/create-and-step-into-directory';
 import GitPull from '../tasks/git-pull';
@@ -22,10 +26,16 @@ class New extends SubCommand {
   run(cliArgs) {
     this.confirmGit();
     this.createDirTask.run(cliArgs).then(() => {
-      this.gitPullTask.run('git@github.com:davezuko/react-redux-starter-kit.git').then(() => {
+      var fetch_url = 'git@github.com:davezuko/react-redux-starter-kit.git';
+      if (cliArgs.useHttps) {
+        fetch_url = 'https://github.com/davezuko/react-redux-starter-kit.git';
+      }
+      this.gitPullTask.run(fetch_url).then(() => {
         this.createProjectSettings();
         this.resetGitHistory();
       });
+
+
     });
   }
 
@@ -41,7 +51,9 @@ class New extends SubCommand {
   resetGitHistory() {
     this.ui.writeInfo('Removing the starter kit .git folder');
     rm('-rf', '.git');
-    exec('git init && git add -A && git commit -m"Initial commit"', {silent: true});
+    exec('git init && git add -A && git commit -m"Initial commit"', {
+      silent: true
+    });
     this.ui.writeCreate('Created new .git history for your project');
     this.ui.writeInfo('Congrats! New Redux app ready to go.  CLI generators configured and ready to go');
   }

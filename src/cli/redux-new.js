@@ -9,9 +9,11 @@ commander.on('--help', () => {
 
 commander
   .arguments('<project name>')
-  .action(dirName => {
+  .option('-H, --use-https', 'Fetch starter kit over https')
+  .action((dirName,command)=> {
     subCommand.run({
-      dirName: dirName
+      dirName: dirName,
+      useHttps:command.useHttps
     });
   })
   .parse(process.argv);
