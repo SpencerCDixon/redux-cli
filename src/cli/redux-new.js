@@ -9,11 +9,12 @@ commander.on('--help', () => {
 
 commander
   .arguments('<project name>')
-  .option('-H, --use-https', 'Fetch starter kit over https')
+  .option('-S, --use-ssh', 'Fetch starter kit over ssh')
   .action((dirName,command)=> {
+    console.log('COMMAND: ', command.useSsh);
     subCommand.run({
       dirName: dirName,
-      useHttps:command.useHttps
+      useSsh: command.useSsh
     });
   })
   .parse(process.argv);
