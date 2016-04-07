@@ -387,6 +387,7 @@ npm run lint     // lints all files in src and test
 
 ### Changelog
 
+`1.4.1` - default to https instead of ssh for pulling project down  
 `1.4.0` - better generator help messages  
 `1.3.5` - properly passes cli options to blueprints so they can use them  
 `1.3.3` - fixes init command, adds --debug to generators, improves error messages for broken templates  
