@@ -24,7 +24,7 @@ export const normalizeDuckName = (name) => {
 };
 
 export const normalizeCasing = (string, casing) => {
-  const types = ['default', 'snake', 'pascal', 'camel'];
+  const types = ['default', 'snake', 'pascal', 'camel', 'dashes'];
 
   if (types.indexOf(casing) === -1) {
     throw new Error(
@@ -40,5 +40,7 @@ export const normalizeCasing = (string, casing) => {
     return camelize(string);
   } else if (casing === 'default') {
     return string;
+  } else if (casing == 'dashes') {
+    return depascalize(string, { separator: '-' });
   }
 };
