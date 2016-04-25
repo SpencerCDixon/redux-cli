@@ -85,7 +85,7 @@ blueprints to come!
 |**testBase**|✓|where you keep your tests (relative from root of project)|
 |**smartPath**|✓|where you keep your smart (container) components (relative of sourceBase)|
 |**dumbPath**|✓|where you keep your dumb (pure) components (relative of sourceBase)|
-|**fileCasing**|✓|how do you want generated files to be named (pasal/camel/snake/default)|
+|**fileCasing**|✓|how do you want generated files to be named (pasal/camel/snake/dashes/default)|
 
 ### Commands
 
@@ -164,7 +164,7 @@ blueprints/smart
 
 The `__name__` token is subtituted with the 
 entity name at install time.  Entity names can be configued in
-either PascalCase, snake_case, or camelCase so teams can customize their file
+either PascalCase, snake_case, camelCase, or dashes-case so teams can customize their file
 names accordingly.  By default, the `__name__` will return whatever is entered
 in the generate CLI command.
 
@@ -223,6 +223,7 @@ The following template variables are provided by default:
 - `pascalEntityName`
 - `camelEntityName`
 - `snakeEntityName`
+- `dashesEntityName`
 
 The mechanism for providing custom template variables is
 described below.

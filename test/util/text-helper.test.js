@@ -96,6 +96,11 @@ describe('(Util) text-helpers', () => {
       expect(th.normalizeCasing(string, 'camel')).to.eql(expected);
     });
 
+    it('converts to dashes-case when settings are set to "dashes"', () => {
+      const expected = 'string-to-test';
+      expect(th.normalizeCasing(string, 'dashes')).to.eql(expected);
+    });
+
     it('leaves string alone when set to "default"', () => {
       expect(th.normalizeCasing(string, 'default')).to.eql(string);
     });

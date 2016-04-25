@@ -199,6 +199,7 @@ export default class Blueprint {
       pascalEntityName: normalizeCasing(entityName, 'pascal'),
       camelEntityName:  normalizeCasing(entityName, 'camel'),
       snakeEntityName: normalizeCasing(entityName, 'snake'),
+      dashesEntityName: normalizeCasing(entityName, 'dashes'),
       fileMap
     };
 
