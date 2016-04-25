@@ -17,8 +17,8 @@ ______         _                   _____  _     _____
 
 ```javascript
 npm i redux-cli -g       // install redux-cli globally
-redux new <project name> // create a new redux project (if ssh setup with github)
-redux new <project name> -S // OR use ssh to pull project down
+redux new <project name> // create a new redux project
+redux new <project name> -S // OR use ssh to pull project down (if ssh setup with github)
 redux init                  // OR configure a current project to use the CLI
 
 // Start generating components/tests and save time \(• ◡ •)/
