@@ -7,6 +7,6 @@ module.exports = {
       __dumb__: (options) => {
         return options.settings.getSetting('dumbPath');
       }
-    }
+    };
   }
 };

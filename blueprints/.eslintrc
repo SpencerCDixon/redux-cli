@@ -1,0 +1,15 @@
+{
+  "extends": "../.eslintrc.json",
+  "env": {
+    "mocha": true
+  },
+  "rules": {
+    "no-unused-vars": 0
+  },
+  "plugins": ["ejs"],
+  "globals": {
+    "expect": false,
+    "should": false,
+    "sinon": false
+  }
+}
