@@ -75,7 +75,7 @@ class UI {
   }
 
   startProgress(string, customStream) {
-    const stream = customStream || logUpdate.create(this.inputStream);
+    const stream = customStream || logUpdate.create(this.outputStream);
     if (this.writeLevelVisible(this.writeLevel)) {
       this.streaming = true;
       this.progressInterval = setInterval(() => {
