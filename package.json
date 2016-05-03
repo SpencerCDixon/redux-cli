@@ -2,7 +2,7 @@
   "name": "redux-cli",
   "version": "1.4.1",
   "description": "An opinionated CLI to make working on redux apps much faster.",
-  "main": "bin/index.js",
+  "main": "bin/redux.js",
   "engine": {
     "node": ">=5.1"
   },
@@ -32,7 +32,7 @@
   "author": "Spencer Dixon <spencercdixon@gmail.com>",
   "license": "MIT",
   "bin": {
-    "redux": "bin/index.js",
+    "redux": "bin/redux.js",
     "redux-init": "bin/redux-init.js",
     "redux-generate": "bin/redux-generate.js",
     "redux-g": "bin/redux-generate.js",
