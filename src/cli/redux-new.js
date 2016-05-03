@@ -11,7 +11,6 @@ commander
   .arguments('<project name>')
   .option('-S, --use-ssh', 'Fetch starter kit over ssh')
   .action((dirName,command)=> {
-    console.log('COMMAND: ', command.useSsh);
     subCommand.run({
       dirName: dirName,
       useSsh: command.useSsh
