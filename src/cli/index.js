@@ -16,7 +16,6 @@ program
 // aliases for sub-commands.
 program
   .command('generate', 'generates new code from blueprints')
-  .command('g', 'alias for generate')
-  .alias('g');//Fix alias 'redux g' missing for Windows
+  .command('g', 'alias for generate');
 
 program.parse(process.argv);
