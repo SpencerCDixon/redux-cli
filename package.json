@@ -35,7 +35,7 @@
     "redux": "bin/redux.js",
     "redux-init": "bin/redux-init.js",
     "redux-generate": "bin/redux-generate.js",
-    "redux-g": "bin/redux-generate.js",
+    "redux-g": "bin/redux-g.js",
     "redux-new": "bin/redux-new.js"
   },
   "dependencies": {
