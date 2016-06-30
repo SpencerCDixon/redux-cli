@@ -26,10 +26,22 @@ class New extends SubCommand {
   run(cliArgs) {
     this.confirmGit();
     this.createDirTask.run(cliArgs).then(() => {
-      let fetch_url = 'https://github.com/davezuko/react-redux-starter-kit.git';
+      let fetch_url;
+
+      if (cliArgs.useBoilerplate) {
+        fetch_url = 'https://github.com/SpencerCDixon/redux-cli-boilerplate.git';
+      } else {
+        fetch_url = 'https://github.com/davezuko/react-redux-starter-kit.git';
+      }
+
       if (cliArgs.useSsh) {
-        console.log('USING SSH');
-        fetch_url = 'git@github.com:davezuko/react-redux-starter-kit.git';
+        this.ui.writeInfo('Using SSH to fetch repo');
+
+        if (cliArgs.useBoilerplate) {
+          fetch_url = 'git@github.com:SpencerCDixon/redux-cli-boilerplate.git';
+        } else {
+          fetch_url = 'git@github.com:davezuko/react-redux-starter-kit.git';
+        }
       }
       this.gitPullTask.run(fetch_url).then(() => {
         this.createProjectSettings();

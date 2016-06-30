@@ -388,6 +388,7 @@ npm run lint     // lints all files in src and test
 
 ### Changelog
 
+`1.6.0` - adds option to use a different boilerplate with the `-B` flag.  Fixes windows issues  
 `1.5.1` - fixes windows support, addes ejs eslint plugin, fixes bug with UI in windows  
 `1.4.1` - default to https instead of ssh for pulling project down  
 `1.4.0` - better generator help messages  

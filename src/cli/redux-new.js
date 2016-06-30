@@ -10,10 +10,12 @@ commander.on('--help', () => {
 commander
   .arguments('<project name>')
   .option('-S, --use-ssh', 'Fetch starter kit over ssh')
-  .action((dirName,command)=> {
+  .option('-B, --use-boilerplate', 'Fetch Redux-CLI boilerplate instead of react-redux-starter-kit')
+  .action((dirName,command) => {
     subCommand.run({
       dirName: dirName,
-      useSsh: command.useSsh
+      useSsh: command.useSsh,
+      useBoilerplate: command.useBoilerplate
     });
   })
   .parse(process.argv);
