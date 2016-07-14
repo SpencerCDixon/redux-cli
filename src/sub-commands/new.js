@@ -30,6 +30,8 @@ class New extends SubCommand {
 
       if (cliArgs.useBoilerplate) {
         fetch_url = 'https://github.com/SpencerCDixon/redux-cli-boilerplate.git';
+      } else if (cliArgs.useUIKit) {
+        fetch_url = 'https://github.com/SpencerCDixon/redux-cli-ui-kit-boilerplate.git';
       } else {
         fetch_url = 'https://github.com/davezuko/react-redux-starter-kit.git';
       }
@@ -39,6 +41,8 @@ class New extends SubCommand {
 
         if (cliArgs.useBoilerplate) {
           fetch_url = 'git@github.com:SpencerCDixon/redux-cli-boilerplate.git';
+        } else if (cliArgs.useUIKit) {
+          fetch_url = 'https://github.com/SpencerCDixon/redux-cli-ui-kit-boilerplate.git';
         } else {
           fetch_url = 'git@github.com:davezuko/react-redux-starter-kit.git';
         }

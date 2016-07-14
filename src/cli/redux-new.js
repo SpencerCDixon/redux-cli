@@ -11,11 +11,13 @@ commander
   .arguments('<project name>')
   .option('-S, --use-ssh', 'Fetch starter kit over ssh')
   .option('-B, --use-boilerplate', 'Fetch Redux-CLI boilerplate instead of react-redux-starter-kit')
+  .option('-U, --use-uikit', 'Fetch UI Kit boilerplate instead of react-redux-starter-kit')
   .action((dirName,command) => {
     subCommand.run({
       dirName: dirName,
       useSsh: command.useSsh,
-      useBoilerplate: command.useBoilerplate
+      useBoilerplate: command.useBoilerplate,
+      useUIKit: command.useUikit,
     });
   })
   .parse(process.argv);
