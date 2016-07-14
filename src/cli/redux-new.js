@@ -17,7 +17,7 @@ commander
       dirName: dirName,
       useSsh: command.useSsh,
       useBoilerplate: command.useBoilerplate,
-      useUIKit: command.useUikit,
+      useUIKit: command.useUikit
     });
   })
   .parse(process.argv);
