@@ -106,6 +106,20 @@ blueprints to come!
 |`redux g form <form name>`|generates a form component (assumes redux-form)||
 |`redux g duck <duck name>`|generates a redux duck and test file||
 
+You can also see what files would get created with the `--dry-run` option like
+so:
+
+```
+redux g dumb MyNewComponent --dry-run
+
+// Output:
+
+  info: installing blueprint...
+  would create: /MyNewComponent.js
+  would create: /MyNewComponent.test.js
+  info: finished installing blueprint.
+```
+
 ### Examples
 Below are some examples of using the generator to speed up development:
 
@@ -343,15 +357,6 @@ the the `options` and `locals` hashes as parameters. Typically used for
 validating any additional command line options or for any asynchronous
 setup that is needed.   
 
-
-### Roadmap
-- [x] template overriding so people can customize templates
-- [ ] more robust blueprint options
-- [ ] uninstall hooks for blueprints
-- [ ] support for fields option in form generator
-- [ ] support for routing (generates both view and route and adds to routes)
-- [ ] multiple starter kit support
-
 ### Contributing
 This CLI is very much in the beginning phases and I would love to have people
 help me to make it more robust.  Currently, it's pretty opinonated to use the
@@ -388,6 +393,7 @@ npm run lint     // lints all files in src and test
 
 ### Changelog
 
+`1.8.0` - adds `--dry-run` option to generators so you can see files before committing
 `1.7.0` - adds option to use a ui kit boilerplate with the `-U` flag.  
 `1.6.0` - adds option to use a different boilerplate with the `-B` flag.  Fixes windows issues  
 `1.5.1` - fixes windows support, addes ejs eslint plugin, fixes bug with UI in windows  
