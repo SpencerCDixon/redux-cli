@@ -11,7 +11,7 @@ class FileInfo {
     this.mappedPath = args.mappedPath;               // destination path to be written to
   }
 
-  writeFile() {
+  writeFile(dryRun) {
     this.ui.writeDebug(`Attempting to write file: ${this.mappedPath}`);
     if (fileExists(this.mappedPath)) {
       this.ui.writeError(
@@ -21,8 +21,12 @@ class FileInfo {
       const fileContent = this.renderTemplate();
       this.ui.writeDebug(`fileContent: ${fileContent}`);
 
-      outputFileSync(this.mappedPath, fileContent);
-      this.ui.writeCreate(this.mappedPath);
+      if (!dryRun) {
+        outputFileSync(this.mappedPath, fileContent);
+        this.ui.writeCreate(this.mappedPath);
+      } else {
+        this.ui.writeWouldCreate(this.mappedPath);
+      }
     }
     return;
   }

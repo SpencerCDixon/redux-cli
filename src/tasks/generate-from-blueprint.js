@@ -29,6 +29,7 @@ export default class extends Task {
       originalBlueprintName: blueprintName,
       ui: this.ui,
       settings: this.settings,
+      dryRun: cliArgs.dryRun,
       entity
     };
 
