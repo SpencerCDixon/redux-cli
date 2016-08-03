@@ -72,6 +72,13 @@ describe('(Model) UI', () => {
         expect(ui.output).to.eq(expected + EOL);
       });
     });
+    describe('#writeWouldCreate', function() {
+      it('prepends a green "warning"', function() {
+        ui.writeWouldCreate(string);
+        const expected = chalk.green('  would create: ') + chalk.white(string);
+        expect(ui.output).to.eq(expected + EOL);
+      });
+    });
   });
 
   describe('#writeLevelVisible', function() {
