@@ -13,9 +13,11 @@ commander
   .version(version())
   .arguments('<blueprint> [entity name]')
   .option('-v, --verbose', 'Turn debug mode on')
+  .option('-d, --dry-run', 'Do not generate files and show what files will be created')
   .description('generates code based off a blueprint')
   .action((blueprintName, entityName, command) => {
     const debug = command.verbose;
+    const dryRun = command.dryRun;
     const rawArgs = command.rawArgs;
     const options = minimist(rawArgs.slice(2));
 
@@ -25,7 +27,8 @@ commander
         options,
         rawArgs
       },
-      debug
+      debug,
+      dryRun
     };
     subCommand.run(blueprintName, cliArgs);
 

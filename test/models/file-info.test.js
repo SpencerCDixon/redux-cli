@@ -3,6 +3,7 @@ import fse from 'fs-extra';
 import fs from 'fs';
 import FileInfo from 'models/file-info';
 import MockUI from '../helpers/mock-ui';
+import { expectFileToNotExist } from '../helpers/fs-helpers';
 
 const originalPath = path.join(__dirname, '..', 'fixtures', 'file-info-template.txt');
 const mappedPath = path.join(__dirname, '..', '..', 'tmp', 'path-to-overwrite.txt');
@@ -64,6 +65,20 @@ describe('(Model) FileInfo', function() {
         const actualString = fs.readFileSync(mappedPath, 'utf8');
         expect(expectedString).to.eql(actualString);
         expect(ui.output).to.match(/create/);
+        fse.remove(mappedPath);
+      });
+    });
+
+    context('when dry run option is enabled', function() {
+      it('should not write the file', function() {
+        const info = new FileInfo({
+          templateVariables: {name: 'rendered ejs string'},
+          ui, originalPath, mappedPath
+        });
+        info.writeFile(true);
+
+        expectFileToNotExist(mappedPath);
+        expect(ui.output).to.match(/would create/);
       });
     });
   });

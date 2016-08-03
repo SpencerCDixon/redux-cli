@@ -59,6 +59,11 @@ class UI {
     this.writeLine(content, 'INFO');
   }
 
+  writeWouldCreate(text) {
+    const content = chalk.green('  would create: ') + chalk.white(text);
+    this.writeLine(content, 'INFO');
+  }
+
   writeLevelVisible(writeLevel = DEFAULT_WRITE_LEVEL) {
     return WRITE_LEVELS[writeLevel] >= WRITE_LEVELS[this.writeLevel];
   }
