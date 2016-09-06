@@ -16,7 +16,7 @@ export default class extends Task {
       ui.stopProgress();
 
       if (err) {
-        ui.writeError('Something went wrong... please try again.  Make sure you have internet access');
+        ui.writeError('Could not git-pull repository... please try again. Make sure you have internet access');
         ui.writeError(`Error code: ${err}`);
         ui.writeError(stdout);
         ui.writeError(stderr);
