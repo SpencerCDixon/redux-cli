@@ -4,7 +4,7 @@
     // return {};
   // },
 
-  // fileMapTokens: function(options) (
+  // fileMapTokens: function(options) {
     // // Return custom tokens to be replaced in your files
     // return {
       // __token__: function(options){
