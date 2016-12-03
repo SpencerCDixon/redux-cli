@@ -47,7 +47,7 @@ to work with this specific starter kit.  If you want to integrate the CLI in an
 existing project or store your components in different pathes please see [config existing project](#config-existing-project)
 
 ### Config Existing Project
-There is an `init` subcommand for you to specify all pathes to where components
+There is an `init` subcommand for you to specify all paths to where components
 live in your project.  The `init` command just creates a `.reduxrc` in your
 project root.  If you want to you can just create the `.reduxrc` manually.  
 
