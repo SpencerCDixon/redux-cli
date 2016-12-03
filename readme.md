@@ -44,7 +44,7 @@ redux g dumb SimpleButton
 Running `redux new <project name>` will pull down the amazing [Redux Starter Kit](https://github.com/davezuko/react-redux-starter-kit) and
 initialize a new git repo.  Running `new` will automatically set up a `.reduxrc`
 to work with this specific starter kit.  If you want to integrate the CLI in an
-existing project or store your components in different pathes please see [config existing project](#config-existing-project)
+existing project or store your components in different paths please see [config existing project](#config-existing-project)
 
 ### Config Existing Project
 There is an `init` subcommand for you to specify all paths to where components
@@ -66,8 +66,8 @@ Final `.reduxrc` might look like this:
 **Note on configuration**:  
 This project tries to walk on a fine line between convention and configuration.
 Since the majority of React applications will separate their smart/dumb
-components if you pass in those pathes you'll get those generators for free.
-However, some of the other generators might not write files to the exact pathes
+components if you pass in those paths you'll get those generators for free.
+However, some of the other generators might not write files to the exact paths
 that you use for your project.  It's easy to override the CLI generators with
 your own so that the generators will write files to the correct location.  
 [See: creating custom blueprints](#creating-blueprints).
