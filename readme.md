@@ -59,7 +59,7 @@ Final `.reduxrc` might look like this:
   "testBase":"tests",
   "smartPath":"containers",
   "dumbPath":"components",
-  "fileCasing": "default",
+  "fileCasing": "default"
 }
 ```  
 
