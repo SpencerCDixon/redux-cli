@@ -8,36 +8,35 @@ import { setupPrompt } from '../prompts/setup';
 import { success } from '../util/text-helper';
 
 class Init extends SubCommand {
-  constructor() {
-    super();
-    setupPrompt('initialization', prompt);
-  }
+    constructor() {
+        super();
+        setupPrompt('initialization', prompt);
+    }
 
-  printUserHelp() {
-    this.ui.write(
-      'inititialization command to create a .reduxrc which has project settings'
-    );
-  }
+    printUserHelp() {
+        this.ui.write(
+            'initialization command to create a .reduxrc which has project settings'
+        );
+    }
 
-  run() {
-    this.ui.write(this.cliLogo());
-    prompt.get(initPrompt, (err, result) => {
-      this.ui.writeInfo('Saving your settings...');
-      this.settings.setAllSettings(result);
-      this.settings.save();
-      this.ui.writeCreate('.reduxrc with configuration saved in project root.');
-    });
-  }
+    run() {
+        this.ui.write(this.cliLogo());
+        prompt.get(initPrompt, (err, result) => {
+            this.ui.writeInfo('Saving your settings...');
+            this.settings.saveDefaults(result);
+            this.ui.writeCreate('.reduxrc with configuration saved in project root.');
+        });
+    }
 
-  cliLogo() {
-    return success(
-      figlet.textSync('Redux-CLI', {
-        font: 'Doom',
-        horizontalLayout: 'default',
-        verticalLayout: 'default'
-      })
-    );
-  }
+    cliLogo() {
+        return success(
+            figlet.textSync('Redux-CLI', {
+                font: 'Doom',
+                horizontalLayout: 'default',
+                verticalLayout: 'default'
+            })
+        );
+    }
 }
 
 export default Init;

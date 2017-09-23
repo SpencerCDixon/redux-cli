@@ -78,7 +78,7 @@ that work out of the gate.  Currently, I'm working on a PR for the
 `react-redux-starter-kit` with a bunch of blueprints.  More starter kits and
 blueprints to come!
 
-### Initial Configuration
+#### Default Settings
 |Key Name|Required|Description|
 |---|---|---|
 |**sourceBase**|✓|where you keep your pre-compiled source (relative from root of project)|
@@ -86,6 +86,29 @@ blueprints to come!
 |**smartPath**|✓|where you keep your smart (container) components (relative of sourceBase)|
 |**dumbPath**|✓|where you keep your dumb (pure) components (relative of sourceBase)|
 |**fileCasing**|✓|how do you want generated files to be named (pascal/camel/snake/dashes/default)|
+
+#### .reduxrc
+It's possible to put `.reduxrc` files in other locations to better share 
+configs.  It looks for files in the following locations and deep merges the 
+files it finds together.  The defaultSettings will be overwritten by any 
+following options while the `--config=path/to/file` option will override 
+everything.  
+
+See the whole list and more ENV tricks 
+at [rc](https://github.com/dominictarr/rc) 
+
+1. defaultSettings
+2. /etc/redux/config
+3. /etc/reduxrc
+4. ~/.config/redux/config
+5. ~/.config/redux
+6. ~/.redux/config
+7. ~/.reduxrc
+9. $REDUX_CONFIG
+10. --config=path/to/file
+
+**Note** - All files found at these locations will have their objects deep 
+merged together. Later file override earlier ones
 
 ### Commands
 

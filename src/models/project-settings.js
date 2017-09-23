@@ -1,66 +1,69 @@
 import path from 'path';
-import { copySync } from 'fs-extra';
 import jf from 'jsonfile';
 import { pwd } from 'shelljs';
-
-import { fileExists } from '../util/fs';
+import rc from 'rc';
 
 /*
   Look into using Yam for finding settings so it will get the first
   .reduxrc it finds and use that for project settings just like how
-  eslintrc and ember-cli works
+  eslintrc and ember-cli works.
+*/
+
+/*
+  2.0 TODO
+
+  Use rc to enable multiple .reduxrc files to be located and merged into a
+  single object.
+
+  rc: https://www.npmjs.com/package/rc
 */
 
 export default class ProjectSettings {
-  constructor(relativePath) {
-    this.relativePath = relativePath || '../../templates/.reduxrc';
-    this.loadSettings();
-  }
-
-  loadSettings() {
-    if (this.settingsExist()) {
-      this.settings = jf.readFileSync(this.settingsPath());
-    } else {
-      this.buildFromTemplate();
-      this.settings = jf.readFileSync(this.settingsPath());
+    // public & tested - maintain in 2.0
+    constructor(defaultSettings = {}, args = null ) {
+        this.defaultSettings = defaultSettings;
+        this.args = args;
+        this.loadSettings();
     }
-  }
 
-  templatePath() {
-    return path.join(
-      path.dirname(module.id), this.relativePath
-    );
-  }
+    // internal & tested
+    // from #constructor
+    loadSettings() {
+        this.settings = rc('redux', this.defaultSettings, this.args);
+        // if the config file list is empty, and the config is only the default
+        // maybe save or prompt to save the default config file
+    }
 
-  buildFromTemplate() {
-    copySync(this.templatePath(), this.settingsPath());
-  }
+    // internal & tested - maintain in 2.0
+    // #settingsExist
+    // #save
+    settingsPath() {
+        return path.join(pwd(), '.reduxrc');
+    }
 
-  settingsPath() {
-    return path.join(pwd(), '.reduxrc');
-  }
+    //public & tested - maintain in 2.0
+    getSetting(key) {
+        return this.settings[key];
+    }
 
-  settingsExist() {
-    return fileExists(this.settingsPath());
-  }
+    //public & tested - maintain in 2.0
+    getAllSettings() {
+        return this.settings;
+    }
 
-  getSetting(key) {
-    return this.settings[key];
-  }
+    //deprecate.  can't see the use of this, especially with nested settings
+    //unused & tested
+    setSetting(key, val) {
+        this.settings[key] = val;
+    }
 
-  getAllSettings() {
-    return this.settings;
-  }
+    //internal & tested - maintain in 2.0
+    setAllSettings(json) {
+        this.settings = json;
+    }
 
-  setSetting(key, val) {
-    this.settings[key] = val;
-  }
-
-  setAllSettings(json) {
-    this.settings = json;
-  }
-
-  save() {
-    jf.writeFileSync(this.settingsPath(), this.settings);
-  }
+    // public - maintain in 2.0
+    saveDefaults(defaultSettings = this.defaultSettings ) {
+        jf.writeFileSync(this.settingsPath(), defaultSettings);
+    }
 }
