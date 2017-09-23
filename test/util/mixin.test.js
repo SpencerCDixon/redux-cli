@@ -6,8 +6,8 @@ class Parent {
   }
 }
 
-describe('(Util) mixin', function() {
-  it('creates a new constructor with functions mixed in', function() {
+describe('(Util) mixin', () => {
+  test('creates a new constructor with functions mixed in', () => {
     const Child = {
       testFunction: () => {
         return 'inside mixin';
@@ -16,6 +16,6 @@ describe('(Util) mixin', function() {
 
     const Constructor = mixin(Parent, Child);
     const instance = new Constructor();
-    expect(instance.testFunction()).to.eql('inside mixin');
+    expect(instance.testFunction()).toEqual('inside mixin');
   });
 });

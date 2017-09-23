@@ -9,82 +9,87 @@ const originalPath = path.join(__dirname, '..', 'fixtures', 'file-info-template.
 const mappedPath = path.join(__dirname, '..', '..', 'tmp', 'path-to-overwrite.txt');
 const ui = new MockUI('DEBUG');
 
-describe('(Model) FileInfo', function() {
-  beforeEach(function() {
+describe('(Model) FileInfo', () => {
+  beforeEach(() => {
     ui.clear();
   });
 
-  describe('#isFile', function() {
-    it('return true if original path is a file', function() {
+  describe('#isFile', () => {
+    test('return true if original path is a file', () => {
       const info = new FileInfo({
         templateVariables: {},
         ui,
         originalPath,
         mappedPath
       });
-      expect(info.isFile()).to.be.true;
+      expect(info.isFile()).toBe(true);
     });
 
-    it('returns false if original path is bogus', function() {
+    test('returns false if original path is bogus', () => {
       const info = new FileInfo({
         templateVariables: {},
         ui,
         originalPath: path.join(__dirname, 'bogus', 'path', 'here'),
         mappedPath
       });
-      expect(info.isFile()).to.be.false;
+      expect(info.isFile()).toBe(false);
     });
   });
 
-  describe('#writeFile', function() {
-    context('when file already exists', function() {
-      it('throws warning to ui and doesnt overwrite old file', function() {
-        fse.outputFileSync(mappedPath, 'some contennt');
+  describe('#writeFile', () => {
+    describe('when file already exists', () => {
+      test('throws warning to ui and doesnt overwrite old file', () => {
+        const existingPath = path.join(__dirname, '..', '..', 'tmp', 'path-to-overwrite-a.txt');
+        fse.outputFileSync(existingPath, 'some contennt');
 
         const info = new FileInfo({
           templateVariables: {},
-          ui, originalPath, mappedPath
+          mappedPath: existingPath,
+          ui, originalPath
         });
         info.writeFile();
-        expect(ui.errors).to.match(/Not writing file/);
-        fse.remove(mappedPath);
+        expect(ui.errors).toMatch(/Not writing file/);
+        fse.remove(existingPath);
       });
     });
 
-    context('when no file exists', function() {
-      it('writes the file', function() {
+    describe('when no file exists', () => {
+      test('writes the file', () => {
+        const noFilePath = path.join(__dirname, '..', '..', 'tmp', 'path-to-overwrite-b.txt');
         const info = new FileInfo({
           templateVariables: {name: 'rendered ejs string'},
-          ui,
-          originalPath,
-          mappedPath
+          mappedPath: noFilePath,
+          ui, originalPath
         });
         info.writeFile();
 
         const expectedString = 'rendered ejs string\n';
-        const actualString = fs.readFileSync(mappedPath, 'utf8');
-        expect(expectedString).to.eql(actualString);
-        expect(ui.output).to.match(/create/);
-        fse.remove(mappedPath);
+        const actualString = fs.readFileSync(noFilePath, 'utf8');
+        expect(expectedString).toEqual(actualString);
+        expect(ui.output).toMatch(/create/);
+        fse.remove(noFilePath);
       });
     });
 
-    context('when dry run option is enabled', function() {
-      it('should not write the file', function() {
+    describe('when dry run option is enabled', () => {
+      test('should not write the file', () => {
+        const dryRunPath = path.join(__dirname, '..', '..', 'tmp', 'path-to-overwrite-c.txt');
+
         const info = new FileInfo({
           templateVariables: {name: 'rendered ejs string'},
-          ui, originalPath, mappedPath
+          mappedPath: dryRunPath,
+          ui, originalPath
         });
         info.writeFile(true);
 
-        expectFileToNotExist(mappedPath);
-        expect(ui.output).to.match(/would create/);
+        expectFileToNotExist(dryRunPath);
+        expect(ui.output).toMatch(/would create/);
       });
     });
   });
 
-  describe('#renderTempalte', function() {
-    it('renders ejs template with the template variables', function() {
+  describe('#renderTempalte', () => {
+    test('renders ejs template with the template variables', () => {
       const info = new FileInfo({
         templateVariables: {name: 'rendered ejs string'},
         ui,

@@ -17,7 +17,7 @@ class Generate extends SubCommand {
   printUserHelp() {
     const blueprints = Blueprint.list();
 
-    this.ui.writeLine(`Available Blueprints:`);
+    this.ui.writeLine('Available Blueprints:');
     this.ui.writeLine('(sources on the top will override sources below)');
     this.ui.writeLine('');
 

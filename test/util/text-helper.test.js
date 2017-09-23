@@ -3,7 +3,7 @@ import * as th from 'util/text-helper';
 
 describe('(Util) text-helpers', () => {
   describe('#success', () => {
-    it('applies green color to text', () => {
+    test('applies green color to text', () => {
       const string = 'Successfully created something important';
       const successString = th.success(string);
 
@@ -13,7 +13,7 @@ describe('(Util) text-helpers', () => {
   });
 
   describe('#danger', () => {
-    it('applies red color to text', () => {
+    test('applies red color to text', () => {
       const string = 'ERROR: something bad happened';
       const errorString = th.danger(string);
 
@@ -23,7 +23,7 @@ describe('(Util) text-helpers', () => {
   });
 
   describe('#warning', () => {
-    it('applies yellow color to text', () => {
+    test('applies yellow color to text', () => {
       const string = 'WARNING: are you sure you want this?';
       const warningString = th.warning(string);
 
@@ -33,82 +33,80 @@ describe('(Util) text-helpers', () => {
   });
 
   describe('#normalizeComponentName', () => {
-    it('turns snake case into capitalized', () => {
+    test('turns snake case into capitalized', () => {
       const string = 'my_component_name';
       const expected = 'MyComponentName';
 
-      expect(th.normalizeComponentName(string)).to.eql(expected);
+      expect(th.normalizeComponentName(string)).toEqual(expected);
     });
 
-    it('turns dashes into capitalized', () => {
+    test('turns dashes into capitalized', () => {
       const string = 'my-component-name';
       const expected = 'MyComponentName';
 
-      expect(th.normalizeComponentName(string)).to.eql(expected);
+      expect(th.normalizeComponentName(string)).toEqual(expected);
     });
 
-    it('turns camelcase into capitalized', () => {
+    test('turns camelcase into capitalized', () => {
       const string = 'myComponent-name';
       const expected = 'MyComponentName';
 
-      expect(th.normalizeComponentName(string)).to.eql(expected);
+      expect(th.normalizeComponentName(string)).toEqual(expected);
     });
   });
 
   describe('#normalizeDuckName', () => {
-    it('camelizes snake case', () => {
+    test('camelizes snake case', () => {
       const string = 'my_duck';
       const expected = 'myDuck';
 
-      expect(th.normalizeDuckName(string)).to.eql(expected);
+      expect(th.normalizeDuckName(string)).toEqual(expected);
     });
 
-    it('camelizes pascal case', () => {
+    test('camelizes pascal case', () => {
       const string = 'MyDuck';
       const expected = 'myDuck';
 
-      expect(th.normalizeDuckName(string)).to.eql(expected);
+      expect(th.normalizeDuckName(string)).toEqual(expected);
     });
 
-    it('camelizes dashes', () => {
+    test('camelizes dashes', () => {
       const string = 'my-duck';
       const expected = 'myDuck';
 
-      expect(th.normalizeDuckName(string)).to.eql(expected);
+      expect(th.normalizeDuckName(string)).toEqual(expected);
     });
   });
 
   describe('#normalizeCasing', () => {
     const string = 'string-to-test';
 
-    it('converts to snake when settings are set to "snake"', () => {
+    test('converts to snake when settings are set to "snake"', () => {
       const expected = 'string_to_test';
-      expect(th.normalizeCasing(string, 'snake')).to.eql(expected);
+      expect(th.normalizeCasing(string, 'snake')).toEqual(expected);
     });
 
-    it('converts to PascalCase when settings are set to "pascal"', () => {
+    test('converts to PascalCase when settings are set to "pascal"', () => {
       const expected = 'StringToTest';
-      expect(th.normalizeCasing(string, 'pascal')).to.eql(expected);
+      expect(th.normalizeCasing(string, 'pascal')).toEqual(expected);
     });
 
-    it('converts to camelCase when settings are set to "camel"', () => {
+    test('converts to camelCase when settings are set to "camel"', () => {
       const expected = 'stringToTest';
-      expect(th.normalizeCasing(string, 'camel')).to.eql(expected);
+      expect(th.normalizeCasing(string, 'camel')).toEqual(expected);
     });
 
-    it('converts to dashes-case when settings are set to "dashes"', () => {
+    test('converts to dashes-case when settings are set to "dashes"', () => {
       const expected = 'string-to-test';
-      expect(th.normalizeCasing(string, 'dashes')).to.eql(expected);
+      expect(th.normalizeCasing(string, 'dashes')).toEqual(expected);
     });
 
-    it('leaves string alone when set to "default"', () => {
-      expect(th.normalizeCasing(string, 'default')).to.eql(string);
+    test('leaves string alone when set to "default"', () => {
+      expect(th.normalizeCasing(string, 'default')).toEqual(string);
     });
 
-    it('throws error if not one of the allowed conversions', () => {
-      expect(() => th.normalizeCasing(string)).to.throw(
-        /Casing must be one of: default, snake, pascal, camel/
-      );
+    test('throws error if not one of the allowed conversions', () => {
+      expect(() => th.normalizeCasing(string)).toThrowError(/Casing must be one of: default, snake, pascal, camel/);
     });
   });
 });

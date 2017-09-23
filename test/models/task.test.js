@@ -8,8 +8,8 @@ describe('(Model) Task', () => {
   const task = new Task(environment);
 
   describe('#run', () => {
-    it('throws if no run() is present', () => {
-      expect(() => task.run()).to.throw(/Tasks must implement run()/);
+    test('throws if no run() is present', () => {
+      expect(() => task.run()).toThrowError(/Tasks must implement run()/);
     });
   });
 });

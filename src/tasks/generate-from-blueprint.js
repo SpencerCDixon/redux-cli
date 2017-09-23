@@ -12,10 +12,10 @@ export default class extends Task {
   // install the blueprint
   run(blueprintName, cliArgs) {
     // if blueprint doesnt exist
-      // this.ui.writeError(
-        // 'this is not a valid blueprint. type help for help.. or w/e'
-      // );
-      // process.exit(1);
+    //   this.ui.writeError(
+    //     'this is not a valid blueprint. type help for help.. or w/e'
+    //   );
+    //   process.exit(1);
     // }
 
     const mainBlueprint = this.lookupBlueprint(blueprintName);

@@ -290,7 +290,7 @@ export default class Blueprint {
   // HOOK: for normalizing entity name that gets passed in as an arg
   // via the CLI
   // normalizeEntityName(options) {
-    // return normalizeEntityName(name);
+  //   return normalizeEntityName(name);
   // }
 }
 

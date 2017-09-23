@@ -9,15 +9,15 @@ describe('(Prompts) #setupPrompt', () => {
     setupPrompt('testing', prompt);
   });
 
-  it('gives the prompt a custom message', () => {
-    expect(prompt.message).to.match(/testing/);
+  test('gives the prompt a custom message', () => {
+    expect(prompt.message).toMatch(/testing/);
   });
 
-  it('sets the delimiter to be an empty string', () => {
-    expect(prompt.delimiter).to.eql('');
+  test('sets the delimiter to be an empty string', () => {
+    expect(prompt.delimiter).toEqual('');
   });
 
-  it('starts the prompt', () => {
-    expect(start.calledOnce).to.be.true;
+  test('starts the prompt', () => {
+    expect(start.calledOnce).toBe(true);
   });
 });

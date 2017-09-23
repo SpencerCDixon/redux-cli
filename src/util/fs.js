@@ -37,18 +37,18 @@ export const readFile = (filename) => {
 // I want to use later...
 
 // export const dirExists = (dirPath) => {
-  // return new Promise(resolve => {
-    // fse.exists(dirPath, resolve);
-  // });
+//   return new Promise(resolve => {
+//     fse.exists(dirPath, resolve);
+//   });
 // };
 
 // export const mkTmpDirIn = (dirPath) => {
-  // return dirExists(dirPath).then(doesExist => {
-    // if (!doesExist) {
-      // return mkdir(dirPath);
-    // }
-  // }).then(() => {
-    // return mkTmpDir({ dir: dirPath});
-  // });
+//   return dirExists(dirPath).then(doesExist => {
+//     if (!doesExist) {
+//       return mkdir(dirPath);
+//     }
+//   }).then(() => {
+//     return mkTmpDir({ dir: dirPath});
+//   });
 // };
 

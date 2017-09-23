@@ -1,3 +1,4 @@
+<% /* eslint-disable */ %>
 import React, { Component, PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
 
@@ -25,7 +26,7 @@ export class <%= pascalEntityName %> extends Component {
       </form>
     );
   }
-}
+};
 
 <%= pascalEntityName %>.propTypes = propTypes;
 <%= pascalEntityName %> = reduxForm({
