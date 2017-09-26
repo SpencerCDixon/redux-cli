@@ -2,7 +2,7 @@
 [![Code Climate](https://codeclimate.com/github/SpencerCDixon/redux-cli/badges/gpa.svg)](https://codeclimate.com/github/SpencerCDixon/redux-cli)
 <a href="https://zenhub.io"><img src="https://raw.githubusercontent.com/ZenHubIO/support/master/zenhub-badge.png"></a>
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
-
+[![Gitter Chat Channel](https://img.shields.io/gitter/room/nwjs/nw.js.svg)](https://gitter.im/redux-cli/Lobby?utm_source=share-link&utm_medium=link&utm_campaign=share-link)
 
 ```
 ______         _                   _____  _     _____  
