@@ -1,21 +1,3 @@
-import commander from 'commander';
-import { version } from '../version';
+import parser from './parser';
 
-const program = commander;
-
-program
-  .version(version());
-
-program
-  .command('init', 'initialize a .reduxrc file for project details');
-
-program
-  .command('new', 'creates a new redux project');
-
-// fake an alias for generate since commander doesn't support
-// aliases for sub-commands.
-program
-  .command('generate', 'generates new code from blueprints')
-  .command('g', 'alias for generate');
-
-program.parse(process.argv);
+module.exports = parser.parse(process.argv.slice(2));

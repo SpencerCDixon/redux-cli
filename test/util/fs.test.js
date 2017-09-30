@@ -26,8 +26,11 @@ describe('(Util) fs', () => {
 
       try {
         fileExists('tmp/example.js');
+        expect('should not get here').toEqual(true);
       } catch (e) {
         expect(e.code).toEqual('random code');
+      } finally {
+        fs.accessSync.restore();
       }
     });
   });

@@ -3,7 +3,8 @@ module.exports = {
   'testEnvironment': 'node',
   'setupTestFrameworkScriptFile': '<rootDir>/test/setup.js',
   'roots': [
-    '<rootDir>/test'
+    '<rootDir>/test',
+    '<rootDir>/src'
   ],
   'modulePaths': [
     '<rootDir>/src'
