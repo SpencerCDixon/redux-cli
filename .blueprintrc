@@ -1,0 +1,9 @@
+{
+  "sourceBase": "src",
+  "testBase": "test",
+  "smartPath": "container",
+  "dumbPath": "component",
+  "fileCasing": "default",
+  "location": "project",
+  "blueprints": true
+}

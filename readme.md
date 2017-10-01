@@ -5,28 +5,28 @@
 [![Gitter Chat Channel](https://img.shields.io/gitter/room/nwjs/nw.js.svg)](https://gitter.im/redux-cli/Lobby?utm_source=share-link&utm_medium=link&utm_campaign=share-link)
 
 ```
-______         _                   _____  _     _____  
+______         _                   _____  _     _____
 | ___ \       | |                 /  __ \| |   |_   _|
-| |_/ /___  __| |_   ___  ________| /  \/| |     | |   
-|    // _ \/ _` | | | \ \/ /______| |    | |     | |   
-| |\ \  __/ (_| | |_| |>  <       | \__/\| |_____| |_  
-\_| \_\___|\__,_|\__,_/_/\_\       \____/\_____/\___/  
+| |_/ /___  __| |_   ___  ________| /  \/| |     | |
+|    // _ \/ _` | | | \ \/ /______| |    | |     | |
+| |\ \  __/ (_| | |_| |>  <       | \__/\| |_____| |_
+\_| \_\___|\__,_|\__,_/_/\_\       \____/\_____/\___/
 ```
 
 ## Quick Start
 
 ```javascript
-npm i redux-cli -g       // install redux-cli globally
-redux new <project name> // create a new redux project
-redux new <project name> -S // OR use ssh to pull project down (if ssh setup with github)
-redux init                  // OR configure a current project to use the CLI
+npm i redux-cli -g       // install blueprint-cli globally
+blueprint new <project name> // create a new blueprint project
+blueprint new <project name> -S // OR use ssh to pull project down (if ssh setup with github)
+blueprint init                  // OR configure a current project to use the CLI
 
 // Start generating components/tests and save time \(• ◡ •)/
 //(g is alias for generate)
-redux g dumb SimpleButton
+blueprint g dumb SimpleButton
 ```
 
-![Redux CLI Usage Gif](redux-cli.gif)
+![Blueprint CLI Usage Gif](redux-cli.gif)
 
 ## Table Of Contents
 
@@ -41,17 +41,17 @@ redux g dumb SimpleButton
 8.  [Changelog](#changelog)
 
 ### Getting Started
-Running `redux new <project name>` will pull down the amazing [Redux Starter Kit](https://github.com/davezuko/react-redux-starter-kit) and
-initialize a new git repo.  Running `new` will automatically set up a `.reduxrc`
+Running `blueprint new <project name>` will pull down the amazing [Redux Starter Kit](https://github.com/davezuko/react-redux-starter-kit) and
+initialize a new git repo.  Running `new` will automatically set up a `.blueprintrc`
 to work with this specific starter kit.  If you want to integrate the CLI in an
 existing project or store your components in different paths please see [config existing project](#config-existing-project)
 
 ### Config Existing Project
 There is an `init` subcommand for you to specify all paths to where components
-live in your project.  The `init` command just creates a `.reduxrc` in your
-project root.  If you want to you can just create the `.reduxrc` manually.  
+live in your project.  The `init` command just creates a `.blueprintrc` in your
+project root.  If you want to you can just create the `.blueprintrc` manually.
 
-Final `.reduxrc` might look like this:
+Final `.blueprintrc` might look like this:
 
 ```javascript
 {
@@ -61,18 +61,18 @@ Final `.reduxrc` might look like this:
   "dumbPath":"components",
   "fileCasing": "default"
 }
-```  
+```
 
-**Note on configuration**:  
+**Note on configuration**:
 This project tries to walk on a fine line between convention and configuration.
 Since the majority of React applications will separate their smart/dumb
 components if you pass in those paths you'll get those generators for free.
 However, some of the other generators might not write files to the exact paths
 that you use for your project.  It's easy to override the CLI generators with
-your own so that the generators will write files to the correct location.  
+your own so that the generators will write files to the correct location.
 [See: creating custom blueprints](#creating-blueprints).
 
-Alternatively, if you use this CLI as a result of `redux new <project name>` the
+Alternatively, if you use this CLI as a result of `blueprint new <project name>` the
 starter kit will come pre-configured with a bunch of blueprints (generators)
 that work out of the gate.  Currently, I'm working on a PR for the
 `react-redux-starter-kit` with a bunch of blueprints.  More starter kits and
@@ -87,53 +87,53 @@ blueprints to come!
 |**dumbPath**|✓|where you keep your dumb (pure) components (relative of sourceBase)|
 |**fileCasing**|✓|how do you want generated files to be named (pascal/camel/snake/dashes/default)|
 
-#### .reduxrc
-It's possible to put `.reduxrc` files in other locations to better share 
-configs.  It looks for files in the following locations and deep merges the 
-files it finds together.  The defaultSettings will be overwritten by any 
-following options while the `--config=path/to/file` option will override 
-everything.  
+#### .blueprintrc
+It's possible to put `.blueprintrc` files in other locations to better share
+configs.  It looks for files in the following locations and deep merges the
+files it finds together.  The defaultSettings will be overwritten by any
+following options while the `--config=path/to/file` option will override
+everything.
 
-See the whole list and more ENV tricks 
-at [rc](https://github.com/dominictarr/rc) 
+See the whole list and more ENV tricks
+at [rc](https://github.com/dominictarr/rc)
 
 1. defaultSettings
-2. /etc/redux/config
-3. /etc/reduxrc
-4. ~/.config/redux/config
-5. ~/.config/redux
-6. ~/.redux/config
-7. ~/.reduxrc
-9. $REDUX_CONFIG
+2. /etc/blueprint/config
+3. /etc/blueprintrc
+4. ~/.config/blueprint/config
+5. ~/.config/blueprint
+6. ~/.blueprint/config
+7. ~/.blueprintrc
+9. $BLUEPRINT_CONFIG
 10. --config=path/to/file
 
-**Note** - All files found at these locations will have their objects deep 
+**Note** - All files found at these locations will have their objects deep
 merged together. Later file override earlier ones
 
 ### Commands
 
 |Command|Description|Alias|
 |---|---|---|
-|`redux new <project name>`|creates a new redux project||
-|`redux init`|configure an existing redux app to use the CLI||
-|`redux generate <generator name> `|generates files and tests for you automatically|`redux g`|
-|`redux help g`|show all generators you have available||
+|`blueprint new <project name>`|creates a new blueprint project||
+|`blueprint init`|configure an existing blueprint app to use the CLI||
+|`blueprint generate <generator name> `|generates files and tests for you automatically|`blueprint g`|
+|`blueprint help g`|show all generators you have available||
 
 
 ### Generators
 
 |Name|Description|Options|
 |---|---|---|
-|`redux g dumb <comp name>`|generates a dumb component and test file||
-|`redux g smart <smart name>`|generates a smart connected component and test file||
-|`redux g form <form name>`|generates a form component (assumes redux-form)||
-|`redux g duck <duck name>`|generates a redux duck and test file||
+|`blueprint g dumb <comp name>`|generates a dumb component and test file||
+|`blueprint g smart <smart name>`|generates a smart connected component and test file||
+|`blueprint g form <form name>`|generates a form component (assumes redux-form)||
+|`blueprint g duck <duck name>`|generates a redux duck and test file||
 
 You can also see what files would get created with the `--dry-run` option like
 so:
 
 ```
-redux g dumb MyNewComponent --dry-run
+blueprint g dumb MyNewComponent --dry-run
 
 // Output:
 
@@ -147,36 +147,36 @@ redux g dumb MyNewComponent --dry-run
 Below are some examples of using the generator to speed up development:
 
 ```
-// generates a dumb component 
-redux g dumb SimpleButton 
+// generates a dumb component
+blueprint g dumb SimpleButton
 
-// generates a smart component 
-redux g smart CommentContainer 
+// generates a smart component
+blueprint g smart CommentContainer
 
 // generate a redux-form with <form> tags in render statement
-redux g form ContactForm
+blueprint g form ContactForm
 
 // generate a Redux 'duck' (reducer, constants, action creators)
-redux g duck todos
+blueprint g duck todos
 ```
 
 ### Creating Blueprints
-Blueprints are template generators with optional custom install logic.  
+Blueprints are template generators with optional custom install logic.
 
-`redux generate` comes with a default set of blueprints.  Every project has
+`blueprint generate` comes with a default set of blueprints.  Every project has
 their own configuration & needs, therefore blueprints have been made easy to override
 and extend.
 
 **Preliminary steps**:
 
-1.  Create a `blueprints` folder in your root directory.  Redux CLI will search
-for blueprints there _first_ before generating blueprints that come by default.  
+1.  Create a `blueprints` folder in your root directory.  Blueprint CLI will search
+for blueprints there _first_ before generating blueprints that come by default.
 2.  Create a sub directory inside `blueprints` for the new blueprint OR use the
-blueprint generator (super meta I know) that comes with Redux CLI by typing:
-`redux g blueprint <new blueprint name>`.  
+blueprint generator (super meta I know) that comes with Blueprint CLI by typing:
+`blueprint g blueprint <new blueprint name>`.
 3.  If you created the directory yourself than make sure to create a `index.js`
 file that exports your blueprint and a `files` folder with what you want
-generated.  
+generated.
 
 **Customizing the blueprint**:
 
@@ -199,29 +199,29 @@ blueprints/smart
 
 `files` contains templates for all the files to be generated into your project.
 
-The `__name__` token is subtituted with the 
+The `__name__` token is subtituted with the
 entity name at install time.  Entity names can be configued in
 either PascalCase, snake_case, camelCase, or dashes-case so teams can customize their file
 names accordingly.  By default, the `__name__` will return whatever is entered
 in the generate CLI command.
 
 For example, when the user
-invokes `redux g smart commentContainer` then `__name__` becomes
+invokes `blueprint g smart commentContainer` then `__name__` becomes
 `commentContainer`.
 
 The `__root__` token is subsituted with the absolute path to your source.
-Whatever path is in your `.reduxrc`'s `sourceBase` will be used here.
+Whatever path is in your `.blueprintrc`'s `sourceBase` will be used here.
 
 The `__test__` token is substitued with the absolute path to your tests.
-Whatever path is in your `.reduxrc`'s `testBase` will be used here.
+Whatever path is in your `.blueprintrc`'s `testBase` will be used here.
 
 The `__path__` token is substituted with the blueprint
 name at install time. For example, when the user invokes
-`redux generate smart foo` then `__path__` becomes
-`smart`.  
+`blueprint generate smart foo` then `__path__` becomes
+`smart`.
 
 The `__smart__` token is a custom token I added in the `index.js` it pulls from
-your `.reduxrc` configuration file to use whatever you have set as your
+your `.blueprintrc` configuration file to use whatever you have set as your
 `smartPath`.
 
 #### Template Variables (AKA Locals)
@@ -252,7 +252,7 @@ export default <%= pascalEntityName %>;
 ```
 
 `<%= pascalEntityName %>` is replaced with the real
-value at install time.  If we were to type: `redux g dumb simple-button` all
+value at install time.  If we were to type: `blueprint g dumb simple-button` all
 instances of `<%= pascalEntityName %>` would be converted to: `SimpleButton`.
 
 The following template variables are provided by default:
@@ -270,7 +270,7 @@ described below.
 Custom installation (and soon uninstallation) behaviour can be added
 by overriding the hooks documented below. `index.js` should
 export a plain object, which will extend the prototype of the
-`Blueprint` class. 
+`Blueprint` class.
 
 ```js
 module.exports = {
@@ -321,7 +321,7 @@ containing general and entity-specific options.
 When the following is called on the command line:
 
 ```sh
-redux g dumb foo --html=button --debug
+blueprint g dumb foo --html=button --debug
 ```
 
 The object passed to `locals` looks like this:
@@ -378,7 +378,7 @@ blueprint's folder.
 Called before any of the template files are processed and receives
 the the `options` and `locals` hashes as parameters. Typically used for
 validating any additional command line options or for any asynchronous
-setup that is needed.   
+setup that is needed.
 
 ### Contributing
 This CLI is very much in the beginning phases and I would love to have people
@@ -403,8 +403,8 @@ npm start        // to compile src into lib
 npm test         // make sure all tests are passing
 
 // to test the cli in the local directory you can:
-npm link         // will install the npm package locally so you can run 'redux <commands>'
-redux <run commands here>
+npm link         // will install the npm package locally so you can run 'blueprint <commands>'
+blueprint <run commands here>
 ```
 
 ### Package Utility Scripts:  

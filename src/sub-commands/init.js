@@ -1,11 +1,7 @@
 import prompt from 'prompt';
-import figlet from 'figlet';
-
 import SubCommand from '../models/sub-command';
-
 import initPrompt from '../prompts/initPrompt';
 import { setupPrompt } from '../prompts/setup';
-import { success } from '../util/text-helper';
 
 class Init extends SubCommand {
   constructor () {
@@ -15,7 +11,7 @@ class Init extends SubCommand {
 
   printUserHelp () {
     this.ui.write(
-      'initialization command to create a .reduxrc which has project settings'
+      'initialization command to create a .blueprintrc which has project settings'
     );
   }
 
@@ -24,18 +20,8 @@ class Init extends SubCommand {
     prompt.get(initPrompt, (err, result) => {
       this.ui.writeInfo('Saving your settings...');
       this.settings.saveDefaults(result);
-      this.ui.writeCreate('.reduxrc with configuration saved in project root.');
+      this.ui.writeCreate('.blueprintrc with configuration saved in project root.');
     });
-  }
-
-  cliLogo () {
-    return success(
-      figlet.textSync('Redux-CLI', {
-        font: 'Doom',
-        horizontalLayout: 'default',
-        verticalLayout: 'default'
-      })
-    );
   }
 }
 

@@ -77,11 +77,11 @@ class New extends SubCommand {
   // All settings for react-redux-starter-kit live in this template so when
   // new projects get created users can immediately start using the CLI
   createProjectSettings () {
-    this.ui.writeInfo('creating a default .reduxrc for your project');
+    this.ui.writeInfo('creating a default .blueprintrc for your project');
     const settings = new ProjectSettings();
     settings.saveDefault();
 
-    this.ui.writeCreate('.reduxrc with starter kit settings saved.');
+    this.ui.writeCreate('.blueprintrc with starter kit settings saved.');
   }
 }
 

@@ -21,4 +21,16 @@ describe('(Model) SubCommand', () => {
     const command = new SubCommand(options);
     expect(command.environment).toEqual(options);
   });
+
+  describe('cliLogo()', () => {
+    test('returns a string', () => {
+      const options = {
+        ui: 'cli interface',
+        settings: 'project settings'
+      };
+      const command = new SubCommand(options);
+      expect(command.cliLogo()).to.be.a('string');
+
+    });
+  });
 });

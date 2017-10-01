@@ -11,22 +11,6 @@ import config from '../config';
 
 const { basePath } = config;
 
-function generateLookupPaths(lookupPaths) {
-  lookupPaths = lookupPaths || [];
-  lookupPaths = lookupPaths.concat(Blueprint.defaultLookupPaths());
-  return _.uniq(lookupPaths);
-}
-
-function dir(fullPath) {
-  if (fileExists(fullPath)) {
-    return fs.readdirSync(fullPath).map(function(fileName) {
-      return path.join(fullPath, fileName);
-    });
-  } else {
-    return [];
-  }
-}
-
 export default class Blueprint {
   constructor(blueprintPath) {
     this.path = blueprintPath;
@@ -57,33 +41,6 @@ export default class Blueprint {
     return this._files;
   }
 
-  static defaultLookupPaths() {
-    return [
-      path.resolve(path.join(basePath, 'blueprints')),
-      path.resolve(__dirname, '..', '..', 'blueprints')
-    ];
-  }
-  // find blueprint given a path or return error
-  // look inside current project first and then redux-cli defaults
-  static lookup(name, options = {}) {
-    const lookupPaths = generateLookupPaths(options.paths);
-
-    let lookupPath;
-    let blueprintPath;
-
-    for (let i = 0; (lookupPath = lookupPaths[i]); i++) {
-      blueprintPath = path.resolve(lookupPath, name);
-
-      if (fileExists(blueprintPath)) {
-        return Blueprint.load(blueprintPath);
-      }
-    }
-
-    if (!options.ignoreMissing) {
-      throw new Error('Unknown blueprint: ' + name);
-    }
-  }
-
   // load in the blueprint that was found, extend this class to load it
   static load(blueprintPath) {
     let Constructor;
@@ -97,85 +54,6 @@ export default class Blueprint {
         return new Constructor(blueprintPath);
       }
     }
-  }
-
-  static loadAll(options = {}) {
-    return generateLookupPaths(options.paths).map(lookupPath => {
-      const blueprintFiles = dir(lookupPath);
-      const packagePath = path.join(lookupPath, '../package.json');
-      let source;
-
-      if (fileExists(packagePath)) {
-        source = require(packagePath).name;
-      } else {
-        source = path.basename(path.join(lookupPath, '..'));
-      }
-
-      const blueprints = blueprintFiles.map(filePath => this.load(filePath));
-
-      return {
-        source,
-        blueprints: _.compact(blueprints)
-      };
-    });
-  }
-
-  static loadRunnable(options = {}) {
-    const blueprints = this.loadAll(options);
-    const runnable = [];
-
-    const alreadyAdded = blueprint =>
-      runnable.find(existing => existing.name === blueprint.name);
-
-    blueprints.forEach(source => {
-      source.blueprints.forEach(blueprint => {
-        if (!alreadyAdded(blueprint)) {
-          runnable.push(blueprint);
-        }
-      });
-    });
-
-    return runnable;
-  }
-
-  // TODO: refactor list to use loadAll or loadRunnable
-  static list(options = {}) {
-    return generateLookupPaths(options.paths).map(lookupPath => {
-      const blueprintFiles = dir(lookupPath);
-      const packagePath = path.join(lookupPath, '../package.json');
-      let source;
-
-      if (fileExists(packagePath)) {
-        source = require(packagePath).name;
-      } else {
-        source = path.basename(path.join(lookupPath, '..'));
-      }
-
-      const blueprints = blueprintFiles.map(filePath => {
-        const blueprint = this.load(filePath);
-
-        if (blueprint) {
-          let description;
-          const name = blueprint.name;
-
-          if (blueprint.description) {
-            description = blueprint.description();
-          } else {
-            description = 'N/A';
-          }
-
-          return {
-            name,
-            description
-          };
-        }
-      });
-
-      return {
-        source,
-        blueprints: _.compact(blueprints)
-      };
-    });
   }
 
   _fileMapTokens(options) {

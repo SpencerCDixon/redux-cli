@@ -1,14 +1,17 @@
 import path from 'path';
 import Blueprint from 'models/blueprint';
-import config from 'config';
-
-const { basePath } = config;
 
 const fixtureBlueprints = path.resolve(__dirname, '..', 'fixtures', 'blueprints');
 const basicBlueprint    = path.join(fixtureBlueprints, 'basic');
 
 describe('(Model) Blueprint', () => {
   const blueprint = new Blueprint(basicBlueprint);
+
+  describe('#description',()=>{
+    test('returns a description',()=>{
+      expect(blueprint.description()).to.match(/Generates a new basic/);
+    });
+  });
 
   describe('#filesPath', () => {
     test('returns a default of "files" ', () => {
@@ -32,27 +35,9 @@ describe('(Model) Blueprint', () => {
     });
   });
 
-  describe('.defaultLookupPaths', () => {
-    test(
-      'returns an array with all potential paths blueprints can live',
-      () => {
-        const expectedFiles = [
-          path.join(basePath, 'blueprints'),
-          path.join(__dirname, '..', '..', 'blueprints')
-        ];
-        expect(Blueprint.defaultLookupPaths()).toEqual(expectedFiles);
-      }
-    );
-  });
-
-  describe('.lookup', () => {
-    test('throws error when it cant find blueprint', () => {
-      expect(() => Blueprint.lookup('sdlfkjskf')).toThrowError(/Unknown blueprint:/);
-    });
-
-    test('it returns loaded blueprint when found', () => {
-      const blueprint = Blueprint.lookup(basicBlueprint);
-      expect(blueprint.path).toEqual(basicBlueprint);
+  describe('.load', () => {
+    test('loads a blueprint from a path', () => {
+      const blueprint = Blueprint.load(basicBlueprint);
       expect(blueprint.name).toEqual('basic');
     });
   });

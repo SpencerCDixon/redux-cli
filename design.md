@@ -15,6 +15,8 @@ SubCommands.
 
 ## Design Decisions 2.0
 
+Rename to blueprint-cli
+
 Take the foundation laid by 1.0 and extend the capabilities.
 
 Blueprints are most useful when able to be shared, copied and customized.  
@@ -25,8 +27,8 @@ Provide a way to copy blueprints into the default directory in order to
 increase the ease of customizing your own version of a default or shared 
 blueprint.
 
-Enhance the .reduxrc experience.  Add the ability to have home directory 
-and ENV var defined locations.  Allow merging of multiple .reduxrc files.  
+Enhance the .blueprintrc experience.  Add the ability to have home directory
+and ENV var defined locations.  Allow merging of multiple .blueprintrc files.
 Allow defining blueprint directories in the file.
 
 Enhance the Generator experience.  Look to Ruby on Rails for inspiration.  
