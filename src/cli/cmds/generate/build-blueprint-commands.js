@@ -9,7 +9,7 @@ const blueprints = subCommand.environment.settings.blueprints;
 settings.bp = settings.bp || {};
 
 const buildBlueprintCommands = () =>
-  blueprints.allGenerators().map(blueprint => {
+  blueprints.generators().map(blueprint => {
     loadBlueprintSettings(blueprint);
     return buildBlueprintCommand(blueprint, subCommand);
   });
