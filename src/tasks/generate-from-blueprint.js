@@ -1,5 +1,4 @@
 import Task from '../models/task';
-import Blueprint from '../models/blueprint';
 
 export default class extends Task {
   constructor(environment) {
@@ -37,6 +36,6 @@ export default class extends Task {
   }
 
   lookupBlueprint(name) {
-    return Blueprint.lookup(name);
+    return this.settings.blueprints.lookup(name);
   }
 }

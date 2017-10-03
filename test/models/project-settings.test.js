@@ -59,13 +59,12 @@ describe('ProjectSettings', () => {
 
     it('collects all blueprints into an array of arrays', () => {
       // How many do we have before
-      const baseline = new ProjectSettings().blueprintChunks.length;
+      const baseline = (new ProjectSettings()).blueprintChunks.length;
 
       process.env['blueprint_config'] = 'test/fixtures/env.blueprintrc';
       const fakeArgv = { config: 'test/fixtures/argv.blueprintrc' };
       const defaultSettings = { defaultOption: true };
       const settings = new ProjectSettings(defaultSettings, fakeArgv);
-
       expect(settings.blueprintChunks.length).to.eql(baseline + 2);
       delete process.env['blueprint_config'];
     });

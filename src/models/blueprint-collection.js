@@ -62,6 +62,15 @@ export default class BlueprintCollection {
       })
     );
   }
+
+  lookupAll(name) {
+    return _filter(this.all(), bp => bp.name === name);
+  }
+
+  lookup(name) {
+    return this.lookupAll(name)[0];
+  }
+
 }
 
 function validSearchDir(dir) {
