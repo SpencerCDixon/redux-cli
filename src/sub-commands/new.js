@@ -1,8 +1,4 @@
-import {
-  which,
-  rm,
-  exec
-} from 'shelljs';
+import { which, rm, exec } from 'shelljs';
 import SubCommand from '../models/sub-command';
 import CreateAndStepIntoDirectory from '../tasks/create-and-step-into-directory';
 import GitPull from '../tasks/git-pull';
@@ -13,25 +9,27 @@ import ProjectSettings from '../models/project-settings';
 // universal react starter kit, etc.
 
 class New extends SubCommand {
-  constructor () {
+  constructor() {
     super();
     this.createDirTask = new CreateAndStepIntoDirectory(this.environment);
     this.gitPullTask = new GitPull(this.environment);
   }
 
-  printUserHelp () {
+  printUserHelp() {
     this.ui.write('Command used for generating new redux projects');
   }
 
-  run (cliArgs) {
+  run(cliArgs) {
     this.confirmGit();
     this.createDirTask.run(cliArgs).then(() => {
       let fetch_url;
 
       if (cliArgs.useBoilerplate) {
-        fetch_url = 'https://github.com/SpencerCDixon/redux-cli-boilerplate.git';
+        fetch_url =
+          'https://github.com/SpencerCDixon/redux-cli-boilerplate.git';
       } else if (cliArgs.useUIKit) {
-        fetch_url = 'https://github.com/SpencerCDixon/redux-cli-ui-kit-boilerplate.git';
+        fetch_url =
+          'https://github.com/SpencerCDixon/redux-cli-ui-kit-boilerplate.git';
       } else {
         fetch_url = 'https://github.com/davezuko/react-redux-starter-kit.git';
       }
@@ -42,7 +40,8 @@ class New extends SubCommand {
         if (cliArgs.useBoilerplate) {
           fetch_url = 'git@github.com:SpencerCDixon/redux-cli-boilerplate.git';
         } else if (cliArgs.useUIKit) {
-          fetch_url = 'https://github.com/SpencerCDixon/redux-cli-ui-kit-boilerplate.git';
+          fetch_url =
+            'https://github.com/SpencerCDixon/redux-cli-ui-kit-boilerplate.git';
         } else {
           fetch_url = 'git@github.com:davezuko/react-redux-starter-kit.git';
         }
@@ -54,7 +53,7 @@ class New extends SubCommand {
     });
   }
 
-  confirmGit () {
+  confirmGit() {
     if (!which('git')) {
       this.ui.writeError('This script requires you have git installed');
       this.ui.writeInfo('If you have homebrew installed try: brew install git');
@@ -63,20 +62,22 @@ class New extends SubCommand {
   }
 
   // Should maybe prompt user for permission to do this since it's dangerous.
-  resetGitHistory () {
+  resetGitHistory() {
     this.ui.writeInfo('Removing the starter kit .git folder');
     rm('-rf', '.git');
     exec('git init && git add -A && git commit -m"Initial commit"', {
       silent: true
     });
     this.ui.writeCreate('Created new .git history for your project');
-    this.ui.writeInfo('Congrats! New Redux app ready to go.  CLI generators configured and ready' +
-      ' to go');
+    this.ui.writeInfo(
+      'Congrats! New Redux app ready to go.  CLI generators configured and ready' +
+        ' to go'
+    );
   }
 
   // All settings for react-redux-starter-kit live in this template so when
   // new projects get created users can immediately start using the CLI
-  createProjectSettings () {
+  createProjectSettings() {
     this.ui.writeInfo('creating a default .blueprintrc for your project');
     const settings = new ProjectSettings();
     settings.saveDefault();

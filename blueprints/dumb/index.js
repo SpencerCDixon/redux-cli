@@ -4,7 +4,7 @@ module.exports = {
   },
   fileMapTokens() {
     return {
-      __dumb__: (options) => {
+      __dumb__: options => {
         return options.settings.getSetting('dumbPath');
       }
     };

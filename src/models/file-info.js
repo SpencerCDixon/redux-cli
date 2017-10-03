@@ -7,8 +7,12 @@ class FileInfo {
   constructor(args) {
     this.ui = args.ui;
     this.templateVariables = args.templateVariables; // locals passed to ejs template
-    this.originalPath = args.originalPath;           // path to template
-    this.mappedPath = args.mappedPath;               // destination path to be written to
+    this.originalPath = args.originalPath; // path to template
+    this.mappedPath = FileInfo.removeEjsExt(args.mappedPath); // destination path to be written to
+  }
+
+  static removeEjsExt(path) {
+    return path.replace(/\.ejs$/i, '');
   }
 
   writeFile(dryRun) {
@@ -40,7 +44,8 @@ class FileInfo {
       rendered = ejs.render(template, this.templateVariables);
     } catch (err) {
       this.ui.writeDebug('couldnt render');
-      err.message += ' (Error in blueprint template: ' + this.originalPath + ')';
+      err.message +=
+        ' (Error in blueprint template: ' + this.originalPath + ')';
       this.ui.writeError(`error was: ${err.message}`);
       throw err;
     }

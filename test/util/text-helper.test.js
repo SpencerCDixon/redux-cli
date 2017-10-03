@@ -106,7 +106,9 @@ describe('(Util) text-helpers', () => {
     });
 
     test('throws error if not one of the allowed conversions', () => {
-      expect(() => th.normalizeCasing(string)).toThrowError(/Casing must be one of: default, snake, pascal, camel/);
+      expect(() => th.normalizeCasing(string)).toThrowError(
+        /Casing must be one of: default, snake, pascal, camel/
+      );
     });
   });
 });

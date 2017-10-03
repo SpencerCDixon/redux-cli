@@ -16,23 +16,24 @@ export default class extends Task {
     this.confirmDir();
 
     this.ui.writeInfo('Creating new directory...');
-    return mkdir(this.dirName)
-      .then(() => {
-        this.ui.writeCreate(`Created directory: ${this.dirName}`);
-        cd(this.dirName);
-        this.initGit();
-      });
+    return mkdir(this.dirName).then(() => {
+      this.ui.writeCreate(`Created directory: ${this.dirName}`);
+      cd(this.dirName);
+      this.initGit();
+    });
   }
 
   confirmDir() {
     if (test('-d', this.dirName)) {
-      this.ui.writeError(`${this.dirName} directory already exists!  Please choose another name`);
+      this.ui.writeError(
+        `${this.dirName} directory already exists!  Please choose another name`
+      );
       process.exit(1);
     }
   }
 
   initGit() {
     this.ui.writeInfo('Setting up tracking with git...');
-    exec('git init', {silent: true});
+    exec('git init', { silent: true });
   }
 }

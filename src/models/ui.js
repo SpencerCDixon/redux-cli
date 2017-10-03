@@ -6,19 +6,19 @@ import logUpdate from 'log-update';
 const frame = elegantSpinner();
 const DEFAULT_WRITE_LEVEL = 'INFO';
 const WRITE_LEVELS = {
-  'DEBUG': 1,
-  'INFO': 2,
-  'WARNING': 3,
-  'ERROR': 4
+  DEBUG: 1,
+  INFO: 2,
+  WARNING: 3,
+  ERROR: 4
 };
 
 class UI {
   constructor(options = {}) {
-    this.inputStream  = options.inputStream || process.stdin;
+    this.inputStream = options.inputStream || process.stdin;
     this.outputStream = options.outputStream || process.stdout;
-    this.errorStream  = options.errorStream || process.stderr;
+    this.errorStream = options.errorStream || process.stderr;
 
-    this.writeLevel  = options.writeLevel || DEFAULT_WRITE_LEVEL;
+    this.writeLevel = options.writeLevel || DEFAULT_WRITE_LEVEL;
     this.streaming = false;
   }
 
@@ -84,7 +84,11 @@ class UI {
     if (this.writeLevelVisible(this.writeLevel)) {
       this.streaming = true;
       this.progressInterval = setInterval(() => {
-        stream(`  ${chalk.green('loading:')} ${string} ${chalk.cyan.bold.dim(frame())}`);
+        stream(
+          `  ${chalk.green('loading:')} ${string} ${chalk.cyan.bold.dim(
+            frame()
+          )}`
+        );
       }, 100);
     }
   }

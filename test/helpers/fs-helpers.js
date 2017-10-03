@@ -13,7 +13,7 @@ export const expectFilesEqual = (pathToActual, pathToExpected) => {
   expect(actual).to.eql(expected);
 };
 
-export const expectFileToNotExist = (pathToFile) => {
+export const expectFileToNotExist = pathToFile => {
   const exists = fileExists(pathToFile);
   expect(exists).to.be.false;
 };
@@ -49,7 +49,6 @@ export const expectFile = (file, options) => {
     });
   }
 };
-
 
 function EqualityError(message, actual, expected) {
   this.message = message;

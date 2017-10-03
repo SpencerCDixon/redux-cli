@@ -15,7 +15,7 @@ export default class Blueprint {
   constructor(blueprintPath) {
     this.path = blueprintPath;
     this.name = path.basename(blueprintPath);
-    this.command = this.command || {};  // default if not set by mixin
+    this.command = this.command || {}; // default if not set by mixin
   }
 
   // HOOK: this can be overridden
@@ -29,7 +29,9 @@ export default class Blueprint {
   }
 
   files() {
-    if (this._files) { return this._files; }
+    if (this._files) {
+      return this._files;
+    }
 
     let filesPath = this.filesPath();
 
@@ -58,18 +60,18 @@ export default class Blueprint {
 
   _fileMapTokens(options) {
     const standardTokens = {
-      __name__: (options) => {
+      __name__: options => {
         const name = options.entity.name;
         const casing = options.settings.getSetting('fileCasing') || 'default';
         return normalizeCasing(name, casing);
       },
-      __path__: (options) => {
+      __path__: options => {
         return options.originalBlueprintName;
       },
-      __root__: (options) => {
+      __root__: options => {
         return options.settings.getSetting('sourceBase');
       },
-      __test__: (options) => {
+      __test__: options => {
         return options.settings.getSetting('testBase');
       }
     };
@@ -116,12 +118,16 @@ export default class Blueprint {
   _locals(options) {
     const entityName = options.entity && options.entity.name;
     const customLocals = this.locals(options);
-    const fileMapVariables = this._generateFileMapVariables(entityName, customLocals, options);
+    const fileMapVariables = this._generateFileMapVariables(
+      entityName,
+      customLocals,
+      options
+    );
     const fileMap = this.generateFileMap(fileMapVariables);
 
     const standardLocals = {
       pascalEntityName: normalizeCasing(entityName, 'pascal'),
-      camelEntityName:  normalizeCasing(entityName, 'camel'),
+      camelEntityName: normalizeCasing(entityName, 'camel'),
       snakeEntityName: normalizeCasing(entityName, 'snake'),
       dashesEntityName: normalizeCasing(entityName, 'dashes'),
       fileMap
@@ -184,7 +190,7 @@ export default class Blueprint {
     };
   */
   install(options) {
-    const ui = this.ui = options.ui;
+    const ui = (this.ui = options.ui);
     this.dryRun = options.dryRun;
 
     ui.writeInfo('installing blueprint...');

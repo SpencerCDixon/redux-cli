@@ -2,7 +2,7 @@ import ProjectSettings from 'models/project-settings';
 import fs from 'fs';
 import config from 'config';
 
-const {basePath} = config;
+const { basePath } = config;
 const settingsPath = basePath + '/.blueprintrc';
 
 describe('ProjectSettings', () => {
@@ -31,37 +31,39 @@ describe('ProjectSettings', () => {
 
     // inject an ARGV and load settings.
     it('loads settings from .blueprintrc defined as ARGV', () => {
-      const fakeArgv = {config: 'test/fixtures/argv.blueprintrc'};
-      const defaultSettings = {defaultOption: true};
+      const fakeArgv = { config: 'test/fixtures/argv.blueprintrc' };
+      const defaultSettings = { defaultOption: true };
       const argvSettings = new ProjectSettings(defaultSettings, fakeArgv);
       expect(argvSettings.getSetting('argvConfig')).to.eql('ARGV');
     });
 
     it('collects __defaults__ in allConfigs', () => {
-      const defaultSettings = {defaultOption: true};
+      const defaultSettings = { defaultOption: true };
       const argvSettings = new ProjectSettings(defaultSettings);
       expect(argvSettings.allConfigs()['__default__']).to.eql(defaultSettings);
     });
 
     it('collects all configurations into a object', () => {
       process.env['blueprint_config'] = 'test/fixtures/env.blueprintrc';
-      const fakeArgv = {config: 'test/fixtures/argv.blueprintrc'};
-      const defaultSettings = {defaultOption: true};
+      const fakeArgv = { config: 'test/fixtures/argv.blueprintrc' };
+      const defaultSettings = { defaultOption: true };
       const allSettings = new ProjectSettings(defaultSettings, fakeArgv);
       const fileCount = allSettings.settings.configs.length;
 
       expect(allSettings.configChunks.length).to.eql(fileCount);
-      expect(Object.keys(allSettings.allConfigs()).length).to.eql(fileCount + 1);
+      expect(Object.keys(allSettings.allConfigs()).length).to.eql(
+        fileCount + 1
+      );
       delete process.env['blueprint_config'];
     });
 
     it('collects all blueprints into an array of arrays', () => {
       // How many do we have before
-      const baseline = (new ProjectSettings).blueprintChunks.length;
+      const baseline = new ProjectSettings().blueprintChunks.length;
 
       process.env['blueprint_config'] = 'test/fixtures/env.blueprintrc';
-      const fakeArgv = {config: 'test/fixtures/argv.blueprintrc'};
-      const defaultSettings = {defaultOption: true};
+      const fakeArgv = { config: 'test/fixtures/argv.blueprintrc' };
+      const defaultSettings = { defaultOption: true };
       const settings = new ProjectSettings(defaultSettings, fakeArgv);
 
       expect(settings.blueprintChunks.length).to.eql(baseline + 2);
@@ -90,7 +92,7 @@ describe('ProjectSettings', () => {
         testTwo: 'works as well!'
       };
       const settings = new ProjectSettings(mockedSettings);
-      const {testOne, testTwo} = settings.getAllSettings();
+      const { testOne, testTwo } = settings.getAllSettings();
       expect(testOne).to.eql('works');
       expect(testTwo).to.eql('works as well!');
     });
@@ -99,7 +101,7 @@ describe('ProjectSettings', () => {
   // deprecate for uselessness?
   describe('#setSetting', () => {
     it('sets new settings', () => {
-      const mockedSettings = {testOne: 'works'};
+      const mockedSettings = { testOne: 'works' };
       const settings = new ProjectSettings(mockedSettings);
       expect(settings.getSetting('testOne')).to.eql('works');
 
@@ -110,7 +112,7 @@ describe('ProjectSettings', () => {
 
   describe('#setAllSettings', () => {
     it('takes a javascript object and overrides current settings', () => {
-      const preWrittenSettings = {testOne: 'some information'};
+      const preWrittenSettings = { testOne: 'some information' };
       const settings = new ProjectSettings(preWrittenSettings);
       expect(settings.getSetting('testOne')).to.eql('some information');
       const overrideAll = {
@@ -125,7 +127,7 @@ describe('ProjectSettings', () => {
   describe('#saveDefault', () => {
     it('saves the current settings to the file', () => {
       const tmpPath = '/tmp/.blueprintrc';
-      const defaults = {'testSaveDefault': 'new setting'};
+      const defaults = { testSaveDefault: 'new setting' };
       const settings = new ProjectSettings(defaults);
       settings.saveDefaults(defaults, tmpPath);
       const newFile = fs.readFileSync(tmpPath, 'utf8');
@@ -136,8 +138,8 @@ describe('ProjectSettings', () => {
   describe('#configFiles', () => {
     it('returns an array of all config files read', () => {
       process.env['blueprint_config'] = 'test/fixtures/env.blueprintrc';
-      const fakeArgv = {config: 'test/fixtures/argv.blueprintrc'};
-      const defaultSettings = {defaultOption: true};
+      const fakeArgv = { config: 'test/fixtures/argv.blueprintrc' };
+      const defaultSettings = { defaultOption: true };
       const settings = new ProjectSettings(defaultSettings, fakeArgv);
       const expectedFiles = [
         settingsPath,
@@ -150,8 +152,8 @@ describe('ProjectSettings', () => {
   describe('#blueprints', () => {
     it('returns a BlueprintCollection', () => {
       process.env['blueprint_config'] = 'test/fixtures/env.blueprintrc';
-      const fakeArgv = {config: 'test/fixtures/argv.blueprintrc'};
-      const defaultSettings = {defaultOption: true};
+      const fakeArgv = { config: 'test/fixtures/argv.blueprintrc' };
+      const defaultSettings = { defaultOption: true };
       const settings = new ProjectSettings(defaultSettings, fakeArgv);
       const blueprintPaths = settings.blueprints.searchPaths;
       const expectedFiles = [

@@ -1,6 +1,6 @@
 {
   "parser": "babel-eslint",
-  "extends": "eslint:recommended",
+  "extends": "prettier",
   "rules": {
     "indent": [2, 2],
     "quotes": [2, "single", {"avoidEscape": true}],

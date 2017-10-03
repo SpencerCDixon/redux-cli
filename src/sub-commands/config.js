@@ -2,17 +2,15 @@ import prettyjson from 'prettyjson';
 import SubCommand from '../models/sub-command';
 
 class Config extends SubCommand {
-  constructor () {
+  constructor() {
     super();
   }
 
-  printUserHelp () {
-    this.ui.write(
-      'config command to display current configuration'
-    );
+  printUserHelp() {
+    this.ui.write('config command to display current configuration');
   }
 
-  run () {
+  run() {
     const finalConfig = Object.assign({}, this.settings.settings);
     delete finalConfig.configs;
     delete finalConfig.allConfigs;

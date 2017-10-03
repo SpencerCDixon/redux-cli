@@ -23,7 +23,7 @@ class SubCommand {
     throw new Error('Subcommands must implement an availableOptions()');
   }
 
-  cliLogo () {
+  cliLogo() {
     return success(
       figlet.textSync('Blueprint-CLI', {
         font: 'Doom',

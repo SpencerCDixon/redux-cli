@@ -5,8 +5,8 @@ export default class MockUI extends UI {
   constructor(writeLevel) {
     super({
       inputStream: through(),
-      outputStream: through(data => this.output += data),
-      errorStream: through(data => this.errors += data)
+      outputStream: through(data => (this.output += data)),
+      errorStream: through(data => (this.errors += data))
     });
     this.output = '';
     this.errors = '';
@@ -18,4 +18,3 @@ export default class MockUI extends UI {
     this.errors = '';
   }
 }
-

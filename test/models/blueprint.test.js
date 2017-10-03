@@ -1,14 +1,19 @@
 import path from 'path';
 import Blueprint from 'models/blueprint';
 
-const fixtureBlueprints = path.resolve(__dirname, '..', 'fixtures', 'blueprints');
-const basicBlueprint    = path.join(fixtureBlueprints, 'basic');
+const fixtureBlueprints = path.resolve(
+  __dirname,
+  '..',
+  'fixtures',
+  'blueprints'
+);
+const basicBlueprint = path.join(fixtureBlueprints, 'basic');
 
 describe('(Model) Blueprint', () => {
   const blueprint = new Blueprint(basicBlueprint);
 
-  describe('#description',()=>{
-    test('returns a description',()=>{
+  describe('#description', () => {
+    test('returns a description', () => {
       expect(blueprint.description()).to.match(/Generates a new basic/);
     });
   });
@@ -23,9 +28,7 @@ describe('(Model) Blueprint', () => {
   describe('#files', () => {
     test('returns an array of files in blueprint', () => {
       const files = blueprint.files();
-      const expectedFiles = [
-        'expected-file.js'
-      ];
+      const expectedFiles = ['expected-file.js'];
       expect(files).toEqual(expectedFiles);
     });
 

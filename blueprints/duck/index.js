@@ -4,7 +4,7 @@ module.exports = {
   },
   fileMapTokens() {
     return {
-      __duck__: (options) => {
+      __duck__: options => {
         return 'redux/modules';
       }
     };

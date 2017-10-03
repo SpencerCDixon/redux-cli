@@ -22,7 +22,11 @@ class Generate extends SubCommand {
     this.ui.writeLine('');
 
     blueprints.forEach(blueprintSource => {
-      this.ui.writeLine(`  ${chalk.blue('Blueprint Source')} ===> ${chalk.green(blueprintSource.source)}:`);
+      this.ui.writeLine(
+        `  ${chalk.blue('Blueprint Source')} ===> ${chalk.green(
+          blueprintSource.source
+        )}:`
+      );
 
       blueprintSource.blueprints.forEach(blueprint => {
         this.ui.writeLine(`    ${blueprint.name} ${chalk.yellow('<name>')}`);

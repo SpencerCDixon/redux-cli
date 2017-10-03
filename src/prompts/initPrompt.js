@@ -23,7 +23,9 @@ const schema = {
       required: true
     },
     fileCasing: {
-      description: chalk.blue('How do you want file casing to be configured? (default|snake|pascal|camel)'),
+      description: chalk.blue(
+        'How do you want file casing to be configured? (default|snake|pascal|camel)'
+      ),
       pattern: /(default|snake|pascal|camel|dashes)/,
       required: true,
       type: 'string'

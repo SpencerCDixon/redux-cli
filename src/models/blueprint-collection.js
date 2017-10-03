@@ -11,68 +11,64 @@ import _uniq from 'lodash/uniq';
 import Blueprint from './blueprint';
 
 export default class BlueprintCollection {
-  constructor (pathList) {
+  constructor(pathList) {
     this.pathList = pathList;
     this.setSearchPaths();
   }
 
-  allPossiblePaths () {
+  allPossiblePaths() {
     return _flatten(
-      _map(
-        this.pathList,
-        (arr, base) => _map(arr, (bp) => expandPath(base, bp)))
+      _map(this.pathList, (arr, base) => _map(arr, bp => expandPath(base, bp)))
     );
   }
 
-  setSearchPaths () {
+  setSearchPaths() {
     this.searchPaths = _uniq(_filter(this.allPossiblePaths(), validSearchDir));
   }
 
-  all () {
+  all() {
     // Is there a more idiomatic way to do this?  I miss ruby's ||=
     if (this.allBlueprints) {
       return this.allBlueprints;
     } else {
-      return this.allBlueprints = this.discoverBlueprints();
+      return (this.allBlueprints = this.discoverBlueprints());
     }
   }
 
-  generators () {
+  generators() {
     // until we learn to tell generators apart from partials
-    return _filter(this.all(), (bp) => bp.name);
+    return _filter(this.all(), bp => bp.name);
   }
 
-  allNames () {
-    return _map(this.all(), (bp) => bp.name);
+  allNames() {
+    return _map(this.all(), bp => bp.name);
   }
 
-
-  addBlueprint (path) {
+  addBlueprint(path) {
     return Blueprint.load(path);
   }
 
-  discoverBlueprints () {
+  discoverBlueprints() {
     return _map(this.findBlueprints(), this.addBlueprint);
   }
 
-  findBlueprints () {
+  findBlueprints() {
     return _flatten(
-      _map(
-        this.searchPaths,
-        (dir) => {
-          const subdirs = _map(fs.readdirSync(dir), (p) => path.resolve(dir, p));
-          return _filter(subdirs, (d) => fs.existsSync(path.resolve(d, 'index.js')));
-        }
-      )
+      _map(this.searchPaths, dir => {
+        const subdirs = _map(fs.readdirSync(dir), p => path.resolve(dir, p));
+        return _filter(subdirs, d =>
+          fs.existsSync(path.resolve(d, 'index.js'))
+        );
+      })
     );
   }
 }
 
-function validSearchDir (dir) {
+function validSearchDir(dir) {
   return fs.existsSync(dir) && fs.lstatSync(dir).isDirectory();
 }
 
-export function expandPath (base, candidate) {
+export function expandPath(base, candidate) {
   let final;
   if (candidate[0] === '~') {
     const st = candidate[1] === path.sep ? 2 : 1;
@@ -87,7 +83,7 @@ export function expandPath (base, candidate) {
   return final;
 }
 
-export function parseBlueprintSetting (setting) {
+export function parseBlueprintSetting(setting) {
   if (_isArray(setting)) {
     return [...setting, './blueprints'];
   } else if (_isString(setting)) {

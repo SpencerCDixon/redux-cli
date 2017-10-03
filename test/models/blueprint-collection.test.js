@@ -1,16 +1,15 @@
 import path from 'path';
-import BlueprintCollection, { expandPath, parseBlueprintSetting } from 'models/blueprint-collection';
+import BlueprintCollection, {
+  expandPath,
+  parseBlueprintSetting
+} from 'models/blueprint-collection';
 import config from 'config';
 import process from 'process';
 
-const {basePath} = config;
+const { basePath } = config;
 
 const paths = {
-  [path.resolve(basePath, 'test')]: [
-    'fixtures',
-    '/ghi',
-    'doh'
-  ],
+  [path.resolve(basePath, 'test')]: ['fixtures', '/ghi', 'doh'],
   [path.resolve(basePath, 'test/fixtures')]: [
     '~doesNotExist7as84',
     './blueprints'
@@ -40,7 +39,6 @@ describe('(Model) BlueprintCollection', () => {
     });
   });
 
-
   describe('#allPossiblePaths', () => {
     test('returns a an array of blueprint paths', () => {
       const blueprints = new BlueprintCollection(paths);
@@ -49,7 +47,9 @@ describe('(Model) BlueprintCollection', () => {
       expect(result[0]).toEqual(basePath + '/test/fixtures');
       expect(result[1]).toEqual('/ghi');
       expect(result[2]).toEqual(basePath + '/test/doh');
-      expect(result[3].slice(process.env.HOME.length)).toEqual('/doesNotExist7as84');
+      expect(result[3].slice(process.env.HOME.length)).toEqual(
+        '/doesNotExist7as84'
+      );
       expect(result[4]).toEqual(basePath + '/test/fixtures/blueprints');
     });
   });
@@ -60,13 +60,11 @@ describe('(Model) BlueprintCollection', () => {
 
       expect(result[0]).toEqual(basePath + '/test/fixtures');
       expect(result[1]).toEqual(basePath + '/test/fixtures/blueprints');
-
     });
   });
 });
 
 describe('#expandPath', () => {
-
   test('returns path if path starts with /', () => {
     const testPath = '/bruce';
     const resultPath = expandPath(basePath, testPath);
@@ -93,8 +91,6 @@ describe('#expandPath', () => {
     const expectedPath = basePath + path.sep + 'alfred';
     expect(resultPath).toEqual(expectedPath);
   });
-
-
 });
 
 describe('::parseBlueprintSetting', () => {

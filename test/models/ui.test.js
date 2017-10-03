@@ -131,7 +131,9 @@ describe('(Model) UI', () => {
     });
 
     test('throws when a bad writeLevel is passed in', () => {
-      expect(() => ui.setWriteLevel('bogus')).toThrowError(/Valid values are: DEBUG, INFO, WARNING, ERROR/);
+      expect(() => ui.setWriteLevel('bogus')).toThrowError(
+        /Valid values are: DEBUG, INFO, WARNING, ERROR/
+      );
     });
   });
 

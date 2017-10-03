@@ -14,7 +14,7 @@ const rootPath = process.cwd();
  recommended approach of accessSync
  https://nodejs.org/api/fs.html#fs_fs_existssync_path
  */
-export const fileExists = (filename) => {
+export const fileExists = filename => {
   try {
     fs.accessSync(filename);
     return true;
@@ -27,7 +27,7 @@ export const fileExists = (filename) => {
   }
 };
 
-export const readFile = (filename) => {
+export const readFile = filename => {
   const filePath = path.join(rootPath, filename);
   return fs.readFileSync(filePath, 'utf8');
 };
@@ -51,4 +51,3 @@ export const readFile = (filename) => {
 //     return mkTmpDir({ dir: dirPath});
 //   });
 // };
-

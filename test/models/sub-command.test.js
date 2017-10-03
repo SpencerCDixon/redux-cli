@@ -9,7 +9,9 @@ describe('(Model) SubCommand', () => {
     });
 
     test('throws if subclass doesnt have availbleOptions()', () => {
-      expect(() => command.availableOptions()).toThrowError(/must implement an availableOptions()/);
+      expect(() => command.availableOptions()).toThrowError(
+        /must implement an availableOptions()/
+      );
     });
   });
 
@@ -30,7 +32,6 @@ describe('(Model) SubCommand', () => {
       };
       const command = new SubCommand(options);
       expect(command.cliLogo()).to.be.a('string');
-
     });
   });
 });

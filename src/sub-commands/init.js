@@ -4,23 +4,25 @@ import initPrompt from '../prompts/initPrompt';
 import { setupPrompt } from '../prompts/setup';
 
 class Init extends SubCommand {
-  constructor () {
+  constructor() {
     super();
     setupPrompt('initialization', prompt);
   }
 
-  printUserHelp () {
+  printUserHelp() {
     this.ui.write(
       'initialization command to create a .blueprintrc which has project settings'
     );
   }
 
-  run () {
+  run() {
     this.ui.write(this.cliLogo());
     prompt.get(initPrompt, (err, result) => {
       this.ui.writeInfo('Saving your settings...');
       this.settings.saveDefaults(result);
-      this.ui.writeCreate('.blueprintrc with configuration saved in project root.');
+      this.ui.writeCreate(
+        '.blueprintrc with configuration saved in project root.'
+      );
     });
   }
 }
