@@ -4,8 +4,8 @@ import initPrompt from '../prompts/initPrompt';
 import { setupPrompt } from '../prompts/setup';
 
 class Init extends SubCommand {
-  constructor() {
-    super();
+  constructor (options) {
+    super(options);
     setupPrompt('initialization', prompt);
   }
 

@@ -1,4 +1,4 @@
-import { getParser } from 'cli/parser';
+import getParser from 'cli/parser';
 import pkg from '../../package.json';
 import { lineRegEx } from '../helpers/regex-utils';
 

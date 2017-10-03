@@ -1,27 +1,26 @@
-import Generate from '../../../sub-commands/generate';
+import _merge from 'lodash/merge';
+import _cloneDeep from 'lodash/cloneDeep';
 
+import getEnvironment from '../../environment';
+import Generate from '../../../sub-commands/generate';
 import buildBlueprintCommand from './build-blueprint-command';
 
-const subCommand = new Generate();
+const loadBlueprintSettings = (blueprint, bp) =>
+  (blueprint.settings = _merge(
+    _cloneDeep(bp.common),
+    _cloneDeep(bp[blueprint.name])
+  ));
 
-const settings = subCommand.environment.settings.settings || {};
-const blueprints = subCommand.environment.settings.blueprints;
-settings.bp = settings.bp || {};
+const buildBlueprintCommands = () => {
+  const environment = getEnvironment();
+  const subCommand = new Generate(environment);
 
-const buildBlueprintCommands = () =>
-  blueprints.generators().map(blueprint => {
-    loadBlueprintSettings(blueprint);
+  const { blueprints, settings: { bp = {} } } = environment.settings;
+
+  return blueprints.generators().map(blueprint => {
+    loadBlueprintSettings(blueprint, bp);
     return buildBlueprintCommand(blueprint, subCommand);
   });
+};
 
 export default buildBlueprintCommands;
-
-const loadBlueprintSettings = blueprint => {
-  const blueprintSettings = getBlueprintSettings(blueprint);
-  blueprint.settings = blueprintSettings;
-  return blueprintSettings;
-};
-const getBlueprintSettings = blueprint => ({
-  ...settings.bp.common,
-  ...settings.bp[blueprint.name]
-});

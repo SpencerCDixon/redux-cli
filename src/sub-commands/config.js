@@ -2,8 +2,8 @@ import prettyjson from 'prettyjson';
 import SubCommand from '../models/sub-command';
 
 class Config extends SubCommand {
-  constructor() {
-    super();
+  constructor (options) {
+    super(options);
   }
 
   printUserHelp() {

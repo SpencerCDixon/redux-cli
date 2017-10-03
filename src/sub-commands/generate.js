@@ -9,8 +9,8 @@ import chalk from 'chalk';
 // Logic for displaying all blueprints and what their options
 // are will live in here.  For now it's pretty baren.
 class Generate extends SubCommand {
-  constructor() {
-    super();
+  constructor(options) {
+    super(options);
     this.generateTask = new GenerateFromBluePrint(this.environment);
   }
 

@@ -1,5 +1,7 @@
+import getEnvironment from '../environment';
 import Config from '../../sub-commands/config';
-const subCommand = new Config();
+
+const subCommand = new Config(getEnvironment());
 
 const usage = 'Usage:\n  $0 config';
 

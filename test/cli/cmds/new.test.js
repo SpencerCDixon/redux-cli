@@ -1,4 +1,4 @@
-import { getParser } from 'cli/parser';
+import getParser from 'cli/parser';
 import { lineRegEx } from '../../helpers/regex-utils';
 import New from 'sub-commands/new';
 

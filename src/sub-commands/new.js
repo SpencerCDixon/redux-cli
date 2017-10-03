@@ -9,8 +9,8 @@ import ProjectSettings from '../models/project-settings';
 // universal react starter kit, etc.
 
 class New extends SubCommand {
-  constructor() {
-    super();
+  constructor (options) {
+    super(options);
     this.createDirTask = new CreateAndStepIntoDirectory(this.environment);
     this.gitPullTask = new GitPull(this.environment);
   }

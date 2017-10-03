@@ -1,6 +1,7 @@
+import getEnvironment from '../environment';
 import New from '../../sub-commands/new';
 
-const subCommand = new New();
+const subCommand = new New(getEnvironment());
 
 const usage = `Usage:
   $0 new <project_name>
