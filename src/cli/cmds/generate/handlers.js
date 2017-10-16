@@ -61,7 +61,8 @@ function getBlueprintHelper(yargs, blueprintName) {
 }
 
 function getBlueprintListHelper(yargs) {
-  return helpers.getBlueprintCommands()
+  return helpers
+    .getBlueprintCommands()
     .reduce((yargs, command) => yargs.command(command), yargs)
     .updateStrings({ 'Commands:': 'Blueprints:' });
 }

@@ -29,7 +29,8 @@ module.exports = {
       .group(['dry-run', 'verbose', 'help'], 'Generate Options:')
       .strict(false) // ditch this if we '--' blueprint commands
       .exitProcess(false) // allow parse to fall through to cli/handler to emit
-      .fail((msg = '', err = {} /*, yargs */) => { // deal with exit conditions
+      .fail((msg = '', err = {} /*, yargs */) => {
+        // deal with exit conditions
         // close over the the original yargs that was passed to builder rather
         // than use the 3rd parameter to fail as it doesn't support logYargs
         yargs.showHelp();

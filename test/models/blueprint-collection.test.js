@@ -108,7 +108,6 @@ describe('#lookupAll(name)', () => {
   });
 });
 
-
 describe('#lookup(name)', () => {
   test('returns falsy if no blueprint for name', () => {
     const blueprints = new BlueprintCollection(paths);
@@ -124,7 +123,6 @@ describe('#lookup(name)', () => {
     expect(basic.name).toEqual('basic');
     expect(blueprints.lookupAll('basic')[0]).toEqual(basic);
   });
-
 });
 
 describe('::parseBlueprintSetting', () => {

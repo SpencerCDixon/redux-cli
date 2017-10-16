@@ -70,7 +70,6 @@ export default class BlueprintCollection {
   lookup(name) {
     return this.lookupAll(name)[0];
   }
-
 }
 
 function validSearchDir(dir) {

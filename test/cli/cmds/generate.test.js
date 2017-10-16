@@ -3,7 +3,6 @@ import yargs from 'yargs/yargs';
 import { default as generate } from 'cli/cmds/generate';
 import { lineRegEx } from '../../helpers/regex-utils';
 
-
 describe('(CLI) Generate', () => {
   let parser;
 
