@@ -36,9 +36,9 @@ blueprint g dumb SimpleButton
 4.  [Generators](#generators)
 5.  [Roadmap](#roadmap)
 6.  [Examples](#examples)
-6.  [Creating Custom Blueprints](#creating-blueprints)
-7.  [Issues/Contributing](#contributing)
-8.  [Changelog](#changelog)
+7.  [Creating Custom Blueprints](#creating-blueprints)
+8.  [Issues/Contributing](#contributing)
+9.  [Changelog](#changelog)
 
 ### Getting Started
 Running `blueprint new <project name>` will pull down the amazing [Redux Starter Kit](https://github.com/davezuko/react-redux-starter-kit) and
@@ -142,6 +142,29 @@ blueprint g dumb MyNewComponent --dry-run
   would create: /MyNewComponent.test.js
   info: finished installing blueprint.
 ```
+
+### Roadmap
+
+#### 2.0
+
+* rename to blueprint-cli
+* replace commander with yargs for cli
+* extend .blueprintrc settings.
+* Allow .blueprintrc files to set search * path for blueprint directories
+* Enable npm blueprint packages
+* Enable better options support for blueprint generation
+* Add Copy command to cli
+* Add config command to cli
+* Add blueprintrc and blueprint-package blueprints
+* Update existing blueprints and move into own package, to be included by default
+
+#### 2.X
+
+* Replace "new" command with alternate ways of project creation
+* Enable blueprint partials
+* Enable blueprints for assets: icons, images, css, fonts
+* Enable ability to insert text into existing files
+* Enable generators that can invoke other generators. Inspired by rails scaffold
 
 ### Examples
 Below are some examples of using the generator to speed up development:
