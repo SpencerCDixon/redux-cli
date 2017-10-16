@@ -35,7 +35,7 @@ const buildBlueprintCommand = (blueprint, runner) => {
   aliases = [].concat(blueprint.settings.aliases || aliases);
 
   // default usage
-  let usage = `Usage:\n  $0 generate ${command}`;
+  let usage = `Blueprint:\n  $0 generate ${command}`;
   aliases.forEach(
     alias =>
       (usage += `\n  $0 generate ${command.replace(blueprint.name, alias)}`)
@@ -56,7 +56,7 @@ const buildBlueprintCommand = (blueprint, runner) => {
   // builder brings together multiple customizations, whilst keeping the
   // options easy to parse for prompting in the init command
   const builder = yargs => {
-    yargs.usage(usage).strict(false); // allow undocumented options through
+    yargs.usage(usage).strict(false);
 
     if (options) yargs.options(options);
     if (check) yargs.check(check, false);

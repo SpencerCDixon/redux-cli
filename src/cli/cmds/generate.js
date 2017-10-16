@@ -1,6 +1,11 @@
-import buildBlueprintCommands from './generate/build-blueprint-commands';
+import getHandler from '../handler';
+import { logYargs } from '../yargs';
+import handlers from './generate/handlers';
 
-const usage = `Usage:
+getHandler().onRun('generate', handlers.handleRun);
+getHandler().onHelp('generate', handlers.handleHelp);
+
+const usage = `Generate:
   $0 generate <blueprint> <name>
   $0 help generate <blueprint>`;
 
@@ -8,7 +13,7 @@ module.exports = {
   command: 'generate <blueprint> <name>',
   aliases: ['g', 'gen'],
   describe: 'Generate project file(s) from a blueprint',
-  builder: yargs => {
+  builder: yargs =>
     yargs
       .usage(usage)
       .option('dry-run', {
@@ -22,14 +27,24 @@ module.exports = {
         type: 'boolean'
       })
       .group(['dry-run', 'verbose', 'help'], 'Generate Options:')
-      .updateStrings({
-        'Commands:': 'Blueprints:',
-        'Options:': 'Blueprint Options:'
-      });
-    return buildBlueprintCommands().reduce(
-      (yargs, command) => yargs.command(command),
-      yargs
-    );
-  },
-  handler: argv => console.error(`Unrecognised blueprint '${argv.blueprint}'`)
+      .strict(false) // ditch this if we '--' blueprint commands
+      .exitProcess(false) // allow parse to fall through to cli/handler to emit
+      .fail((msg = '', err = {} /*, yargs */) => { // deal with exit conditions
+        // close over the the original yargs that was passed to builder rather
+        // than use the 3rd parameter to fail as it doesn't support logYargs
+        yargs.showHelp();
+
+        let message = msg || err.message;
+
+        message = message.replace(
+          'Not enough non-option arguments: got 0, need at least 2',
+          'Missing arguments <blueprint> and <name>'
+        );
+        message = message.replace(
+          'Not enough non-option arguments: got 1, need at least 2',
+          'Missing argument blueprint <name>'
+        );
+
+        logYargs(yargs, message);
+      })
 };

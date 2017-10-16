@@ -99,7 +99,7 @@ describe('(CLI) buildBlueprintCommand', () => {
     describe('Usage', () => {
       test('built from command', done => {
         buildParser().parse('help', (err, argv, output) => {
-          expect(output).to.include('Usage:');
+          expect(output).to.include('Blueprint:');
           expect(output).to.include('bp generate test_blueprint <name>');
           expect(output).to.not.include('[options]');
           done();
@@ -108,7 +108,7 @@ describe('(CLI) buildBlueprintCommand', () => {
       test('includes [options]', done => {
         blueprint.command.options = {};
         buildParser().parse('help', (err, argv, output) => {
-          expect(output).to.include('Usage:');
+          expect(output).to.include('Blueprint:');
           expect(output).to.include(
             'bp generate test_blueprint <name> [options]'
           );
@@ -119,7 +119,7 @@ describe('(CLI) buildBlueprintCommand', () => {
         blueprint.command.options = {};
         blueprint.command.aliases = ['foo', 'bar'];
         buildParser().parse('help', (err, argv, output) => {
-          expect(output).to.include('Usage:');
+          expect(output).to.include('Blueprint:');
           expect(output).to.include(
             'bp generate test_blueprint <name> [options]'
           );

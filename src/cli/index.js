@@ -1,3 +1,11 @@
 import getParser from './parser';
+import getHandler from './handler';
 
-module.exports = getParser().parse(process.argv.slice(2));
+function cli() {
+  const parser = getParser();
+  const handler = getHandler();
+  const argv = parser.parse(process.argv.slice(2));
+  handler.handle(argv, parser);
+}
+
+module.exports = cli;
